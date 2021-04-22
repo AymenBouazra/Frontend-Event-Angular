@@ -108,6 +108,7 @@ export const routes: Routes = [
       }
     ]
   },
+  { path: 'companies', loadChildren: () => import('./views/company/company.module').then(m => m.CompanyModule) },
   { path: '**', component: P404Component }
 ];
 
