@@ -105,10 +105,10 @@ export const routes: Routes = [
       {
         path: 'widgets',
         loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
-      }
+      },{ path: 'companies', loadChildren: () => import('./views/company/company.module').then(m => m.CompanyModule) }
     ]
   },
-  { path: 'companies', loadChildren: () => import('./views/company/company.module').then(m => m.CompanyModule) },
+  
   { path: '**', component: P404Component }
 ];
 
