@@ -105,9 +105,22 @@ export const routes: Routes = [
       {
         path: 'widgets',
         loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
-      },{ path: 'companies', loadChildren: () => import('./views/company/company.module').then(m => m.CompanyModule) }
+      },
+      { 
+        path: 'companies', 
+        loadChildren: () => import('./views/company/company.module').then(m => m.CompanyModule) 
+      },
+      { 
+        path: 'events',
+        loadChildren: () => import('./views/events/events.module').then(m => m.EventsModule) 
+      },
+      { 
+        path: 'tags', 
+        loadChildren: () => import('./views/tags/tags.module').then(m => m.TagsModule) 
+      }
     ]
   },
+
   
   { path: '**', component: P404Component }
 ];
