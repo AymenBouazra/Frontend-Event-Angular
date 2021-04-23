@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   templateUrl: 'login.component.html'
 })
 export class LoginComponent {
-  submitted = false;
+  registerSubmitted = false;
+  loginSubmitted = false;
   registerForm: FormGroup = new FormGroup({
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
@@ -26,7 +27,7 @@ export class LoginComponent {
   ngOnInit(): void {
   }
   register() {
-    this.submitted = true
+    this.registerSubmitted = true
     if (this.registerForm.invalid) {
       return;
     }
@@ -48,7 +49,7 @@ export class LoginComponent {
   
   
  login(){
-  this.submitted= true;
+  this.loginSubmitted= true;
   if(this.loginForm.invalid){ 
     return;
   }

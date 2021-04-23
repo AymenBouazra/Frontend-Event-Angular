@@ -24,10 +24,10 @@
                     </div>
                     <input type="text" class="form-control" placeholder="E-mail" autocomplete="username" required
                       style="background: transparent; color: white;" formControlName="email"
-                      [ngClass]="{ 'is-invalid': submitted && loginForm.controls.email.errors,
-                                   'is-valid': submitted && !loginForm.controls.email.errors }" >
+                      [ngClass]="{ 'is-invalid': loginSubmitted && loginForm.controls.email.errors,
+                                   'is-valid': loginSubmitted && !loginForm.controls.email.errors }" >
                       
-                      <div class="invalid-feedback d-block" *ngIf="submitted && loginForm.controls.email.hasError('required')" >
+                      <div class="invalid-feedback d-block" *ngIf="loginSubmitted && loginForm.controls.email.hasError('required')" >
                         The email is required.
                       </div>
                   </div>
@@ -37,8 +37,8 @@
                     </div>
                     <input type="password" class="form-control" placeholder="Password" autocomplete="current-password"
                       required style="background: transparent; color: white;" formControlName="password"
-                      [ngClass]="{ 'is-invalid': submitted && loginForm.controls.password.errors, 'is-valid': submitted && !loginForm.controls.password.errors }" >
-                      <div class="invalid-feedback d-block" *ngIf="submitted && loginForm.controls.password.hasError('required')">
+                      [ngClass]="{ 'is-invalid': loginSubmitted && loginForm.controls.password.errors, 'is-valid': loginSubmitted && !loginForm.controls.password.errors }" >
+                      <div class="invalid-feedback d-block" *ngIf="loginSubmitted && loginForm.controls.password.hasError('required')">
                         The password is required.
                       </div>
                       <div *ngIf="registerForm.controls.password.hasError('minlength')" class="invalid-feedback">The
@@ -70,7 +70,7 @@
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
               <div class="modal-dialog">
-                <div class="modal-content" style="background:rgba(255,255,255, 0.5);">
+                <div class="modal-content" style="background:rgba(255,255,255, 0.8);">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(0, 204, 255);">Register Now !</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -84,10 +84,10 @@
                         </div>
                         <input type="text" class="form-control" placeholder="First name" autocomplete="firstname"
                           formControlName="firstName"
-                          [ngClass]="{ 'is-invalid': submitted && registerForm.controls.firstName.errors, 'is-valid': submitted && !registerForm.controls.firstName.errors }">
+                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.firstName.errors, 'is-valid': registerSubmitted && !registerForm.controls.firstName.errors }">
 
                         <div class="invalid-feedback d-block"
-                          *ngIf="submitted && registerForm.controls.firstName.hasError('required')">
+                          *ngIf="registerSubmitted && registerForm.controls.firstName.hasError('required')">
                           First name is required.
                         </div>
 
@@ -98,9 +98,9 @@
                         </div>
                         <input type="text" class="form-control" placeholder="Last name" autocomplete="lastname"
                           formControlName="lastName"
-                          [ngClass]="{ 'is-invalid': submitted && registerForm.controls.lastName.errors, 'is-valid': submitted && !registerForm.controls.lastName.errors }" >
+                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.lastName.errors, 'is-valid': registerSubmitted && !registerForm.controls.lastName.errors }" >
                         <div class="invalid-feedback d-block"
-                          *ngIf="submitted && registerForm.controls.lastName.hasError('required')">
+                          *ngIf="registerSubmitted && registerForm.controls.lastName.hasError('required')">
                           Last name is required.
                         </div>
                       </div>
@@ -110,7 +110,7 @@
                         </div>
                         <input type="text" class="form-control" placeholder="E-mail" autocomplete="email"
                           formControlName="email"
-                          [ngClass]="{ 'is-invalid': submitted && registerForm.controls.email.errors, 'is-valid': submitted && !registerForm.controls.email.errors }" >
+                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.email.errors, 'is-valid': registerSubmitted && !registerForm.controls.email.errors }" >
 
                         <div *ngIf="registerForm.controls.email.hasError('required')" class="invalid-feedback">E-mail is
                           required.</div>
@@ -122,12 +122,12 @@
                         </div>
                         <input type="password" class="form-control" placeholder="Password" autocomplete="new-password"
                           formControlName="password"
-                          [ngClass]="{ 'is-invalid': submitted && registerForm.controls.password.errors, 'is-valid': submitted && !registerForm.controls.password.errors }" >
+                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.password.errors, 'is-valid': registerSubmitted && !registerForm.controls.password.errors }" >
 
                         <div *ngIf="registerForm.controls.password.hasError('required')" class="invalid-feedback">
                           Password is required.</div>
                         <div *ngIf="registerForm.controls.password.hasError('minlength')" class="invalid-feedback">The
-                          password must be more than 8 caracters please.</div>
+                          Password must be more than 6 caracters please.</div>
 
                       </div>
                       <div class="input-group mb-4">
@@ -136,16 +136,16 @@
                         </div>
                         <input type="password" class="form-control" placeholder="Password confirmation"
                           autocomplete="new-password" formControlName="passwordConfirmation"
-                          [ngClass]="{'is-invalid': submitted && registerForm.controls.passwordConfirmation.errors && registerForm.hasError('mismatch') , 'is-valid': submitted && !registerForm.controls.passwordConfirmation.errors && !registerForm.hasError('mismatch') }">
+                          [ngClass]="{'is-invalid': registerSubmitted && registerForm.controls.passwordConfirmation.errors || registerForm.hasError('mismatch') , 'is-valid': registerSubmitted && !registerForm.controls.passwordConfirmation.errors && !registerForm.hasError('mismatch') }">
                         <div class="invalid-feedback d-block">
-                          <div *ngIf="submitted && registerForm.controls.passwordConfirmation.hasError('required')">The
-                            password is required.</div>
-                          <div *ngIf="submitted && registerForm.controls.passwordConfirmation.hasError('minlength')" >The
-                            password must be more than 8 caracters.</div>
-                          <div *ngIf="submitted && registerForm.hasError('mismatch')">Password does not match</div>
+                          <div *ngIf="registerSubmitted && registerForm.controls.passwordConfirmation.hasError('required')">The
+                            Password is required.</div>
+                          <div *ngIf="registerSubmitted && registerForm.controls.passwordConfirmation.hasError('minlength')" >The
+                            Password must be more than 6 caracters.</div>
+                          <div *ngIf="registerSubmitted && registerForm.hasError('mismatch')">Password does not match</div>
                         </div>
                       </div>
-                      <button type="submit" class="btn btn-block btn-success">Create Account</button>
+                      <button type="submit" class="btn btn-block btn-success" routerLink="/login">Create Account</button>
                     </form>
                   </div>
                   <div class="modal-footer">
