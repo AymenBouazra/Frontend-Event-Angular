@@ -1,3 +1,6 @@
+
+<main class="main d-flex align-items-center"
+style="background-image: url('/src/back\ ground.jpg');background-size: cover;">
 <div class="animated fadeIn">
     <div class="row">
         <div class="offset-3 col-6 ">
@@ -6,56 +9,53 @@
                     <strong>Company</strong>
                     <small>Form</small>
                 </div>
-                
                 <div class="card-body">
                     <form action="">
-                    <div class="form-group">
-                        <label for="company">Company</label>
-                        <input type="text" class="form-control" id="company" placeholder="Enter your company name">
-                    </div>
-                
-                
-                    <div class="form-group row">
-                        <label for="textarea-input">Company Description</label>
-                        <div class="col-md-9">
-                            <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control"
-                                placeholder="Content.."></textarea>
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" class="form-control" id="company" placeholder="Enter your company name">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="if-email" name="if-email" class="form-control"
-                            placeholder="Enter Email.." autocomplete="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="if-password" name="if-password" class="form-control"
-                            placeholder="Enter Password.." autocomplete="current-password">
-                    </div>
-                    <div class="form-group row">
-                        <label for="select1">Select</label>
-                        <div class="col-md-9">
-                            <select id="select1" name="select1" class="form-control">
-                                <option value="0">Please select</option>
-                                <option value="1">Option #1</option>
-                                <option value="2">Option #2</option>
-                                <option value="3">Option #3</option>
-                            </select>
+                        <div class="form-group row">
+                            <label for="textarea-input">Company Description</label>
+                            <div class="col-md-9">
+                                <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control"
+                                    placeholder="Content.."></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="file-input">File input</label>
-                        <div class="col-md-9">
-                            <input type="file" id="file-input" name="file-input">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="if-email" name="if-email" class="form-control"
+                                placeholder="Enter Email.." autocomplete="email">
                         </div>
-                    </div>
-
-
-
-                </form>
-
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="if-password" name="if-password" class="form-control"
+                                placeholder="Enter Password.." autocomplete="current-password">
+                        </div>
+                        <div class="form-group row">
+                            <label for="select1">Select</label>
+                            <div class="col-md-9">
+                                <select id="select1" name="select1" class="form-control">
+                                    <option value="0">Please select</option>
+                                    <option value="1">Option #1</option>
+                                    <option value="2">Option #2</option>
+                                    <option value="3">Option #3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="file-input">File input</label>
+                            <div class="col-md-9">
+                                <input type="file" id="file-input" name="file-input">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Add Company</button>
+                        <button type="submit" class="btn btn-danger btn-block" routerLink="/companies">Cancel</button>
+                    </form>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
+
+</main>
