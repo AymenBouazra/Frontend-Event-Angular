@@ -53,6 +53,16 @@ export const navItems: NavData[] = [
     url: ('/companies'),
     icon: 'icon-user'
   },
+  {
+    name:'Events',
+    url: ('/events'),
+    icon: 'icon-diamond'
+  },
+  {
+    name: 'Tags',
+    url: ('/tags'),
+    icon: 'icon-tag'
+  },
   // {
   //   name: 'Colors',
   //   url: '/theme/colors',
