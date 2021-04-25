@@ -329,27 +329,27 @@ export const navItems: NavData[] = [
   //     }
   //   ]
   // },
-  // {
-  //   name: 'Tables',
-  //   url: '/tables',
-  //   icon: 'icon-list',
-  //   children: [
-  //     {
-  //       name: 'DataTable',
-  //       url: '/tables/datatable',
-  //       icon: 'icon-list',
-  //       badge: {
-  //         variant: 'danger',
-  //         text: 'PRO'
-  //       }
-  //     },
-  //     {
-  //       name: 'Standard Tables',
-  //       url: '/tables/tables',
-  //       icon: 'icon-list'
-  //     },
-  //   ]
-  // },
+  {
+    name: 'Tables',
+    url: '/tables',
+    icon: 'icon-list',
+    children: [
+      {
+        name: 'DataTable',
+        url: '/tables/datatable',
+        icon: 'icon-list',
+        badge: {
+          variant: 'danger',
+          text: 'PRO'
+        }
+      },
+      {
+        name: 'Standard Tables',
+        url: '/tables/tables',
+        icon: 'icon-list'
+      },
+    ]
+  },
   // {
   //   name: 'Widgets',
   //   url: '/widgets',
