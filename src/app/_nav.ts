@@ -51,7 +51,7 @@ export const navItems: NavData[] = [
   {
     name:'Companies',
     url: ('/companies'),
-    icon: 'icon-user'
+    icon: 'icon-home'
   },
   {
     name:'Events',
