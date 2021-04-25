@@ -22,7 +22,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text" style="background: transparent; color: white;">@</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="E-mail" autocomplete="username" required
+                    <input type="text" class="form-control" placeholder="Company e-mail"  required
                       style="background: transparent; color: white;" formControlName="email"
                       [ngClass]="{ 'is-invalid': loginSubmitted && loginForm.controls.email.errors,
                                    'is-valid': loginSubmitted && !loginForm.controls.email.errors }" >
@@ -33,9 +33,9 @@
                   </div>
                   <div class="input-group mb-4">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" style="background: transparent; color: white;"><i class="icon-lock"></i></span>
+                      <span class="input-group-text" style="background: transparent; color: white;"><i class="icon-key"></i></span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" autocomplete="current-password"
+                    <input type="password" class="form-control" placeholder="Password"
                       required style="background: transparent; color: white;" formControlName="password"
                       [ngClass]="{ 'is-invalid': loginSubmitted && loginForm.controls.password.errors, 'is-valid': loginSubmitted && !loginForm.controls.password.errors }" >
                       <div class="invalid-feedback d-block" *ngIf="loginSubmitted && loginForm.controls.password.hasError('required')">
@@ -80,27 +80,27 @@
                       <p class="text-white">Create your account</p>
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="icon-user"></i></span>
+                          <span class="input-group-text"><i class="fa fa-building-o"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="First name" autocomplete="firstname"
-                          formControlName="firstName"
-                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.firstName.errors, 'is-valid': registerSubmitted && !registerForm.controls.firstName.errors }">
+                        <input type="text" class="form-control" placeholder="Company name" autocomplete="companyName"
+                          formControlName="companyName"
+                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.companyName.errors, 'is-valid': registerSubmitted && !registerForm.controls.companyName.errors }">
 
                         <div class="invalid-feedback d-block"
-                          *ngIf="registerSubmitted && registerForm.controls.firstName.hasError('required')">
-                          First name is required.
+                          *ngIf="registerSubmitted && registerForm.controls.companyName.hasError('required')">
+                          Company name is required.
                         </div>
 
                       </div>
                       <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="icon-user"></i></span>
+                          <span class="input-group-text"><i class="icon-pencil"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Last name" autocomplete="lastname"
-                          formControlName="lastName"
-                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.lastName.errors, 'is-valid': registerSubmitted && !registerForm.controls.lastName.errors }" >
+                        <textarea type="text" class="form-control" placeholder="Company description" autocomplete="lastname"
+                          formControlName="companyDescription"
+                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.companyDescription.errors, 'is-valid': registerSubmitted && !registerForm.controls.companyDescription.errors }" ></textarea>
                         <div class="invalid-feedback d-block"
-                          *ngIf="registerSubmitted && registerForm.controls.lastName.hasError('required')">
+                          *ngIf="registerSubmitted && registerForm.controls.companyDescription.hasError('required')">
                           Last name is required.
                         </div>
                       </div>
