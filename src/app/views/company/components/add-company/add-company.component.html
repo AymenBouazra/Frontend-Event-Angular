@@ -8,11 +8,11 @@
                     <small>Form</small>
                 </div>
                 <div class="card-body">
-                    <form [formGroup]="companyForm"(ngSubmit)="AddCompany()">
+                    <form [formGroup]="companyForm" (ngSubmit)="AddCompany()">
                         <div class="form-group">
                             <label for="companyName">Company</label>
-                            <input type="text" class="form-control" id="companyName" placeholder="Enter your company name"
-                                formControlName="companyName"
+                            <input type="text" class="form-control" id="companyName"
+                                placeholder="Enter your company name" formControlName="companyName"
                                 [ngClass]="{'is-invalid': submitted && companyForm.controls.companyName.errors, 'is-valid': submitted && !companyForm.controls.companyName.errors}">
                             <div class="invalid-feedback d-block">
                                 <div *ngIf="submitted && companyForm.controls.companyName.hasError('required')">Company
@@ -22,17 +22,20 @@
                         </div>
                         <div class="form-group">
                             <label for="companyDescription">Company Description :</label>
-                            <textarea class="form-control" row="40" id="companyDescription" placeholder="Type your Company description here" formControlName="companyDescription" 
-                            [ngClass]="{'is-invalid': submitted && companyForm.controls.companyDescription.errors, 'is-valid': submitted && !companyForm.controls.companyDescription.errors}"></textarea>
+                            <textarea class="form-control" row="40" id="companyDescription"
+                                placeholder="Type your Company description here" formControlName="companyDescription"
+                                [ngClass]="{'is-invalid': submitted && companyForm.controls.companyDescription.errors, 'is-valid': submitted && !companyForm.controls.companyDescription.errors}"></textarea>
                             <div class="invalid-feedback d-block">
-                                <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('required')">Product Description is required.</div>
-                                <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('minlength')">Product Description is invalid format > 8.</div>
+                                <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('required')">
+                                    Company description is required.</div>
+                                <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('minlength')">
+                                    Company description is invalid format > 8.</div>
                             </div>
-                        </div> 
+                        </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control"
-                                placeholder="Enter Email.." autocomplete="email" formControlName="email"
+                            <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email.."
+                                autocomplete="email" formControlName="email"
                                 [ngClass]="{'is-invalid': submitted && companyForm.controls.email.errors, 'is-valid': submitted && !companyForm.controls.email.errors}">
                             <div class="invalid-feedback d-block"
                                 *ngIf="submitted && companyForm.controls.email.hasError('required')">
@@ -42,13 +45,12 @@
                                 *ngIf="submitted && companyForm.controls.email.hasError('email')">
                                 Email is invalid format.
                             </div>
-                           
+
                         </div>
                         <div class="form-group">
-                            <label for=" password"> password</label>
-                            <input type=" password" id=" password" name=" password" class="form-control"
-                                placeholder="Enter  password.." 
-                                formControlName="password"
+                            <label for="password"> password</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                                placeholder="Enter  password.." formControlName="password"
                                 [ngClass]="{'is-invalid': submitted && companyForm.controls.password.errors, 'is-valid': submitted && !companyForm.controls.password.errors}">
                             <div class="invalid-feedback d-block"
                                 *ngIf="submitted && companyForm.controls.password.hasError('required')">
@@ -62,11 +64,11 @@
                         <div class="form-group row">
                             <label for="role">Select Role</label>
                             <div class="col-md-9">
-                                <select id="role" name="role" class="form-control"formControlName="role"
-                                [ngClass]="{'is-invalid': submitted && companyForm.controls.role.errors, 'is-valid': submitted && !companyForm.controls. role.errors}">
+                                <select id="role" name="role" class="form-control" formControlName="role"
+                                    [ngClass]="{'is-invalid': submitted && companyForm.controls.role.errors, 'is-valid': submitted && !companyForm.controls. role.errors}">
                                     <div class="invalid-feedback d-block"
                                         *ngIf="submitted && companyForm.controls.role.hasError('required')">
-                                        passoword is required.
+                                        Role is required.
                                     </div>
                                     <option value="Super Admin">Super Admin</option>
                                     <option value="Admin">Admin</option>
@@ -77,13 +79,6 @@
                             <label for="file-input">File input</label>
                             <div class="col-md-9">
                                 <input type="file" id="file-input" name="file-input">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox">
-                                <label for="accept">I accept the terms of use</label>
-
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Add Company</button>
