@@ -1,44 +1,75 @@
-
 <div class="animated fadeIn"
-style="background-image: url('assets/img/Background-image/event.jpg');background-size: cover;">
+    style="background-image: url('assets/img/Background-image/event.jpg');background-size: cover;">
     <div class="row">
         <div class="offset-3 col-6 ">
             <div class="card" style="background:rgba(255, 255, 255, 0.336);">
-                <div class="card-header"style="background:rgba(255, 255, 255, 0.678);">
+                <div class="card-header" style="background:rgba(255, 255, 255, 0.678);">
                     <strong>Company</strong>
                     <small>Form</small>
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form [formGroup]="companyForm"(ngSubmit)="AddCompany()">
                         <div class="form-group">
-                            <label for="company">Company</label>
-                            <input type="text" class="form-control" id="company" placeholder="Enter your company name">
-                        </div>
-                        <div class="form-group row">
-                            <label for="textarea-input">Company Description</label>
-                            <div class="col-md-9">
-                                <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control"
-                                    placeholder="Content.."></textarea>
+                            <label for="companyName">Company</label>
+                            <input type="text" class="form-control" id="companyName" placeholder="Enter your company name"
+                                formControlName="companyName"
+                                [ngClass]="{'is-invalid': submitted && companyForm.controls.companyName.errors, 'is-valid': submitted && !companyForm.controls.companyName.errors}">
+                            <div class="invalid-feedback d-block">
+                                <div *ngIf="submitted && companyForm.controls.companyName.hasError('required')">Company
+                                    Name is
+                                    required.</div>
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="companyDescription">Company Description :</label>
+                            <textarea class="form-control" row="40" id="companyDescription" placeholder="Type your Company description here" formControlName="companyDescription" 
+                            [ngClass]="{'is-invalid': submitted && companyForm.controls.companyDescription.errors, 'is-valid': submitted && !companyForm.controls.companyDescription.errors}"></textarea>
+                            <div class="invalid-feedback d-block">
+                                <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('required')">Product Description is required.</div>
+                                <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('minlength')">Product Description is invalid format > 8.</div>
+                            </div>
+                        </div> 
+                        <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="if-email" name="if-email" class="form-control"
-                                placeholder="Enter Email.." autocomplete="email">
+                            <input type="email" id="email" name="email" class="form-control"
+                                placeholder="Enter Email.." autocomplete="email" formControlName="email"
+                                [ngClass]="{'is-invalid': submitted && companyForm.controls.email.errors, 'is-valid': submitted && !companyForm.controls.email.errors}">
+                            <div class="invalid-feedback d-block"
+                                *ngIf="submitted && companyForm.controls.email.hasError('required')">
+                                Email is required.
+                            </div>
+                            <div class="invalid-feedback d-block"
+                                *ngIf="submitted && companyForm.controls.email.hasError('email')">
+                                Email is invalid format.
+                            </div>
+                           
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" id="if-password" name="if-password" class="form-control"
-                                placeholder="Enter Password.." autocomplete="current-password">
+                            <label for=" password"> password</label>
+                            <input type=" password" id=" password" name=" password" class="form-control"
+                                placeholder="Enter  password.." 
+                                formControlName="password"
+                                [ngClass]="{'is-invalid': submitted && companyForm.controls.password.errors, 'is-valid': submitted && !companyForm.controls.password.errors}">
+                            <div class="invalid-feedback d-block"
+                                *ngIf="submitted && companyForm.controls.password.hasError('required')">
+                                passoword is required.
+                            </div>
+                            <div class="invalid-feedback d-block"
+                                *ngIf="submitted && companyForm.controls.password.hasError('minlength')">
+                                passoword is required minimum 8 char.
+                            </div>
                         </div>
                         <div class="form-group row">
-                            <label for="select1">Select</label>
+                            <label for="role">Select Role</label>
                             <div class="col-md-9">
-                                <select id="select1" name="select1" class="form-control">
-                                    <option value="0">Please select</option>
-                                    <option value="1">Option #1</option>
-                                    <option value="2">Option #2</option>
-                                    <option value="3">Option #3</option>
+                                <select id="role" name="role" class="form-control"formControlName="role"
+                                [ngClass]="{'is-invalid': submitted && companyForm.controls.role.errors, 'is-valid': submitted && !companyForm.controls. role.errors}">
+                                    <div class="invalid-feedback d-block"
+                                        *ngIf="submitted && companyForm.controls.role.hasError('required')">
+                                        passoword is required.
+                                    </div>
+                                    <option value="Super Admin">Super Admin</option>
+                                    <option value="Admin">Admin</option>
                                 </select>
                             </div>
                         </div>
@@ -47,7 +78,13 @@ style="background-image: url('assets/img/Background-image/event.jpg');background
                             <div class="col-md-9">
                                 <input type="file" id="file-input" name="file-input">
                             </div>
-                            
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox">
+                                <label for="accept">I accept the terms of use</label>
+
+                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Add Company</button>
                         <button type="submit" class="btn btn-danger btn-block" routerLink="/companies">Cancel</button>
@@ -57,4 +94,4 @@ style="background-image: url('assets/img/Background-image/event.jpg');background
 
         </div>
     </div>
-
+</div>
