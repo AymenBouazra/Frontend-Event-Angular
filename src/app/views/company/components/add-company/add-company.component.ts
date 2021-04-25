@@ -13,7 +13,7 @@ export class AddCompanyComponent implements OnInit {
     companyName: new FormControl('', [Validators.required]),
     companyDescription: new FormControl('', [Validators.required,Validators.minLength(8)]),
     email: new FormControl('',[Validators.required, Validators.email]),
-    Password: new FormControl('',[Validators.required,Validators.minLength(8)]),
+    password: new FormControl('',[Validators.required,Validators.minLength(8)]),
   });
 
   constructor() { }
