@@ -31,13 +31,7 @@ export class LoginComponent {
   });
  
 
-  constructor(private company: LoginregisterService, private router: Router,private toastr:ToastrService) {
-     
-  }
-
-  
-    
-  
+  constructor(private company: LoginregisterService, private router: Router,private toastr:ToastrService) {} 
   ngOnInit(): void {
   }
   register() {
