@@ -54,11 +54,11 @@
                                 [ngClass]="{'is-invalid': submitted && companyForm.controls.password.errors, 'is-valid': submitted && !companyForm.controls.password.errors}">
                             <div class="invalid-feedback d-block"
                                 *ngIf="submitted && companyForm.controls.password.hasError('required')">
-                                passoword is required.
+                                assoword is required.
                             </div>
                             <div class="invalid-feedback d-block"
                                 *ngIf="submitted && companyForm.controls.password.hasError('minlength')">
-                                passoword is required minimum 8 char.
+                                Passoword is required minimum 8 char.
                             </div>
                         </div>
                         <div class="form-group row">
@@ -70,7 +70,7 @@
                                         *ngIf="submitted && companyForm.controls.role.hasError('required')">
                                         Role is required.
                                     </div>
-                                    <option value="Super Admin">Super Admin</option>
+                                    <option value="Super Admin" selected>Super Admin</option>
                                     <option value="Admin">Admin</option>
                                 </select>
                             </div>
