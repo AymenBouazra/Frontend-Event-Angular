@@ -47,10 +47,6 @@ export class LoginComponent {
         console.log(error);
         this.toastr.error( 'This email *'+this.registerForm.value.email+'* alreay exists, please enter an other email!','Register Failed');
       })
-
-
-
-
   }
   passwordConfirmation(group: AbstractControl): { [key: string]: any } | null {
     const password = group.get('password')
