@@ -6,6 +6,8 @@ import { TagsComponent } from './tags.component';
 import { AddTagComponent } from './add-tag/add-tag.component';
 import { UpdateTagComponent } from './update-tag/update-tag.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     TagsRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    Observable
   ]
 })
 export class TagsModule { }
