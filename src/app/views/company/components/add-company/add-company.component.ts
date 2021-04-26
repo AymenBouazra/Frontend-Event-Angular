@@ -1,9 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyService } from '../../services/company.service';
-
 
 @Component({
   selector: 'app-add-company',
@@ -18,14 +18,13 @@ export class AddCompanyComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     role: new FormControl('', [Validators.required]),
+    // uploadPhoto:new FormControl('', [Validators.required]), 
+    
   });
   
-  loginForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-  });
+ 
 
-  constructor(private router: Router,private company:CompanyService,private toastr:ToastrService) { }
+  constructor(private router: Router,private company:CompanyService,private toastr:ToastrService,private http :HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -44,6 +43,8 @@ export class AddCompanyComponent implements OnInit {
       })
 
   }
-  
 
+
+    
+  
 }
