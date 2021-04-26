@@ -5,7 +5,9 @@ import { CompanyComponent } from './company.component';
 import { AddCompanyComponent } from './components/add-company/add-company.component';
 import { UpdateCompanyComponent } from './components/update-company/update-company.component';
 import { ListCompanyComponent } from './components/list-company/list-company.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
+import { HttpClientModule} from '@angular/common/http';
+import { AngularFileUploaderModule } from "angular-file-uploader";
 
 
 
@@ -19,7 +21,9 @@ import {ReactiveFormsModule} from '@angular/forms';
   imports: [
     CommonModule,
     CompanyRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    AngularFileUploaderModule
   ]
 })
 export class CompanyModule { }
