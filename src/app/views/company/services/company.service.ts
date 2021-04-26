@@ -14,9 +14,5 @@ export class CompanyService {
   getCompanyById(id:number){
     return this.http.get("http://localhost:3000/register"+id)
   };
-  loginCompany(companyData:any)
-  {
-   return this.http.post("http://localhost:3000/login",companyData)
-  }
-
+  
 }

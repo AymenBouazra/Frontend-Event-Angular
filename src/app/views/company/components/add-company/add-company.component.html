@@ -4,55 +4,52 @@
         <div class="offset-3 col-6 ">
             <div class="card" style="background:rgba(255, 255, 255, 0.336);">
                 <div class="card-header" style="background:rgba(255, 255, 255, 0.678);">
-                    <strong>Company</strong>
-                    <small>Form</small>
+                    <strong>Add Company</strong>
                 </div>
                 <div class="card-body">
                     <form [formGroup]="companyForm"(ngSubmit)="AddCompany()">
                         <div class="form-group">
-                            <label for="companyName">Company</label>
+                            <label for="companyName">Company name:</label>
                             <input type="text" class="form-control" id="companyName" placeholder="Enter your company name"
                                 formControlName="companyName"
                                 [ngClass]="{'is-invalid': submitted && companyForm.controls.companyName.errors, 'is-valid': submitted && !companyForm.controls.companyName.errors}">
                             <div class="invalid-feedback d-block">
-                                <div *ngIf="submitted && companyForm.controls.companyName.hasError('required')">Company
-                                    Name is
-                                    required.</div>
+                                <div *ngIf="submitted && companyForm.controls.companyName.hasError('required')">Company name is required.</div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="companyDescription">Company Description :</label>
+                            <label for="companyDescription">Company description :</label>
                             <textarea class="form-control" row="40" id="companyDescription" placeholder="Type your Company description here" formControlName="companyDescription" 
                             [ngClass]="{'is-invalid': submitted && companyForm.controls.companyDescription.errors, 'is-valid': submitted && !companyForm.controls.companyDescription.errors}"></textarea>
                             <div class="invalid-feedback d-block">
-                                <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('required')">Product Description is required.</div>
-                                <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('minlength')">Product Description is invalid format > 8.</div>
+                                <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('required')">Company description is required.</div>
+                                <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('minlength')">Company description is invalid format > 8.</div>
                             </div>
                         </div> 
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email">E-mail</label>
                             <input type="email" id="email" name="email" class="form-control"
-                                placeholder="Enter Email.." autocomplete="email" formControlName="email"
+                                placeholder="Enter e-mail.." autocomplete="email" formControlName="email"
                                 [ngClass]="{'is-invalid': submitted && companyForm.controls.email.errors, 'is-valid': submitted && !companyForm.controls.email.errors}">
                             <div class="invalid-feedback d-block"
                                 *ngIf="submitted && companyForm.controls.email.hasError('required')">
-                                Email is required.
+                                E-mail is required.
                             </div>
                             <div class="invalid-feedback d-block"
                                 *ngIf="submitted && companyForm.controls.email.hasError('email')">
-                                Email is invalid format.
+                                Invalid e-mail.
                             </div>
                            
                         </div>
                         <div class="form-group">
-                            <label for=" password"> password</label>
+                            <label for=" password"> Password</label>
                             <input type=" password" id=" password" name=" password" class="form-control"
                                 placeholder="Enter  password.." 
                                 formControlName="password"
                                 [ngClass]="{'is-invalid': submitted && companyForm.controls.password.errors, 'is-valid': submitted && !companyForm.controls.password.errors}">
                             <div class="invalid-feedback d-block"
                                 *ngIf="submitted && companyForm.controls.password.hasError('required')">
-                                assoword is required.
+                                Passoword is required.
                             </div>
                             <div class="invalid-feedback d-block"
                                 *ngIf="submitted && companyForm.controls.password.hasError('minlength')">

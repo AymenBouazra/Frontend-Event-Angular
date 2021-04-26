@@ -12,12 +12,11 @@ import { CompanyService } from '../../services/company.service';
 })
 export class AddCompanyComponent implements OnInit {
   submitted = false;
-  loginSubmitted=false;
   companyForm: FormGroup = new FormGroup({
     companyName: new FormControl('', [Validators.required]),
     companyDescription: new FormControl('', [Validators.required, Validators.minLength(8)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     role: new FormControl('', [Validators.required]),
   });
   
@@ -45,20 +44,6 @@ export class AddCompanyComponent implements OnInit {
       })
 
   }
-  login() {
-    this.loginSubmitted = true;
-    if (this.loginForm.invalid) {
-      return;
-    }
-    this.company.loginCompany(this.loginForm.value).subscribe((response: any) => {
-      this.router.navigate(['/dashboard'])
-      this.toastr.success( 'You are succesfully logged in !.','Logged in');
-    },
-      (error) => {
-        console.log(error);
-        this.toastr.error( 'Please verify your email and password!','Login Failed');
-      })
-
-  }
+  
 
 }
