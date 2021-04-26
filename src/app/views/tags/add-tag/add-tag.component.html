@@ -1,1 +1,29 @@
-<p>add-tag works!</p>
+<div class="card-body">
+    <h1>Add tag</h1>
+
+    <form [formGroup]="tagForm" (ngSubmit)="addTag()">
+        <div class="form-group">
+            <label for="name">Tag title</label>
+            <input type="text" class="form-control" placeholder="Name" formControlName="title" 
+                [ngClass]="{ 'is-invalid': submitted && tagForm.controls.title.errors,
+                    'is-valid': submitted && !tagForm.controls.title.errors }">
+            <div class="invalid-feedback d-block" *ngIf="submitted && tagForm.controls.title.hasError('required')">
+                Tag name is required.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="name">Tag description</label>
+            <textarea type="text" class="form-control" placeholder="Description..." formControlName="description"
+                [ngClass]="{ 'is-invalid': submitted && tagForm.controls.description.errors,
+                    'is-valid': submitted && !tagForm.controls.description.errors }">
+                </textarea>
+            <div class="invalid-feedback d-block"
+                *ngIf="submitted && tagForm.controls.description.hasError('required')">
+                Tag description is required.
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-success">Add this tag</button>
+        </div>
+    </form>
+</div>

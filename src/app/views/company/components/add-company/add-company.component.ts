@@ -12,12 +12,11 @@ import { CompanyService } from '../../services/company.service';
 })
 export class AddCompanyComponent implements OnInit {
   submitted = false;
-  loginSubmitted=false;
   companyForm: FormGroup = new FormGroup({
     companyName: new FormControl('', [Validators.required]),
     companyDescription: new FormControl('', [Validators.required, Validators.minLength(8)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     role: new FormControl('', [Validators.required]),
     // uploadPhoto:new FormControl('', [Validators.required]), 
     
@@ -45,13 +44,6 @@ export class AddCompanyComponent implements OnInit {
 
   }
 
-  // SelectedFile = null;
-  //   onFileSelected(event){
-  //     this.SelectedFile = event.target.files[0];
-  
-  //   }
-  //   onUpload(){
-  //     this.http.post('')
 
     
   
