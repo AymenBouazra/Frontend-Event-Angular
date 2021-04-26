@@ -1,9 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyService } from '../../services/company.service';
-
 
 @Component({
   selector: 'app-add-company',
@@ -19,14 +19,13 @@ export class AddCompanyComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     role: new FormControl('', [Validators.required]),
+    // uploadPhoto:new FormControl('', [Validators.required]), 
+    
   });
   
-  loginForm: FormGroup = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-  });
+ 
 
-  constructor(private router: Router,private company:CompanyService,private toastr:ToastrService) { }
+  constructor(private router: Router,private company:CompanyService,private toastr:ToastrService,private http :HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -45,20 +44,15 @@ export class AddCompanyComponent implements OnInit {
       })
 
   }
-  login() {
-    this.loginSubmitted = true;
-    if (this.loginForm.invalid) {
-      return;
-    }
-    this.company.loginCompany(this.loginForm.value).subscribe((response: any) => {
-      this.router.navigate(['/dashboard'])
-      this.toastr.success( 'You are succesfully logged in !.','Logged in');
-    },
-      (error) => {
-        console.log(error);
-        this.toastr.error( 'Please verify your email and password!','Login Failed');
-      })
 
-  }
+  // SelectedFile = null;
+  //   onFileSelected(event){
+  //     this.SelectedFile = event.target.files[0];
+  
+  //   }
+  //   onUpload(){
+  //     this.http.post('')
 
+    
+  
 }
