@@ -18,7 +18,7 @@ export class AddCompanyComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     role: new FormControl('', [Validators.required]),
-    uploadPhoto:new FormControl('', [Validators.required]), 
+    uploadPhoto:new FormControl('', []), 
     
   });
   

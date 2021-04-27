@@ -9,12 +9,12 @@ export class CompanyService {
   constructor(private http:HttpClient) { }
   postCompany(companyData:any)
   {
-   return this.http.post("http://localhost:3000/register",companyData)
+   return this.http.post("http://localhost:3000/company",companyData)
   }
   getCompanyById(id:number){
-    return this.http.get("http://localhost:3000/register"+id)
+    return this.http.get("http://localhost:3000/company"+id)
   };
   getAllCompnanies(){
-    return this.http.get("http://localhost:3000/register")
+    return this.http.get("http://localhost:3000/company")
   };
 }

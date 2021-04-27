@@ -12,10 +12,12 @@ export class CompanyComponent implements OnInit {
   currentDate= new Date;
   searchText:any;
   company:any;
-  constructor(private router: Router, private CompanyService: CompanyService) { }
+  constructor(private router: Router, private companyService: CompanyService) { }
 
   ngOnInit(): void {
-    this.company= this.company.getAllCompnanies();
+     this.companyService.getAllCompnanies().subscribe(response => {
+       this.company = response ;
+     });
   }
 
   deletecompany(i){
