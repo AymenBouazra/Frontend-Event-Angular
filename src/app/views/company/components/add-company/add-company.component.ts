@@ -18,7 +18,7 @@ export class AddCompanyComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     role: new FormControl('', [Validators.required]),
-    // uploadPhoto:new FormControl('', [Validators.required]), 
+    uploadPhoto:new FormControl('', []), 
     
   });
   
@@ -35,6 +35,7 @@ export class AddCompanyComponent implements OnInit {
     }
     this.company.postCompany(this.companyForm.value).subscribe((response: any) => {
       this.toastr.success( this.companyForm.value.companyName+' Added successfully','Company added');
+      this.router.navigateByUrl('/companies')
       
     },
       (error) => {
@@ -43,8 +44,4 @@ export class AddCompanyComponent implements OnInit {
       })
 
   }
-
-
-    
-  
 }
