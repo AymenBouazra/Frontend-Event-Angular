@@ -34,8 +34,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { TokenInterceptorService } from './providers/token-interceptor.service';
 
 @NgModule({
   imports: [
@@ -68,7 +69,13 @@ import { ToastrModule } from 'ngx-toastr';
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
-  }],
+  },
+  {
+    provide : HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi   : true,
+  },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
