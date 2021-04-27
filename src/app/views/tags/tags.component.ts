@@ -56,14 +56,16 @@ export class TagsComponent implements OnInit {
 
   delete(id:number){    
     this.tag.deleteTagById(id).subscribe((response:any)=>{this.ngOnInit()},(error)=>{})
+    console.log(id);
+    
   }
   showData() {
-    this.tag.getTagsById(this.toDoId).subscribe((response:any)=>{this.tagUpdateForm.patchValue(response),this.ngOnInit()},(error)=>{})
+    // this.tag.getTagsById(this.toDoId).subscribe((response:any)=>{this.tagUpdateForm.patchValue(response),this.ngOnInit()},(error)=>{})
     
   }
   updateTag(){
     this.updateSubmitted=true;
-    this.tag.updateTagsDataById(this.tagUpdateForm.value,this.toDoId).subscribe((response:any)=>{},(error)=>{})
+    // this.tag.updateTagsDataById(this.tagUpdateForm.value,this.toDoId).subscribe((response:any)=>{},(error)=>{})
 
   }
   
