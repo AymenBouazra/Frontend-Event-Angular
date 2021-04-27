@@ -82,11 +82,10 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="form-group row">
+                        <div class="form-group row">
                             <label>Event Started In : </label>
                             <div class="col-md-6">
-                                <input  type="datetime-local" name="partydate" min="2021-04-27T12:30" value="bsValue" formContrilName="starDateTime">
-                              <input type="text" #dp="bsDatepicker" class="form-control" [minDate]="minDate" bsDatepicker [(bsValue)]="bsValue" formContrilName="starDateTime"
+                              <input type="text" #dp="bsDatepicker" class="form-control" [minDate]="minStartDate" bsDatepicker [(bsValue)]="bsValue" formControlName="starDateTime"
                               [ngClass]="{'is-invalid': submitted && eventForm.controls.starDateTime.errors, 'is-valid': submitted && !eventForm.controls.starDateTime.errors}">
                             </div>
                             <div class="invalid-feedback d-block">
@@ -98,7 +97,7 @@
                         <div class="form-group row">
                             <label>Event Ended In : </label>
                             <div class="">
-                              <input type="text" #dp="bsDatepicker" class="form-control" [minDate]="minDate" bsDatepicker [(bsValue)]="bsValue" formContrilName="endDateTime"
+                              <input type="text" #dp="bsDatepicker" class="form-control" [minDate]="minEndDate" bsDatepicker [(bsValue)]="bsValue" formControlName="endDateTime"
                               [ngClass]="{'is-invalid': submitted && eventForm.controls.endDateTime.errors, 'is-valid': submitted && !eventForm.controls.endDateTime.errors}">
                             </div>
                             <div class="invalid-feedback d-block">
@@ -106,7 +105,7 @@
                                     Event end time is required.
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                         <button type="submit" class="btn btn-primary btn-block">Add event</button>
                         <button type="button" class="btn btn-danger btn-block" routerLink="/events">Cancel</button>
                     </form>
