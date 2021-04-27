@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { TagService } from './services/tag.service';
 
@@ -9,20 +10,15 @@ import { TagService } from './services/tag.service';
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.css']
 })
+
 export class TagsComponent implements OnInit {
+  @ViewChild('modal') public modal: ModalDirective;
   searchText:string;
   listTagsTodo: any;
-  currentDate= new Date;
-  toDoId:any;
+  tagId:any;
   
-  addSubmitted=false
-  tagAddForm: FormGroup = new FormGroup({
-    title: new FormControl('', Validators.required),
-    description: new FormControl('', [Validators.required])
-  });
-
-  updateSubmitted=false
-  tagUpdateForm: FormGroup = new FormGroup({
+  submitted=false
+  tagForm: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
     description: new FormControl('', [Validators.required])
   });
@@ -36,21 +32,20 @@ export class TagsComponent implements OnInit {
   },(error)=>{
     console.log(error);
   })
-  this.toDoId=this.route.snapshot.params['id']; 
-  this.showData()
+  this.tagId=this.route.snapshot.params['id']; 
   }
   addTag() {
-    this.addSubmitted = true
-    if (this.tagAddForm.invalid) {
+    this.submitted = true
+    if (this.tagForm.invalid) {
       return;
     }
-    this.tag.tags(this.tagAddForm.value).subscribe((response: any) => {
+    this.tag.tags(this.tagForm.value).subscribe((response: any) => {
       this.toastr.success( 'New tag succesfully added.','Tag added !');
       this.ngOnInit()
     },
       (error) => {
         console.log(error);
-        this.toastr.error(this.tagAddForm.value.title+'  already exists, please enter an other tag.','Add failed !');
+        this.toastr.error(this.tagForm.value.title+'  already exists, please enter an other tag.','Add failed !');
       })
   }
 
@@ -59,12 +54,16 @@ export class TagsComponent implements OnInit {
     console.log(id);
     
   }
-  showData() {
-    // this.tag.getTagsById(this.toDoId).subscribe((response:any)=>{this.tagUpdateForm.patchValue(response),this.ngOnInit()},(error)=>{})
+  show(id:number) {
+    this.modal.show()
+    this.tag.getTagsById(id).subscribe((response:any)=>{this.tagForm.patchValue(response),this.ngOnInit()},(error)=>{})
     
   }
+  hide(){
+    this.modal.hide()
+  }
   updateTag(){
-    this.updateSubmitted=true;
+    this.submitted=true;
     // this.tag.updateTagsDataById(this.tagUpdateForm.value,this.toDoId).subscribe((response:any)=>{},(error)=>{})
 
   }
