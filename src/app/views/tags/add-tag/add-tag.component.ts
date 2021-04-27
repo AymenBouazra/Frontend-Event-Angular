@@ -12,7 +12,7 @@ export class AddTagComponent implements OnInit {
   submitted=false
   tagForm: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
-    description: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required])
   });
   constructor(private tag:TagService, private toastr:ToastrService) { }
 
