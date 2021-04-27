@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" *ngIf="eventForm.value.eventType == 'Paid'">
                             <label>Price :</label>
                             <div class="input-group">
                                 <input type="number" class="form-control" placeholder="Price" formControlName="price"
@@ -85,7 +85,7 @@
                         <div class="form-group row">
                             <label>Event Started In : </label>
                             <div class="col-md-6">
-                              <input type="text" #dp="bsDatepicker" class="form-control" [minDate]="minDate" bsDatepicker [(bsValue)]="bsValue" formContrilName="starDateTime"
+                              <input type="text" #dp="bsDatepicker" class="form-control" [minDate]="minStartDate" bsDatepicker [(bsValue)]="bsValue" formControlName="starDateTime"
                               [ngClass]="{'is-invalid': submitted && eventForm.controls.starDateTime.errors, 'is-valid': submitted && !eventForm.controls.starDateTime.errors}">
                             </div>
                             <div class="invalid-feedback d-block">
@@ -96,8 +96,8 @@
                         </div>
                         <div class="form-group row">
                             <label>Event Ended In : </label>
-                            <div class="col-md-6">
-                              <input type="text" #dp="bsDatepicker" class="form-control" [minDate]="minDate" bsDatepicker [(bsValue)]="bsValue" formContrilName="endDateTime"
+                            <div class="">
+                              <input type="text" #dp="bsDatepicker" class="form-control" [minDate]="minEndDate" bsDatepicker [(bsValue)]="bsValue" formControlName="endDateTime"
                               [ngClass]="{'is-invalid': submitted && eventForm.controls.endDateTime.errors, 'is-valid': submitted && !eventForm.controls.endDateTime.errors}">
                             </div>
                             <div class="invalid-feedback d-block">
