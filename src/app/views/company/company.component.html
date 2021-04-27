@@ -1,62 +1,39 @@
-<button routerLink="/companies/add-company">add
-    <i class="fa fa-cart-plus fa-lg mt-4"></i></button> 
-<button routerLink="/companies/update-company">update</button>
-
-    <!-- <div class="animated fadeIn">
-        <div class="card">
-          <div class="card-header">
-            Company List
-           
-          </div>
-          <div class="card-body">
-            <div class="row mb-3">
-              <div class="col-md-4 offset-md-8">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fa fa-search"></i></span>
-                  </div>
-                  <input type="text" class="form-control" [(ngModel)]="filterQuery" placeholder="Search by name"/>
-                </div>
-              </div>
-            </div>
-            <table class="table table-striped table-hover table-responsive-lg" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="10">
-              <thead>
-                <tr>
-                  <th style="width: 20%">
-                    <mfDefaultSorter by="companyName">Company Name</mfDefaultSorter>
-                  </th>
-                  <th style="width: 35%">
-                    <mfDefaultSorter by="companyDescription">Company Description</mfDefaultSorter>
-                  </th>
-                  <th style="width: 10%">
-                    <mfDefaultSorter by="email">email</mfDefaultSorter>
-                  </th>
-                  <th style="width: 20%">
-                    <mfDefaultSorter by="role">role</mfDefaultSorter>
-                  </th>
-                  <th style="width: 10%">
-                    <mfDefaultSorter by="city">Registered</mfDefaultSorter>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let company of mf.data">
-                  <td>{{company.name}}</td>
-                  <td>{{company.email}}</td>
-                  <td class="text-left">{{company.age}}</td>
-                  <td>{{company.city | uppercase}}</td>
-                  <td>{{getDate(company.regDate)}}</td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="5">
-                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
+<div class="row mt-5">
+  <div class="offset-1 col-9">
+    <!-- <div class="row col-6">
+      <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search company..." [(ngModel)]="searchText">
+      </div> -->
+      <div class=" float-right">
+        
+    <button class="btn btn-primary float-right my-2" routerLink="/add-company"><i class="fas fa-plus"></i> Add company</button>
       </div>
-       -->
+    
+  </div>
+  <div class="offset-1 col-9">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Email</th>
+          <th scope="col">Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let company of company ; let i=index">
+          <th scope="row">{{ i+1 }}</th>
+          <td>{{ company.companyName }}</td>
+          <td>{{ company.companyDescription }}</td>
+          <td>{{ company.email }}</td>
+          <td>{{ company.role }}</td>
+          <td>
+            <button class="btn btn-info" [routerLink]="[ '/update-company', i ]"> <i class="fas fa-pen"></i> Update</button>
+            <button class="btn btn-danger ml-1" (click)="deletecompany(i)"> <i class="far fa-trash-alt"></i> Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>{{ currentDate | date:'fullDate' }}</p>
+  </div>
+</div>

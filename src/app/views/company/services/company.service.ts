@@ -14,5 +14,7 @@ export class CompanyService {
   getCompanyById(id:number){
     return this.http.get("http://localhost:3000/register"+id)
   };
-  
+  getAllCompnanies(){
+    return this.http.get("http://localhost:3000/register")
+  };
 }
