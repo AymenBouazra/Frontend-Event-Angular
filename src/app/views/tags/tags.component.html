@@ -14,8 +14,7 @@
 </style>
 
 
-<button>add</button>
-<button routerLink="/tags/UpdateTag">update</button>
+
 <div class="offset-1 my-3 row">
     <div class="col-12">
         <button class="btn btn-success col-2 float-right" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-plus"></i> Add
@@ -38,7 +37,7 @@
             <td>{{tag.title}}</td>
             <td>{{tag.description}}</td>
             <td>
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal"  data-bs-target="#exampleModal">
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal"  data-bs-target="#updateModal">
                     <i class="far fa-edit"></i> Update
                 </button>
                 <button type="button" class="btn btn-danger" style="color:black!important" (click)='delete(tag._id)'><i
@@ -91,7 +90,7 @@
     </div>
 </div>
 <!-- Modal UPDATE -->
-<div class="modal fade right" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal right fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
