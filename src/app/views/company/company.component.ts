@@ -12,6 +12,7 @@ export class CompanyComponent implements OnInit {
   currentDate= new Date;
   searchText:any;
   company:any;
+  
   constructor(private router: Router, private companyService: CompanyService) { }
 
   ngOnInit(): void {
@@ -19,11 +20,12 @@ export class CompanyComponent implements OnInit {
        this.company = response ;
      });
   }
+  deletecompany(i:number){
 
-  deletecompany(i){
-
-    this.company.DeleteCompanyById(i);
-    this.company= this.company.getAllCompnanies();
+    this.companyService.deleteCompanyById(i).subscribe(response => {
+     this.ngOnInit();
+    });
+    
     
   }
   

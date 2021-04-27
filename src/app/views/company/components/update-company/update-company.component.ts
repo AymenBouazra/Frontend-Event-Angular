@@ -10,7 +10,7 @@ import { CompanyService } from '../../services/company.service';
 })
 export class UpdateCompanyComponent implements OnInit {
   submitted = false;
-  loginSubmitted=false;
+  loginSubmitted = false;
   updateCompanyForm: FormGroup = new FormGroup({
     companyName: new FormControl('', [Validators.required]),
     companyDescription: new FormControl('', [Validators.required, Validators.minLength(8)]),
@@ -18,43 +18,45 @@ export class UpdateCompanyComponent implements OnInit {
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     role: new FormControl('', [Validators.required]),
   });
-  index: any;
-  CompanyService: any;
+  id: any;
 
-  constructor(private router: Router,private activatedRoute: ActivatedRoute,private company:CompanyService) { }
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private companyService: CompanyService) { }
 
   ngOnInit(): void {
 
-    this.index = this.activatedRoute.snapshot.params['i'];
-    // console.log(this.index);
+    this.id = this.activatedRoute.snapshot.params['id'];
+    // console.log(this.id);
     this.loadCompany();
 
 
   }
-  loadCompany(){
-    let companyData = this.CompanyService.getcompanyByindex(this.index) ;
-    this.updateCompanyForm.patchValue(companyData);
+  loadCompany() {
+    this.companyService.getcompanyByid(this.id).subscribe((response: any) => {
+
+      this.updateCompanyForm.patchValue(response);
+    });
+
 
 
   }
-  saveCrud()
-  {
+  saveCompany() {
+
     this.submitted = true;
-    if(this.updateCompanyForm.invalid)
-    {
-      return ;
+    if (this.updateCompanyForm.invalid) {
+      return;
     }
 
-    
-    let updateProductData=this.updateCompanyForm.value;
-    this.CompanyService.updateProductDataByIndex(updateProductData,this.index);
 
-    
-    this.updateCompanyForm.reset();
-    this.submitted = false;
+    let updatecompanyData = this.updateCompanyForm.value;
+    this.companyService.updateCompanyDataByid(updatecompanyData, this.id).subscribe((rsponse: any) => {
+      this.updateCompanyForm.reset();
+      this.submitted = false;
+      this.router.navigate(['/companies'])
 
-    
-     this.router.navigate(['/companies'])
+    });
+
+
 
   }
 

@@ -35,6 +35,7 @@ export class AddCompanyComponent implements OnInit {
     }
     this.company.postCompany(this.companyForm.value).subscribe((response: any) => {
       this.toastr.success( this.companyForm.value.companyName+' Added successfully','Company added');
+      this.router.navigateByUrl('/companies')
       
     },
       (error) => {
