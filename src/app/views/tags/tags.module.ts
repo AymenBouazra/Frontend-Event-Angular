@@ -7,6 +7,7 @@ import { AddTagComponent } from './add-tag/add-tag.component';
 import { UpdateTagComponent } from './update-tag/update-tag.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -21,7 +22,8 @@ import { HttpClientModule, HttpHeaders } from '@angular/common/http';
     TagsRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ModalModule.forRoot()
   ]
 })
 export class TagsModule { }

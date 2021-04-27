@@ -64,14 +64,16 @@ export class LoginComponent {
       return;
     }
     this.company.loginCompany(this.loginForm.value).subscribe((response: any) => {
+      localStorage.setItem('token', response.token);
       this.router.navigate(['/dashboard'])
       this.toastr.success( 'You are succesfully logged in !.','Logged in');
     },
       (error) => {
         console.log(error);
         this.toastr.error( 'Please verify your email and password!','Login Failed');
-      })
-
+      }) 
+  }
+  logout(){
     
   }
 }
