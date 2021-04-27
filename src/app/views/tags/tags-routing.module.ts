@@ -3,18 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { TagsComponent } from './tags.component';
 
 const routes: Routes = [
-  { 
-    path: '',
-    data:{
+  {
+    path: '', 
+    component: TagsComponent,
+    data: {
       title: 'Tags'
-    },
-    children:[
-      {
-        path:'',
-        component: TagsComponent
-      }
-    ]
-     }];
+    }
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
