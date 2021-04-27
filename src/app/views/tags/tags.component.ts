@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { resetFakeAsyncZone } from '@angular/core/testing';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
@@ -16,8 +17,9 @@ export class TagsComponent implements OnInit {
   searchText:string;
   listTagsTodo: any;
   tagId:any;
-  
-  submitted=false
+  showUpdateButton = false;
+  submitted=false;
+  modalTitle:string='Add tag'
   tagForm: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
     description: new FormControl('', [Validators.required])
@@ -32,7 +34,6 @@ export class TagsComponent implements OnInit {
   },(error)=>{
     console.log(error);
   })
-  this.tagId=this.route.snapshot.params['id']; 
   }
   addTag() {
     this.submitted = true
@@ -41,7 +42,8 @@ export class TagsComponent implements OnInit {
     }
     this.tag.tags(this.tagForm.value).subscribe((response: any) => {
       this.toastr.success( 'New tag succesfully added.','Tag added !');
-      this.ngOnInit()
+      this.hide();
+      this.ngOnInit();
     },
       (error) => {
         console.log(error);
@@ -52,20 +54,30 @@ export class TagsComponent implements OnInit {
   delete(id:number){    
     this.tag.deleteTagById(id).subscribe((response:any)=>{this.ngOnInit()},(error)=>{})
     console.log(id);
-    
   }
-  show(id:number) {
+  showAdd(){
+    this.modal.show()
+    this.showUpdateButton = false;
+  }
+  showUpdate(id:number) {
+    this.showUpdateButton = true;
+    this.modalTitle='Update tag'
+    this.tagId=id
     this.modal.show()
     this.tag.getTagsById(id).subscribe((response:any)=>{this.tagForm.patchValue(response),this.ngOnInit()},(error)=>{})
-    
   }
   hide(){
-    this.modal.hide()
+    this.modal.hide();
+    this.modalTitle='Add tag'
+    this.tagForm.reset()
+    this.submitted= false;
   }
   updateTag(){
     this.submitted=true;
-    // this.tag.updateTagsDataById(this.tagUpdateForm.value,this.toDoId).subscribe((response:any)=>{},(error)=>{})
-
+    this.tag.updateTagsDataById(this.tagForm.value,this.tagId).subscribe((response:any)=>{
+      this.hide();
+      this.ngOnInit();
+    },(error)=>{})
+    
   }
-  
 }
