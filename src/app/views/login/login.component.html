@@ -70,7 +70,7 @@
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
               <div class="modal-dialog">
-                <div class="modal-content" style="background:rgba(255,255,255, 0.8);">
+                <div class="modal-content" style="background:rgba(255, 255, 255, 0.123);">
                   <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(0, 204, 255);">Register Now !</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -145,11 +145,11 @@
                           <div *ngIf="registerSubmitted && registerForm.hasError('mismatch')">Password does not match</div>
                         </div>
                       </div>
-                      <button type="submit" class="btn btn-block btn-success" routerLink="/login">Create Account</button>
+                      <button type="submit" class="btn btn-block btn-primary" routerLink="/login">Create Account</button>
                     </form>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-warning" style="width: 30%; margin: auto;"
+                    <button type="button" class="btn btn-secondary" style="width: 30%; margin: auto;"
                       data-bs-dismiss="modal">Close</button>
                   </div>
                 </div>
