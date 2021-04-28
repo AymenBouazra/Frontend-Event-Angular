@@ -29,12 +29,13 @@ export class EventsComponent implements OnInit {
     location: new FormControl('', [Validators.required]),
     availableTicketNumber: new FormControl('', [Validators.required,Validators.min(1)]),
     price: new FormControl('',[]),
-    starDateTime: new FormControl(new Date("MM/DD/YYYY"),[Validators.required]),
-    endDateTime: new FormControl(new Date("MM/DD/YYYY"),[Validators.required]),
+    starDateTime: new FormControl(new Date(),[Validators.required]),
+    endDateTime: new FormControl(new Date(),[Validators.required]),
   });
   minStartDate = new Date();
   minEndDate= new Date();
-  bsValue: Date = new Date();
+  startValue: Date = new Date();
+  endValue: Date = new Date();  
 
   constructor(
     private eventService: EventsService,
@@ -51,6 +52,18 @@ export class EventsComponent implements OnInit {
       
     })
     
+    this.eventForm.controls.eventType.valueChanges.subscribe(newvalue =>{
+      if (newvalue == 'Paid'){
+        this.eventForm.controls.price.setValidators([Validators.required,Validators.min(1)])
+      }else{
+        this.eventForm.controls.price.setValidators([]);
+        this.eventForm.controls.price.reset();
+      }
+    });
+    this.eventForm.controls.starDateTime.valueChanges.subscribe(newvalue =>{
+      this.endValue = newvalue;
+      this.minEndDate = newvalue;
+    })
   }
   addEvent(){
     this.submitted = true
@@ -69,7 +82,8 @@ export class EventsComponent implements OnInit {
     this.eventService.deleteEventById(id).subscribe((response:any)=>{
       this.ngOnInit()
     },(error)=>{
-
+      console.log(error);
+      
     })
   }
   showAdd(){
