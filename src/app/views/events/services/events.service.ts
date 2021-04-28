@@ -22,6 +22,6 @@ export class EventsService {
     return this.http.put(`${this.baseUrl}/events/${id}`,updateEventData)
   }
   deleteEventById(id:number){
-    return this.http.delete(`${this.baseUrl}/tags/${id}`)
+    return this.http.delete(`${this.baseUrl}/events/${id}`)
   }
 }
