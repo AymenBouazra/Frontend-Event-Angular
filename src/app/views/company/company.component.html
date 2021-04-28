@@ -1,11 +1,13 @@
+<div class="animated fadeIn"
+style="background-image: url('assets/img/Background-image/best-Event-Flyer-Templates.jpeg');background-size: cover;">
 <div class="row mt-5">
-  <div class="offset-1 col-9">
-    <!-- <div class="row col-6">
-      <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search company..." [(ngModel)]="searchText">
-      </div> -->
+  <div class="offset-1 col-11">
+    <div class="row col-10">
+      <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search company...">
+      </div>
       <div class=" float-right">
         
-    <button class="btn btn-primary float-right my-2" routerLink="/companies/add-company"><i class="fas fa-plus"></i> Add company</button>
+    <button class="btn btn-primary  float-right" routerLink="/companies/add-company"><i class="fa fa-plus fa-lg"></i> Add company</button>
       </div>
     
   </div>
@@ -18,6 +20,7 @@
           <th scope="col">Description</th>
           <th scope="col">Email</th>
           <th scope="col">Role</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -29,11 +32,12 @@
           <td>{{ company.role }}</td>
           <td>
             <button class="btn btn-info" [routerLink]="['/companies/update-company',company._id]"> <i class="fas fa-pen"></i> Update</button>
-            <button class="btn btn-danger ml-1" (click)="deletecompany(company._id)"> <i class="far fa-trash-alt"></i> Delete</button>
+            <button class="btn btn-danger ml-1" (click)="deletecompany(company._id)">  <i class="fa fa-remove fa-lg"></i> Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
-    <p>{{ currentDate | date:'fullDate' }}</p>
+    <!-- <p>{{ currentDate | date:'fullDate' }}</p> -->
   </div>
+</div>
 </div>
