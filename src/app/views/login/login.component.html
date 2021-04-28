@@ -1,55 +1,66 @@
 <style>
-  .dashboard{background: transparent; text-decoration: none; color: white;}
-  .dashboard:hover{color: rgb(0, 238, 255);}
+  .dashboard {
+    background: transparent;
+    text-decoration: none;
+    color: white;
+  }
+
+  .dashboard:hover {
+    color: rgb(0, 238, 255);
+  }
 </style>
 <div class="app-body">
-  
   <main class="main d-flex align-items-center"
     style="background-image: url('assets/img/Background-image/wp2715590.jpg');background-size: cover;">
     <div class="container">
       <div style="margin-bottom: 50px;">
-        <a routerLink="/dashboard" class="dashboard"><i class="fa fa-chevron-circle-left fa-lg mt-4"></i> Return to Dashboard</a>
+        <a routerLink="/dashboard" class="dashboard"><i class="fa fa-chevron-circle-left fa-lg mt-4"></i> Return to
+          Dashboard</a>
       </div>
       <div class="row">
         <div class="col-md-8 mx-auto">
           <div class="card-group">
             <div style="background:rgba(0, 0, 0, 0.5);" class="card p-4">
               <div class="card-body">
-                <form  [formGroup]="loginForm" (ngSubmit)="login()">
+                <form [formGroup]="loginForm" (ngSubmit)="login()">
                   <h1 style="color: white;">Sign In</h1>
                   <p class="text-white">Sign In to your account</p>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text" style="background: transparent; color: white;">@</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Company e-mail"  required
-                      style="background: transparent; color: white;" formControlName="email"
-                      [ngClass]="{ 'is-invalid': loginSubmitted && loginForm.controls.email.errors,
-                                   'is-valid': loginSubmitted && !loginForm.controls.email.errors }" >
-                      
-                      <div class="invalid-feedback d-block" *ngIf="loginSubmitted && loginForm.controls.email.hasError('required')" >
-                        The email is required.
-                      </div>
+                    <input type="text" class="form-control" placeholder="Company e-mail" required
+                      style="background: transparent; color: white;" formControlName="email" [ngClass]="{ 'is-invalid': loginSubmitted && loginForm.controls.email.errors,
+                                   'is-valid': loginSubmitted && !loginForm.controls.email.errors }">
+
+                    <div class="invalid-feedback d-block"
+                      *ngIf="loginSubmitted && loginForm.controls.email.hasError('required')">
+                      The email is required.
+                    </div>
                   </div>
                   <div class="input-group mb-4">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" style="background: transparent; color: white;"><i class="icon-key"></i></span>
+                      <span class="input-group-text" style="background: transparent; color: white;"><i
+                          class="icon-key"></i></span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password"
-                      required style="background: transparent; color: white;" formControlName="password"
-                      [ngClass]="{ 'is-invalid': loginSubmitted && loginForm.controls.password.errors, 'is-valid': loginSubmitted && !loginForm.controls.password.errors }" >
-                      <div class="invalid-feedback d-block" *ngIf="loginSubmitted && loginForm.controls.password.hasError('required')">
-                        The password is required.
-                      </div>
-                      <div *ngIf="registerForm.controls.password.hasError('minlength')" class="invalid-feedback">The
-                        password must be more than 6 caracters please.</div>
+                    <input type="password" class="form-control" placeholder="Password" required
+                      style="background: transparent; color: white;" formControlName="password"
+                      [ngClass]="{ 'is-invalid': loginSubmitted && loginForm.controls.password.errors, 'is-valid': loginSubmitted && !loginForm.controls.password.errors }">
+                    <div class="invalid-feedback d-block"
+                      *ngIf="loginSubmitted && loginForm.controls.password.hasError('required')">
+                      The password is required.
+                    </div>
+                    <div *ngIf="registerForm.controls.password.hasError('minlength')" class="invalid-feedback">The
+                      password must be more than 6 caracters please.</div>
                   </div>
                   <div class="row">
                     <div class="col-6">
-                      <button type="submit" class="btn btn-primary px-4">Login</button>
+                      <button type="submit" class="btn btn-primary px-4">Login <i class="fa fa-sign-in"></i></button>
                     </div>
                     <div class="col-6 text-right">
-                      <button type="button" class="btn btn-link px-0">Forgot password?</button>
+                      <a href="#" data-bs-toggle="modal" data-bs-target="#forgotPassword">
+                        Forgot Password?
+                      </a>
                     </div>
                   </div>
                 </form>
@@ -62,7 +73,7 @@
                   <h4 style="margin-top: 50px; color: rgba(255, 255, 255, 0.781);">If you don't have an account click
                     below.</h4>
                   <button type="button" class="btn btn-primary active mt-3" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal">Register Now!</button>
+                    data-bs-target="#exampleModal">Register Now! </button>
                 </div>
               </div>
             </div>
@@ -96,9 +107,9 @@
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="icon-pencil"></i></span>
                         </div>
-                        <textarea type="text" class="form-control" placeholder="Company description" autocomplete="lastname"
-                          formControlName="companyDescription"
-                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.companyDescription.errors, 'is-valid': registerSubmitted && !registerForm.controls.companyDescription.errors }" ></textarea>
+                        <textarea type="text" class="form-control" placeholder="Company description"
+                          autocomplete="lastname" formControlName="companyDescription"
+                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.companyDescription.errors, 'is-valid': registerSubmitted && !registerForm.controls.companyDescription.errors }"></textarea>
                         <div class="invalid-feedback d-block"
                           *ngIf="registerSubmitted && registerForm.controls.companyDescription.hasError('required')">
                           Last name is required.
@@ -110,7 +121,7 @@
                         </div>
                         <input type="text" class="form-control" placeholder="E-mail" autocomplete="email"
                           formControlName="email"
-                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.email.errors, 'is-valid': registerSubmitted && !registerForm.controls.email.errors }" >
+                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.email.errors, 'is-valid': registerSubmitted && !registerForm.controls.email.errors }">
 
                         <div *ngIf="registerForm.controls.email.hasError('required')" class="invalid-feedback">E-mail is
                           required.</div>
@@ -122,7 +133,7 @@
                         </div>
                         <input type="password" class="form-control" placeholder="Password" autocomplete="new-password"
                           formControlName="password"
-                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.password.errors, 'is-valid': registerSubmitted && !registerForm.controls.password.errors }" >
+                          [ngClass]="{ 'is-invalid': registerSubmitted && registerForm.controls.password.errors, 'is-valid': registerSubmitted && !registerForm.controls.password.errors }">
 
                         <div *ngIf="registerForm.controls.password.hasError('required')" class="invalid-feedback">
                           Password is required.</div>
@@ -138,14 +149,20 @@
                           autocomplete="new-password" formControlName="passwordConfirmation"
                           [ngClass]="{'is-invalid': registerSubmitted && registerForm.controls.passwordConfirmation.errors || registerForm.hasError('mismatch') , 'is-valid': registerSubmitted && !registerForm.controls.passwordConfirmation.errors && !registerForm.hasError('mismatch') }">
                         <div class="invalid-feedback d-block">
-                          <div *ngIf="registerSubmitted && registerForm.controls.passwordConfirmation.hasError('required')">The
+                          <div
+                            *ngIf="registerSubmitted && registerForm.controls.passwordConfirmation.hasError('required')">
+                            The
                             Password is required.</div>
-                          <div *ngIf="registerSubmitted && registerForm.controls.passwordConfirmation.hasError('minlength')" >The
+                          <div
+                            *ngIf="registerSubmitted && registerForm.controls.passwordConfirmation.hasError('minlength')">
+                            The
                             Password must be more than 6 caracters.</div>
-                          <div *ngIf="registerSubmitted && registerForm.hasError('mismatch')">Password does not match</div>
+                          <div *ngIf="registerSubmitted && registerForm.hasError('mismatch')">Password does not match
+                          </div>
                         </div>
                       </div>
-                      <button type="submit" class="btn btn-block btn-success" routerLink="/login">Create Account</button>
+                      <button type="submit" class="btn btn-block btn-success">Create account <i
+                          class="fa fa-floppy-o"></i></button>
                     </form>
                   </div>
                   <div class="modal-footer">
@@ -160,6 +177,39 @@
       </div>
     </div>
   </main>
+  <div class="modal fade" id="forgotPassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-warning">
+      <div class="modal-content" style="background:rgba(255,255,255, 0.8);">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(10, 120, 148);">Reset password</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="forgotPassword" (ngSubmit)="forgot()">
+            <h5>Account e-mail</h5>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">@</span>
+              </div>
+              <input type="text" class="form-control" placeholder="E-mail" autocomplete="email" formControlName="email"
+                [ngClass]="{ 'is-invalid': forgetSubmitted && registerForm.controls.email.errors, 'is-valid': registerSubmitted && !registerForm.controls.email.errors }">
+
+              <div *ngIf="registerForm.controls.email.hasError('required')" class="invalid-feedback">E-mail is
+                required.</div>
+
+            </div>
+            <p class="text-dark bold">An e-mail will be sent to your e-mail account containing a link to reset your
+              password.</p>
+            <button class="btn btn-primary">Reset <i class="fa fa-paper-plane-o"></i></button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" style="width: 30%; margin: auto;"
+            data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"></script>

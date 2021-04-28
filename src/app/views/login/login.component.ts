@@ -1,10 +1,8 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-
-
-
 import { LoginregisterService } from './services/loginregister.service';
 
 @Component({
@@ -13,7 +11,7 @@ import { LoginregisterService } from './services/loginregister.service';
 
 })
 export class LoginComponent {
-  
+  @ViewChild('infoModal') public infoModal: ModalDirective;
   registerSubmitted = false;
   loginSubmitted = false;
   registerForm: FormGroup = new FormGroup({
@@ -29,7 +27,9 @@ export class LoginComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
- 
+  form
+  forgotPassword=new FormControl('',[Validators.required,Validators.email])
+  forgotSubmitted=false;
 
   constructor(private company: LoginregisterService, private router: Router,private toastr:ToastrService) {} 
   ngOnInit(): void {
@@ -73,7 +73,15 @@ export class LoginComponent {
         this.toastr.error( 'Please verify your email and password!','Login Failed');
       }) 
   }
+  forgot(){
+    this.forgotSubmitted=true
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+  }
   logout(){
-    
+    localStorage.removeItem('token');
+    this.router.navigate(['/login'])
   }
 }

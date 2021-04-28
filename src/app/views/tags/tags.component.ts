@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { resetFakeAsyncZone } from '@angular/core/testing';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { TagService } from './services/tag.service';
 
@@ -52,7 +52,9 @@ export class TagsComponent implements OnInit {
   }
 
   delete(id:number){    
-    this.tag.deleteTagById(id).subscribe((response:any)=>{this.ngOnInit()},(error)=>{})
+    this.tag.deleteTagById(id).subscribe((response:any)=>{
+      this.toastr.warning( 'Tag succesfully deleted.','Tag deleted !');;
+      this.ngOnInit()},(error)=>{})
     console.log(id);
   }
   showAdd(){
@@ -64,7 +66,12 @@ export class TagsComponent implements OnInit {
     this.modalTitle='Update tag'
     this.tagId=id
     this.modal.show()
-    this.tag.getTagsById(id).subscribe((response:any)=>{this.tagForm.patchValue(response),this.ngOnInit()},(error)=>{})
+    this.tag.getTagsById(id).subscribe((response:any)=>{
+      this.tagForm.patchValue(response);
+      this.ngOnInit()
+    },(error)=>{
+
+    })
   }
   hide(){
     this.modal.hide();
@@ -75,9 +82,11 @@ export class TagsComponent implements OnInit {
   updateTag(){
     this.submitted=true;
     this.tag.updateTagsDataById(this.tagForm.value,this.tagId).subscribe((response:any)=>{
+      this.toastr.success( 'Tag succesfully updated.','Tag updated !');
       this.hide();
       this.ngOnInit();
-    },(error)=>{})
-    
+    },(error)=>{
+
+    })
   }
 }

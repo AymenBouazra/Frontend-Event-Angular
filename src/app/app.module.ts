@@ -37,6 +37,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptorService } from './providers/token-interceptor.service';
+import { ResetPasswordComponent } from './views/login/reset-password/reset-password.component';
 
 @NgModule({
   imports: [
@@ -65,6 +66,7 @@ import { TokenInterceptorService } from './providers/token-interceptor.service';
     P500Component,
     LoginComponent,
     RegisterComponent,
+    ResetPasswordComponent,
   ],
   providers: [{
     provide: LocationStrategy,
