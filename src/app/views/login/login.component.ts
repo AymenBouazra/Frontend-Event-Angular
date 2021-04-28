@@ -27,11 +27,13 @@ export class LoginComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
-  form
-  forgotPassword=new FormControl('',[Validators.required,Validators.email])
-  forgotSubmitted=false;
 
-  constructor(private company: LoginregisterService, private router: Router,private toastr:ToastrService) {} 
+  forgotPassword: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email])
+  })
+  forgotSubmitted = false;
+
+  constructor(private company: LoginregisterService, private router: Router, private toastr: ToastrService) { }
   ngOnInit(): void {
   }
   register() {
@@ -40,12 +42,12 @@ export class LoginComponent {
       return;
     }
     this.company.registerCompany(this.registerForm.value).subscribe((response: any) => {
-      this.toastr.success( 'You are succesfully registered.','Registered');
+      this.toastr.success('You are succesfully registered.', 'Registered');
       this.router.navigate(['/login'])
     },
       (error) => {
         console.log(error);
-        this.toastr.error( 'This email *'+this.registerForm.value.email+'* alreay exists, please enter an other email!','Register Failed');
+        this.toastr.error('This email *' + this.registerForm.value.email + '* alreay exists, please enter an other email!', 'Register Failed');
       })
   }
   passwordConfirmation(group: AbstractControl): { [key: string]: any } | null {
@@ -66,21 +68,21 @@ export class LoginComponent {
     this.company.loginCompany(this.loginForm.value).subscribe((response: any) => {
       localStorage.setItem('token', response.token);
       this.router.navigate(['/dashboard'])
-      this.toastr.success( 'You are succesfully logged in !.','Logged in');
+      this.toastr.success('You are succesfully logged in !.', 'Logged in');
     },
       (error) => {
         console.log(error);
-        this.toastr.error( 'Please verify your email and password!','Login Failed');
-      }) 
+        this.toastr.error('Please verify your email and password!', 'Login Failed');
+      })
   }
-  forgot(){
-    this.forgotSubmitted=true
-    if (this.loginForm.invalid) {
+  forgot() {
+    this.forgotSubmitted = true
+    if (this.forgotPassword.invalid) {
       return;
     }
-
   }
-  logout(){
+
+  logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login'])
   }
