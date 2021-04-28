@@ -1,62 +1,9 @@
-<style>
-    .modal.right.fade .modal-dialog {
-        right: -320px;
-        -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
-        -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
-        -o-transition: opacity 0.3s linear, right 0.3s ease-out;
-        transition: opacity 0.3s linear, right 0.3s ease-out;
-    }
-
-    .modal.right.fade.in .modal-dialog {
-        right: 0;
-    }
-</style>
-
-
-
-<div class="offset-1 my-3 row">
-    <div class="col-12">
-        <button class="btn btn-success col-2 float-right" data-toggle="modal"
-        (click)="show(tag._id)"><i
-                class="fas fa-plus"></i> Add
-            tag</button>
-        <!-- <input type="search" class="form-control col-3" placeholder="Search product by name"  [(ngModel)]="searchText"> -->
-    </div>
-</div>
-<table class="table table-striped table-hover">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Tag name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr class="" *ngFor="let tag of listTagsTodo ;let i=index">
-            <td>{{i+1}}</td>
-            <td>{{tag.title}}</td>
-            <td>{{tag.description}}</td>
-            <td>
-                <button type="button" class="btn btn-warning" data-toggle="modal"
-                    (click)="show(tag._id)">
-                    <i class="far fa-edit"></i> Update
-                </button>
-                <button type="button" class="btn btn-danger" style="color:black!important" (click)='delete(tag._id)'><i
-                        class="fa fa-trash"></i> Delete</button>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-
 <div bsModal #modal="bs-modal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-primary" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Add tag</h4>
-
+                <h4 class="modal-title">{{modalTitle}}</h4>
                 <button type="button" class="close" (click)="hide()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -87,9 +34,62 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" (click)="hide()">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" (click)="updateTag()" *ngIf="showUpdateButton">Save
+                        changes</button>
+                    <button type="submit" class="btn btn-primary" *ngIf="!showUpdateButton">Save </button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Tag</strong>
+                    <small>list</small>
+                </div>
+                <div class="card-body">
+                    <div class="offset-1 my-3 row">
+                        <div class="col-12">
+                            <button class="btn btn-success col-1.5 float-right" data-toggle="modal"
+                                (click)="showAdd()"><i class="fa fa-plus"></i> Add tag</button>
+                            <!-- <input type="search" class="form-control col-3" placeholder="Search product by name"  [(ngModel)]="searchText"> -->
+                        </div>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Tag name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="" *ngFor="let tag of listTagsTodo ;let i=index">
+                                <td>{{i+1}}</td>
+                                <td>{{tag.title}}</td>
+                                <td>{{tag.description}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                                        (click)="showUpdate(tag._id)">
+                                        <i class="fa fa-edit"></i> Update
+                                    </button>
+                                    <button type="button" class="btn btn-danger text-dark" (click)='delete(tag._id)'><i
+                                            class="fa fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+
+                </div>
+                <!--/.row-->
+            </div>
         </div>
     </div>
 </div>
