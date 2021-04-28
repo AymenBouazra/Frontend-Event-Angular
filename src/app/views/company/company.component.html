@@ -1,8 +1,8 @@
 <div class="row mt-5">
-  <div class="offset-1 col-9">
-    <!-- <div class="row col-6">
-      <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search company..." [(ngModel)]="searchText">
-      </div> -->
+  <div class="offset-1 col-10">
+    <div class="row col-10">
+      <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search company...">
+      </div>
       <div class=" float-right">
         
     <button class="btn btn-primary float-right my-2" routerLink="/companies/add-company"><i class="fas fa-plus"></i> Add company</button>
@@ -18,6 +18,7 @@
           <th scope="col">Description</th>
           <th scope="col">Email</th>
           <th scope="col">Role</th>
+          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -34,6 +35,6 @@
         </tr>
       </tbody>
     </table>
-    <p>{{ currentDate | date:'fullDate' }}</p>
+    <!-- <p>{{ currentDate | date:'fullDate' }}</p> -->
   </div>
 </div>
