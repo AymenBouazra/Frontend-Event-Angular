@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { EventsRoutingModule } from './events-routing.module';
 import { EventsComponent } from './events.component';
@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     ModalModule.forRoot(),
     TimepickerModule.forRoot(),
     BsDatepickerModule.forRoot()
-  ]
+  ],
+  providers: [DatePipe],
 })
 export class EventsModule { }
