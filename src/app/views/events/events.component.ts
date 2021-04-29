@@ -46,7 +46,6 @@ export class EventsComponent implements OnInit {
     
     this.eventService.getAllEvents().subscribe((response)=>{
       this.listEvents=response
-      console.log(this.listEvents);
     },(error)=>{
       console.log(error);
       
@@ -68,10 +67,11 @@ export class EventsComponent implements OnInit {
   addEvent(){
     this.submitted = true
     if(this.eventForm.invalid){
+      this.toastr.warning('Please complete Event informations','Event not added !');
       return;
     }
     this.eventService.events(this.eventForm.value).subscribe((response:any)=>{
-      this.toastr.success('New event succesfully added.','Event added !');
+      this.toastr.success('New event successfully added.','Event added !');
       this.hide();
       this.ngOnInit();
     },(error)=>{
@@ -80,6 +80,7 @@ export class EventsComponent implements OnInit {
   }
   deleteEvent(id:number){
     this.eventService.deleteEventById(id).subscribe((response:any)=>{
+      this.toastr.error('Event deleted successfully','Event deleted !');
       this.ngOnInit()
     },(error)=>{
       console.log(error);
@@ -108,6 +109,10 @@ export class EventsComponent implements OnInit {
   }
   updateEvent(){
     this.submitted = true;
+    if(this.eventForm.invalid){
+      this.toastr.warning('Please complete Event informations','Event not updated !');
+      return;
+    }
     this.eventService.updateEventsDataById(this.eventForm.value,this.eventId).subscribe((response:any)=>{
       this.hide();
       this.ngOnInit();
