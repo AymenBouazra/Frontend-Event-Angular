@@ -38,6 +38,7 @@ export class TagsComponent implements OnInit {
   addTag() {
     this.submitted = true
     if (this.tagForm.invalid) {
+      this.toastr.warning( 'Please complete tag informations.','Tag not added!');
       return;
     }
     this.tag.tags(this.tagForm.value).subscribe((response: any) => {
@@ -53,7 +54,7 @@ export class TagsComponent implements OnInit {
 
   delete(id:number){    
     this.tag.deleteTagById(id).subscribe((response:any)=>{
-      this.toastr.warning( 'Tag succesfully deleted.','Tag deleted !');;
+      this.toastr.error( 'Tag succesfully deleted.','Tag deleted !');;
       this.ngOnInit()},(error)=>{})
     console.log(id);
   }
@@ -81,6 +82,10 @@ export class TagsComponent implements OnInit {
   }
   updateTag(){
     this.submitted=true;
+    if(this.tagForm.invalid){
+      this.toastr.warning( 'Please complete tag information.','Tag not updated!');
+      return;
+    }
     this.tag.updateTagsDataById(this.tagForm.value,this.tagId).subscribe((response:any)=>{
       this.toastr.success( 'Tag succesfully updated.','Tag updated !');
       this.hide();

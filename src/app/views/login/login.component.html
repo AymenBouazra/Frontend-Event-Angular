@@ -185,7 +185,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <h5>Account e-mail</h5>
+          <h5 class="text-white">Account e-mail</h5>
           <form [formGroup]="forgotPassword" (ngSubmit)="forgot()">
             
             <div class="input-group mb-3">
@@ -193,7 +193,7 @@
                 <span class="input-group-text">@</span>
               </div>
               <input type="email" class="form-control" placeholder="E-mail" formControlName="email"
-                [ngClass]="{ 'is-invalid': forgetSubmitted && forgotPassword.controls.email.errors, 
+                [ngClass]="{ 'is-invalid': forgotSubmitted && forgotPassword.controls.email.errors, 
                 'is-valid': forgotSubmitted && !forgotPassword.controls.email.errors }">
 
               <div *ngIf="forgotPassword.controls.email.hasError('required')" class="invalid-feedback">E-mail is
@@ -201,7 +201,7 @@
 
               </div>
             <button type="submit" class="btn btn-primary" >Reset <i class="fa fa-paper-plane-o"></i></button>
-            <p class="text-dark bold">An e-mail will be sent to your e-mail account containing a link to reset your
+            <p class="text-white bold">An e-mail will be sent to your e-mail account containing a link to reset your
               password.</p>
           </form>
         </div>
@@ -212,3 +212,4 @@
       </div>
     </div>
   </div>
+</div>

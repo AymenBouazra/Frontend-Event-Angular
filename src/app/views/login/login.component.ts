@@ -75,13 +75,19 @@ export class LoginComponent {
         this.toastr.error('Please verify your email and password!', 'Login Failed');
       })
   }
-  forgot() {
-    this.forgotSubmitted = true
+  forgot(){
     if (this.forgotPassword.invalid) {
       return;
     }
+    this.company.forgotPassword(this.forgotPassword.value).subscribe((response:any)=>{
+      this.toastr.success('An e-mail was sent to '+this.forgotPassword.value.email+' Please check your mailbox.', 'Email sent!');
+    },
+    (error) => {
+      console.log(error);
+      this.toastr.error('This email is not registered!', 'Error');
+    })
   }
-
+  
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login'])
