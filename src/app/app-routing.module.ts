@@ -8,6 +8,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
+import { ResetPasswordComponent } from './views/login/reset-password/reset-password.component';
 import { RegisterComponent } from './views/register/register.component';
 
 export const routes: Routes = [
@@ -18,31 +19,19 @@ export const routes: Routes = [
   },
   {
     path: '404',
-    component: P404Component,
-    data: {
-      title: 'Page 404'
-    }
+    component: P404Component
   },
   {
     path: '500',
-    component: P500Component,
-    data: {
-      title: 'Page 500'
-    }
+    component: P500Component
   },
   {
     path: 'login',
-    component: LoginComponent,
-    data: {
-      title: 'Login Page'
-    }
+    component: LoginComponent
   },
   {
-    path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
+    path: 'reset-password/:token',
+    component: ResetPasswordComponent
   },
   {
     path: '',
