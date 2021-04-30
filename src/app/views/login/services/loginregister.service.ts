@@ -18,8 +18,11 @@ export class LoginregisterService {
   {
    return this.http.post(`${this.baseUrl}/login`,companyData)
   }
-  forgotPassoword(email:any){
-    return this.http.post(`${this.baseUrl}/forgot-password`,email)
+  resetPassoword(resetData:any){
+    return this.http.post(`${this.baseUrl}/reset-password`,resetData)
+  }
+  forgotPassword(data){
+    return this.http.post(`${this.baseUrl}/forgot-password`,data)
   }
 
 }
