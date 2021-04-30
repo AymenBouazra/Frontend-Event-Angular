@@ -452,9 +452,5 @@ export const navItems: NavData[] = [
   //       }
   //     ]
   //   }
-  {
-    name: 'logout',
-    url: '/login',
-    icon: 'icon-logout'
-  }
+  
 ];

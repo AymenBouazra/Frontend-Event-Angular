@@ -1,6 +1,8 @@
 import { Component, OnDestroy, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { navItems } from '../../_nav';
+import { LoginregisterService } from '../../views/login/services/loginregister.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -12,7 +14,7 @@ export class DefaultLayoutComponent implements OnDestroy {
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement;
-  constructor(@Inject(DOCUMENT) _document?: any) {
+  constructor(private user:LoginregisterService, private toastr:ToastrService ,@Inject(DOCUMENT) _document?: any ) {
 
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = _document.body.classList.contains('sidebar-minimized');
@@ -27,4 +29,12 @@ export class DefaultLayoutComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.changes.disconnect();
   }
+  logout() {
+    this.user.logout().subscribe((response:any)=>{
+      this.toastr.success('Logged out successfully', 'Logged out!')
+    })
+    localStorage.removeItem('token');
+    window.location.reload()
+  }
+
 }
