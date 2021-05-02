@@ -114,6 +114,7 @@
               <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
+                <th scope="col">Logo</th>
                 <th scope="col">Description</th>
                 <th scope="col">Email</th>
                 <th scope="col">Role</th>
@@ -124,6 +125,7 @@
               <tr class="" *ngFor="let company of company ; let i=index">
                 <td>{{i+1}}</td>
                 <td>{{ company.companyName }}</td>
+                <td>{{ company.photo }}</td>
                 <td>{{ company.companyDescription }}</td>
                 <td>{{ company.email }}</td>
                 <td>{{ company.role }}</td>
