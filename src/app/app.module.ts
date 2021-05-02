@@ -38,6 +38,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptorService } from './providers/token-interceptor.service';
 import { ResetPasswordComponent } from './views/login/reset-password/reset-password.component';
+import { HomeComponent } from './home/home/home.component';
 
 @NgModule({
   imports: [
@@ -67,6 +68,7 @@ import { ResetPasswordComponent } from './views/login/reset-password/reset-passw
     LoginComponent,
     RegisterComponent,
     ResetPasswordComponent,
+    HomeComponent,
   ],
   providers: [{
     provide: LocationStrategy,

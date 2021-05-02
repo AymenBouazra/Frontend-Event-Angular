@@ -31,9 +31,9 @@ export class EventsComponent implements OnInit {
     availableTicketNumber: new FormControl('', [Validators.required, Validators.min(1)]),
     price: new FormControl('', []),
     startDate: new FormControl(new Date(), [Validators.required]),
-    startTime: new FormControl('',[Validators.required]),
+    startTime: new FormControl('', [Validators.required]),
     endDate: new FormControl(new Date(), [Validators.required]),
-    endTime: new FormControl('',[Validators.required]),
+    endTime: new FormControl('', [Validators.required]),
     photo: new FormControl(''),
   });
 
@@ -59,16 +59,16 @@ export class EventsComponent implements OnInit {
     private eventService: EventsService,
     private toastr: ToastrService,
     private datePipe: DatePipe) {
-      this.startTime.setHours;
-      this.startTime.setMinutes;
-      this.endTime.setHours;
-      this.endTime.setMinutes
-      this.minStartTime.setHours;
-      this.minStartTime.setMinutes;
-      this.minEndTime.setHours;
-      this.minEndTime.setMinutes;
-     }
-
+    this.startTime.setHours;
+    this.startTime.setMinutes;
+    this.endTime.setHours;
+    this.endTime.setMinutes
+    this.minStartTime.setHours;
+    this.minStartTime.setMinutes;
+    this.minEndTime.setHours;
+    this.minEndTime.setMinutes;
+  }
+  imageSrc: string = '';
   ngOnInit(): void {
 
 
@@ -90,9 +90,9 @@ export class EventsComponent implements OnInit {
     this.eventForm.controls.startDate.valueChanges.subscribe(newvalue => {
       this.endValue = newvalue;
       this.minEndDate = newvalue;
-    })      
+    })
     // this.eventForm.controls.endDate.valueChanges.subscribe(newvalue =>{
-      
+
     //   const startDateEvent: string = this.datePipe.transform(this.eventForm.value.startDate, 'MM/dd/yyyy');
     //   const endDateEvent: string = this.datePipe.transform(newvalue, 'MM/dd/yyyy');
     //   const startTimeEvent: String = this.datePipe.transform(this.eventForm.value.startTime, 'HH:mm');
@@ -101,10 +101,10 @@ export class EventsComponent implements OnInit {
     //     const h = Number(startTimeEvent[0]+startTimeEvent[1])
     //     const m = Number(startTimeEvent[3]+startTimeEvent[4])
     //     console.log(h);
-        
+
     //     console.log(this.endTime.setMinutes(h));
-        
-        
+
+
     //     this.endTime.setMinutes(m)
     //     this.endTime.setHours(h) 
     //     this.minEndTime.setHours(h)
@@ -113,65 +113,45 @@ export class EventsComponent implements OnInit {
     // })
   }
   onFileSelect(event) {
-    if (event.target.files.length > 0) {
-      const reader = new FileReader();
-      const file = (event.target.files[0] as File);
-      this.eventForm.get('photo').setValue(file);
-      const image = this.eventForm.get('photo').value
-      reader.onloadend = () => {
-        console.log(image);
-        let b = (btoa(image))
-        console.log(b);
-        let a = (atob(b))
-        console.log("hello" ,a);
-        
-        
-      }
-      reader.readAsDataURL(file);
-      
-    }else{
-      console.log('not working');
-      
+    var file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
+    var pattern = /image-*/;
+    var reader = new FileReader();
+    if (!file.type.match(pattern)) {
+      alert('invalid format');
+      return;
     }
 
-    // if (event.target.files && event.target.files.length > 0) {
-    //   const file = (event.target.files[0] as File);
-    //   this.eventForm.get('photo').setValue(file);
-    //   console.log(this.eventForm.get('photo').value);
-    // }
+    reader.readAsDataURL(file);
 
-  //   const toBase64 = file => new Promise((resolve, reject) => {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(file);
-  //     reader.onload = () => resolve(reader.result);
-  //     reader.onerror = error => reject(error);
-  //     console.log(file);
-  //     console.log(reader);
-      
-      
-  // });
+    reader.onloadend = () => {
+      // use a regex to remove data url part
 
+            const base64String =(<string>reader.result).replace("data:", "").replace(/^.+,/, "");
+           // const base64String = reader.result
+        this.eventForm.controls.photo.setValue("data:image/jpeg;base64,"+base64String.toString())
+      console.log("karim"+ this.imageSrc);
+    };
   }
   addEvent() {
     this.submitted = true
-    if(this.eventForm.invalid){
-      this.toastr.warning('Please complete event information.','Event not added!');
+    if (this.eventForm.invalid) {
+      this.toastr.warning('Please complete event information.', 'Event not added!');
       return;
     }
     const formData = new FormData();
     formData.append('file', this.eventForm.get('photo').value);
-    this.eventService.events(this.eventForm.value).subscribe((response:any)=>{
-      this.toastr.success('New event successfully added. ','Event added!');
+    this.eventService.events(this.eventForm.value).subscribe((response: any) => {
+      this.toastr.success('New event successfully added. ', 'Event added!');
       this.hide();
       this.ngOnInit();
     }, (error) => {
       console.log(error);
     })
-    
+
   }
-  deleteEvent(id:number){
-    this.eventService.deleteEventById(id).subscribe((response:any)=>{
-      this.toastr.error('Event deleted successfully. ','Event deleted!');
+  deleteEvent(id: number) {
+    this.eventService.deleteEventById(id).subscribe((response: any) => {
+      this.toastr.error('Event deleted successfully. ', 'Event deleted!');
       this.ngOnInit()
     }, (error) => {
       console.log(error);
@@ -195,7 +175,8 @@ export class EventsComponent implements OnInit {
       response.endDate = endDateEvent
       response.startDate = startDateEvent
       response.startTime = startTimeEvent
-      response.endTime = endTimeEvent
+      response.endTime = endTimeEvent;
+      this.imageSrc=response.photo
       this.eventForm.patchValue(response);
       this.ngOnInit();
     }, (error) => { })
@@ -208,12 +189,12 @@ export class EventsComponent implements OnInit {
   }
   updateEvent() {
     this.submitted = true;
-    if(this.eventForm.invalid){
-      this.toastr.warning('Please complete event information. ','Event not updated!');
+    if (this.eventForm.invalid) {
+      this.toastr.warning('Please complete event information. ', 'Event not updated!');
       return;
     }
-    this.eventService.updateEventsDataById(this.eventForm.value,this.eventId).subscribe((response:any)=>{
-      this.toastr.success('Event updated successfully. ','Event updated!');
+    this.eventService.updateEventsDataById(this.eventForm.value, this.eventId).subscribe((response: any) => {
+      this.toastr.success('Event updated successfully. ', 'Event updated!');
       this.hide();
       this.ngOnInit();
     }, (error) => { })
