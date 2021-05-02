@@ -88,8 +88,5 @@ export class LoginComponent {
     })
   }
   
-  logout() {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login'])
-  }
+  
 }

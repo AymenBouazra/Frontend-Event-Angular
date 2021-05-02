@@ -24,5 +24,7 @@ export class LoginregisterService {
   forgotPassword(data){
     return this.http.post(`${this.baseUrl}/forgot-password`,data)
   }
-
+   logout(){
+    return this.http.get(`${this.baseUrl}/logout`)
+   }
 }
