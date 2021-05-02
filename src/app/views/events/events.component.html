@@ -32,27 +32,39 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-5">Event Started In : </label>
-                        <div class="col-sm-5">
+                        <label class="col-sm-4" style="margin: auto 0px;">Event Started In :</label>
+                        <div class="col-sm-4" style="margin: auto 0px;">
                             <input type="text" #dp="bsDatepicker" class="form-control" [minDate]="minStartDate"
-                                bsDatepicker [(bsValue)]="startValue" formControlName="starDateTime"
-                                [ngClass]="{'is-invalid': submitted && eventForm.controls.starDateTime.errors, 'is-valid': submitted && !eventForm.controls.starDateTime.errors}">
+                                bsDatepicker [(bsValue)]="startValue" formControlName="startDate"
+                                [ngClass]="{'is-invalid': submitted && eventForm.controls.startDate.errors, 'is-valid': submitted && !eventForm.controls.startDate.errors}">
+                        </div>
+                        <div class="col-sm-3">
+                            <timepicker [(ngModel)]="startTime"  [hourStep]="hstep" [min]="minStartTime"
+                            [minuteStep]="mstep" [showMeridian]="ismeridian" [readonlyInput]="!isEnabled" formControlName="startTime"
+                            [ngClass]="{'is-invalid': submitted && eventForm.controls.startTime.errors, 'is-valid': submitted && !eventForm.controls.startTime.errors}">
+                        </timepicker>
                         </div>
                         <div class="invalid-feedback d-block">
-                            <div *ngIf="submitted && eventForm.controls.starDateTime.hasError('required')">
+                            <div *ngIf="submitted && eventForm.controls.startDate.hasError('required') && eventForm.controls.startTime.hasError('required')">
                                 Event start time is required.
                             </div>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-5">Event Ended In : </label>
-                        <div class="col-sm-5">
+                        <label class="col-sm-4" style="margin: auto 0px;">Event Ended In : </label>
+                        <div class="col-sm-4" style="margin: auto 0px;">
                             <input type="text" #dp="bsDatepicker" class="form-control" [minDate]="minEndDate"
-                                bsDatepicker [(bsValue)]="endValue" formControlName="endDateTime"
-                                [ngClass]="{'is-invalid': submitted && eventForm.controls.endDateTime.errors, 'is-valid': submitted && !eventForm.controls.endDateTime.errors}">
+                                bsDatepicker [(bsValue)]="endValue" formControlName="endDate"
+                                [ngClass]="{'is-invalid': submitted && eventForm.controls.endDate.errors, 'is-valid': submitted && !eventForm.controls.endDate.errors}">
+                        </div>
+                        <div class="col-sm-3">
+                            <timepicker [(ngModel)]="endTime" [hourStep]="hstep" [min]="minEndTime"
+                            [minuteStep]="mstep" [showMeridian]="ismeridian" [readonlyInput]="!isEnabled" formControlName="endTime"
+                            [ngClass]="{'is-invalid': submitted && eventForm.controls.endTime.errors, 'is-valid': submitted && !eventForm.controls.endTime.errors}">
+                        </timepicker>
                         </div>
                         <div class="invalid-feedback d-block">
-                            <div *ngIf="submitted && eventForm.controls.endDateTime.hasError('required')">
+                            <div *ngIf="submitted && eventForm.controls.endDate.hasError('required') && eventForm.controls.endTime.hasError('required')">
                                 Event end time is required.
                             </div>
                         </div>
@@ -104,13 +116,23 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Event's Location</label>
+                        <label>Event's Location :</label>
                         <input type="text" class="form-control" placeholder="Ex. Online Or your Address"
                             formControlName="location"
                             [ngClass]="{'is-invalid': submitted && eventForm.controls.location.errors, 'is-valid': submitted && !eventForm.controls.location.errors}">
                         <div class="invalid-feedback d-block">
                             <div *ngIf="submitted && eventForm.controls.location.hasError('required')">
                                 Event's Location is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Photo :</label>
+                        <input type="file" (change)="onFileSelect($event)" placeholder="Upload photo for your event"
+                        [ngClass]="{'is-invalid': submitted && eventForm.controls.photo.errors, 'is-valid': submitted && !eventForm.controls.photo.errors}">
+                        <div class="invalid-feedback d-block">
+                            <div *ngIf="submitted && eventForm.controls.photo.hasError('required')">
+                                Photo is required.
                             </div>
                         </div>
                     </div>
@@ -155,8 +177,8 @@
                             <tr class="" *ngFor="let event of listEvents ;let i=index">
                                 <td>{{i+1}}</td>
                                 <td>{{event.eventName}}</td>
-                                <td>{{event.eventDescription}}</td>
-                                <td>{{event.starDateTime | date: 'MMM d, y, h:mm:ss a'}}</td>
+                                <td>{{event.photo}}</td>
+                                <td>{{event.startDate | date: 'MMM d, y'}}</td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-toggle="modal"
                                         (click)="showUpdate(event._id)">
