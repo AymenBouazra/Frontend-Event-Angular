@@ -128,6 +128,7 @@
                     </div>
                     <div class="form-group">
                         <label>Photo :</label>
+                        <img [src]="imageSrc" style="width: 100px; height :70px;" alt="imageSrc">
                         <input type="file" (change)="onFileSelect($event)" placeholder="Upload photo for your event"
                         [ngClass]="{'is-invalid': submitted && eventForm.controls.photo.errors, 'is-valid': submitted && !eventForm.controls.photo.errors}">
                         <div class="invalid-feedback d-block">
@@ -177,7 +178,7 @@
                             <tr class="" *ngFor="let event of listEvents ;let i=index">
                                 <td>{{i+1}}</td>
                                 <td>{{event.eventName}}</td>
-                                <td>{{event.photo}}</td>
+                                <td>{{event.eventDescription}}</td>
                                 <td>{{event.startDate | date: 'MMM d, y'}}</td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-toggle="modal"

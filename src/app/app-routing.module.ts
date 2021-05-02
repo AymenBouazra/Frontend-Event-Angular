@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 import { AuthGuard } from './guards/auth.guard';
+import { HomeComponent } from './home/home/home.component';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -24,6 +25,10 @@ export const routes: Routes = [
   {
     path: '500',
     component: P500Component
+  },
+  {
+    path: 'home',
+    component: HomeComponent
   },
   {
     path: 'login',
