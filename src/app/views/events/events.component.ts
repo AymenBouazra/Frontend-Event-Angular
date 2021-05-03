@@ -5,7 +5,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { EventsService } from './services/events.service';
-import {IOption} from 'ng-select';
+import { IOption } from 'ng-select';
 
 @Component({
   selector: 'app-events',
@@ -36,8 +36,9 @@ export class EventsComponent implements OnInit {
     startTime: new FormControl('', [Validators.required]),
     endDate: new FormControl(new Date(), [Validators.required]),
     endTime: new FormControl('', [Validators.required]),
-    photo: new FormControl(''),
+    photo: new FormControl('',Validators.required),
   });
+  file:any;
 
   // DatePicker
   minStartDate = new Date();
@@ -56,6 +57,16 @@ export class EventsComponent implements OnInit {
   startTime: Date = new Date();
   endTime: Date = new Date();
 
+  public countries: Array<IOption> = [
+    { label: 'Belgium', value: 'BE' },
+    { label: 'Danmark', value: 'DK' },
+    { label: 'France', value: 'FR', disabled: true },
+    { label: 'Luxembourg', value: 'LU' },
+    { label: 'Netherlands', value: 'NL' }
+  ];
+
+  public selectedCountries: Array<string> = ['BE', 'NL'];
+
   constructor(
     private eventService: EventsService,
     private toastr: ToastrService,
@@ -73,12 +84,12 @@ export class EventsComponent implements OnInit {
   public tags: Array<IOption> = [
   ];
   ngOnInit(): void {
-    
+
 
     this.eventService.getAllEvents().subscribe((response) => {
       this.listEvents = response
       console.log(this.listEvents);
-      
+
     }, (error) => {
       console.log(error);
 
@@ -123,23 +134,23 @@ export class EventsComponent implements OnInit {
     // })
   }
   onFileSelect(event) {
-    var file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
-    var pattern = /image-*/;
-    var reader = new FileReader();
-    if (!file.type.match(pattern)) {
-      alert('invalid format');
-      return;
+    this.file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
+    let pattern = /image-*/;
+    if (this.file) {
+      if (!this.file.type.match(pattern)) {
+        this.toastr.error('Please select an iamge file.', 'File not valid!');
+        return;
+      } else {
+        let reader = new FileReader();
+        reader.readAsDataURL(this.file);
+        reader.onloadend = () => {
+          const base64String = (<string>reader.result).replace("data:", "").replace(/^.+,/, "");
+          this.eventForm.controls.photo.setValue("data:image/jpeg;base64," + base64String.toString())
+        };
+      }
     }
-
-    reader.readAsDataURL(file);
-
-    reader.onloadend = () => {
-      // use a regex to remove data url part
-
-        const base64String =(<string>reader.result).replace("data:", "").replace(/^.+,/, "");
-        this.eventForm.controls.photo.setValue("data:image/jpeg;base64,"+base64String.toString())
-    };
   }
+
   addEvent() {
     this.submitted = true
     if (this.eventForm.invalid) {
@@ -184,7 +195,7 @@ export class EventsComponent implements OnInit {
       response.startDate = startDateEvent
       response.startTime = startTimeEvent
       response.endTime = endTimeEvent;
-      this.imageSrc=response.photo
+      this.imageSrc = response.photo
       this.eventForm.patchValue(response);
       this.ngOnInit();
     }, (error) => { })

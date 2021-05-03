@@ -128,14 +128,17 @@
                     </div>
                     <div class="form-group">
                         <label>Photo :</label>
-                        <!-- <img [src]="eventForm.controls.value.photo" style="width: 50px; height :70px;" alt=""> -->
-                        <input type="file" (change)="onFileSelect($event)" placeholder="Upload photo for your event"
+                        <input type="file" (change)="onFileSelect($event)" placeholder="Upload photo for your event" accept="image/*"
                         [ngClass]="{'is-invalid': submitted && eventForm.controls.photo.errors, 'is-valid': submitted && !eventForm.controls.photo.errors}">
                         <div class="invalid-feedback d-block">
-                            <div *ngIf="submitted && eventForm.controls.photo.hasError('required')">
+                            <div *ngIf="submitted && eventForm.controls.photo.hasError('required') && !file">
                                 Photo is required.
                             </div>
+                            <div *ngIf="submitted && eventForm.controls.photo.hasError('required') && file">
+                                Photo format must be type image.
+                            </div>
                         </div>
+                        <img *ngIf="eventForm.value.photo" [src]="eventForm.value.photo" style="width: 50px; height :50px;">
                     </div>
                     <fieldset class="form-group">
                         <ng-select
