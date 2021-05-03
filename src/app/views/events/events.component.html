@@ -171,6 +171,7 @@
                                 <th scope="col">Event name</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Event Time</th>
+                                <th scope="col">Photo</th>
                                 <th scope="col">Actions</th>
                             </tr>
                         </thead>
@@ -180,6 +181,7 @@
                                 <td>{{event.eventName}}</td>
                                 <td>{{event.eventDescription}}</td>
                                 <td>{{event.startDate | date: 'MMM d, y'}}</td>
+                                <td></td>
                                 <td>
                                     <button type="button" class="btn btn-warning" data-toggle="modal"
                                         (click)="showUpdate(event._id)">
