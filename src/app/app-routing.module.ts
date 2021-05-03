@@ -4,13 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 import { AuthGuard } from './guards/auth.guard';
-import { HomeComponent } from './home/home/home.component';
-
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { ResetPasswordComponent } from './views/login/reset-password/reset-password.component';
-import { RegisterComponent } from './views/register/register.component';
 
 export const routes: Routes = [
   {
@@ -26,9 +23,8 @@ export const routes: Routes = [
     path: '500',
     component: P500Component
   },
-  {
-    path: 'home',
-    component: HomeComponent
+  { 
+    path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) 
   },
   {
     path: 'login',
@@ -115,9 +111,7 @@ export const routes: Routes = [
         loadChildren: () => import('./views/tags/tags.module').then(m => m.TagsModule) 
       }
     ]
-  },
-
-  
+  } , 
   { path: '**', component: P404Component }
 ];
 
