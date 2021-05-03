@@ -32,9 +32,9 @@ export class DefaultLayoutComponent implements OnDestroy {
   logout() {
     this.user.logout().subscribe((response:any)=>{
       this.toastr.success('Logged out successfully', 'Logged out!')
+      localStorage.removeItem('token');
+      window.location.reload()
     })
-    localStorage.removeItem('token');
-    window.location.reload()
   }
 
 }

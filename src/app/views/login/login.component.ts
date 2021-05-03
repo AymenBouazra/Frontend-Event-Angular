@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { LoginregisterService } from './services/loginregister.service';
-
+import jwt_decode from "jwt-decode";
 @Component({
   selector: 'app-dashboard',
   templateUrl: 'login.component.html',
@@ -35,6 +35,7 @@ export class LoginComponent {
 
   constructor(private company: LoginregisterService, private router: Router, private toastr: ToastrService) { }
   ngOnInit(): void {
+    this.redirectToDashboardIfConnected();
   }
   register() {
     this.registerSubmitted = true
@@ -88,5 +89,22 @@ export class LoginComponent {
     })
   }
   
+  redirectToDashboardIfConnected(){
+    const token = localStorage.getItem('token')
+    if (token !== null) {
+      const expire = this.isExpiredToken(token)
+      if (!expire) {
+        this.router.navigateByUrl('/dashboard');
+        
+      }
+    }
+}
+  isExpiredToken(token: string): boolean {
+    let decoded: any = jwt_decode(token);
+    const expireDate = new Date();
+    expireDate.setUTCDate(decoded.exp);
+    const currentDate = new Date();
+    return (expireDate.valueOf() > currentDate.valueOf());
+  }
   
 }
