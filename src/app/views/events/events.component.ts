@@ -20,6 +20,7 @@ export class EventsComponent implements OnInit {
   @ViewChild('dp') public dp: BsDatepickerModule;
   searchText: string;
   listEvents: any;
+  listTags:any;
   eventId: any;
   showUpdateButton = false;
   submitted = false;
@@ -55,16 +56,6 @@ export class EventsComponent implements OnInit {
   startTime: Date = new Date();
   endTime: Date = new Date();
 
-  public countries: Array<IOption> = [
-    {label: 'Belgium', value: 'BE'},
-    {label: 'Danmark', value: 'DK'},
-    {label: 'France', value: 'FR', disabled: true},
-    {label: 'Luxembourg', value: 'LU'},
-    {label: 'Netherlands', value: 'NL'}
-  ];
-
-  public selectedCountries: Array<string> = ['BE', 'NL'];
-
   constructor(
     private eventService: EventsService,
     private toastr: ToastrService,
@@ -79,6 +70,8 @@ export class EventsComponent implements OnInit {
     this.minEndTime.setMinutes;
   }
   imageSrc: string = '';
+  public tags: Array<IOption> = [
+  ];
   ngOnInit(): void {
     
 
@@ -88,6 +81,11 @@ export class EventsComponent implements OnInit {
       
     }, (error) => {
       console.log(error);
+
+    })
+
+    this.eventService.getAllTags().subscribe((response)=>{
+      
 
     })
 
