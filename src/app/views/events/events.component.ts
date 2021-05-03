@@ -5,6 +5,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { EventsService } from './services/events.service';
+import {IOption} from 'ng-select';
 
 @Component({
   selector: 'app-events',
@@ -54,6 +55,15 @@ export class EventsComponent implements OnInit {
   startTime: Date = new Date();
   endTime: Date = new Date();
 
+  public countries: Array<IOption> = [
+    {label: 'Belgium', value: 'BE'},
+    {label: 'Danmark', value: 'DK'},
+    {label: 'France', value: 'FR', disabled: true},
+    {label: 'Luxembourg', value: 'LU'},
+    {label: 'Netherlands', value: 'NL'}
+  ];
+
+  public selectedCountries: Array<string> = ['BE', 'NL'];
 
   constructor(
     private eventService: EventsService,
@@ -70,10 +80,12 @@ export class EventsComponent implements OnInit {
   }
   imageSrc: string = '';
   ngOnInit(): void {
-
+    
 
     this.eventService.getAllEvents().subscribe((response) => {
       this.listEvents = response
+      console.log(this.listEvents);
+      
     }, (error) => {
       console.log(error);
 
@@ -126,10 +138,8 @@ export class EventsComponent implements OnInit {
     reader.onloadend = () => {
       // use a regex to remove data url part
 
-            const base64String =(<string>reader.result).replace("data:", "").replace(/^.+,/, "");
-           // const base64String = reader.result
+        const base64String =(<string>reader.result).replace("data:", "").replace(/^.+,/, "");
         this.eventForm.controls.photo.setValue("data:image/jpeg;base64,"+base64String.toString())
-      console.log("karim"+ this.imageSrc);
     };
   }
   addEvent() {
