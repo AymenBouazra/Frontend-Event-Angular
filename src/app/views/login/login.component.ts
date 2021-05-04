@@ -93,7 +93,7 @@ export class LoginComponent {
     const token = localStorage.getItem('token')
     if (token !== null) {
       const expire = this.isExpiredToken(token)
-      if (!expire) {
+      if (expire) {
         this.router.navigateByUrl('/dashboard');
         
       }
