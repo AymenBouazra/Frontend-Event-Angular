@@ -37,6 +37,7 @@ export class EventsComponent implements OnInit {
     endDate: new FormControl(new Date(), [Validators.required]),
     endTime: new FormControl('', [Validators.required]),
     photo: new FormControl('',Validators.required),
+
   });
   file:any;
 
@@ -58,7 +59,7 @@ export class EventsComponent implements OnInit {
   endTime: Date = new Date();
 
   public tags: Array<IOption> = [
-    { label: 'tag.title', value: 'tag.title' },
+
   ];
   constructor(
     private eventService: EventsService,
@@ -88,12 +89,12 @@ export class EventsComponent implements OnInit {
 
     this.eventService.getAllTags().subscribe((response)=>{
       this.listTags = response;
-      this.listTags.forEach(x => {
-        console.log(x.title);
-        
-        
-      });
+   
       
+    },err=>{}, ()=>{
+      this.listTags.forEach(element => {
+        this.tags.push( { label: element.title, value:element.title })
+      })
     })
 
     this.eventForm.controls.eventType.valueChanges.subscribe(newvalue => {
