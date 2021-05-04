@@ -9,11 +9,13 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { SelectModule } from 'ng-select';
+import { SearchPipe } from './pipes/search.pipe';
 
 
 @NgModule({
   declarations: [
     EventsComponent,
+    SearchPipe,
   ],
   imports: [
     CommonModule,
