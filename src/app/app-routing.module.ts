@@ -51,32 +51,16 @@ export const routes: Routes = [
         loadChildren: () => import('./views/buttons/buttons.module').then(m => m.ButtonsModule)
       },
       {
-        path: 'charts',
-        loadChildren: () => import('./views/chartjs/chartjs.module').then(m => m.ChartJSModule)
-      },
-      {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'editors',
-        loadChildren: () => import('./views/editors/editors.module').then(m => m.EditorsModule)
       },
       {
         path: 'forms',
         loadChildren: () => import('./views/forms/forms.module').then(m => m.FormsModule)
       },
       {
-        path: 'google-maps',
-        loadChildren: () => import('./views/google-maps/google-maps.module').then(m => m.GoogleMapsModule)
-      },
-      {
         path: 'icons',
         loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
-      },
-      {
-        path: 'notifications',
-        loadChildren: () => import('./views/notifications/notifications.module').then(m => m.NotificationsModule)
       },
       {
         path: 'plugins',
