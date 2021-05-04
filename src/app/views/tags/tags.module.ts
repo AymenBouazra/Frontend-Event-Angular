@@ -6,12 +6,15 @@ import { TagsComponent } from './tags.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { SearchPipe } from './pipes/search.pipe';
+
 
 
 
 @NgModule({
   declarations: [
-    TagsComponent
+    TagsComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,
