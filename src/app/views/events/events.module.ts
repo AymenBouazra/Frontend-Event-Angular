@@ -10,6 +10,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { HttpClientModule } from '@angular/common/http';
 import { SelectModule } from 'ng-select';
 import { SearchPipe } from './pipes/search.pipe';
+// import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -26,8 +27,9 @@ import { SearchPipe } from './pipes/search.pipe';
     ModalModule.forRoot(),
     TimepickerModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    SelectModule
-  ],
+    SelectModule,
+    // NgSelectModule 
+   ],
   providers: [DatePipe],
 })
 export class EventsModule { }
