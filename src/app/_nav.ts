@@ -44,12 +44,12 @@ export const navItems: NavData[] = [
     name: 'Theme'
   },
   {
-    name:'Companies',
+    name: 'Companies',
     url: ('/companies'),
     icon: 'icon-home'
   },
   {
-    name:'Events',
+    name: 'Events',
     url: ('/events'),
     icon: 'icon-diamond'
   },
@@ -124,67 +124,38 @@ export const navItems: NavData[] = [
   //     }
   //   ]
   // },
-  // {
-  //   name: 'Buttons',
-  //   url: '/buttons',
-  //   icon: 'icon-cursor',
-  //   children: [
-  //     {
-  //       name: 'Buttons',
-  //       url: '/buttons/buttons',
-  //       icon: 'icon-cursor'
-  //     },
-  //     {
-  //       name: 'Dropdowns',
-  //       url: '/buttons/dropdowns',
-  //       icon: 'icon-cursor'
-  //     },
-  //     {
-  //       name: 'Loading Buttons',
-  //       url: '/buttons/loading-buttons',
-  //       icon: 'icon-cursor',
-  //       badge: {
-  //         variant: 'danger',
-  //         text: 'PRO'
-  //       }
-  //     },
-  //     {
-  //       name: 'Brand Buttons',
-  //       url: '/buttons/brand-buttons',
-  //       icon: 'icon-cursor'
-  //     }
-  //   ]
-  // },
-  // {
-  //   name: 'Charts',
-  //   url: '/charts',
-  //   icon: 'icon-pie-chart'
-  // },
-  // {
-  //   name: 'Editors',
-  //   url: '/editors',
-  //   icon: 'fa fa-code',
-  //   children: [
-  //     {
-  //       name: 'Text Editors',
-  //       url: '/editors/text-editors',
-  //       icon: 'icon-note',
-  //       badge: {
-  //         variant: 'danger',
-  //         text: 'PRO'
-  //       }
-  //     },
-  //     {
-  //       name: 'Code Editors',
-  //       url: '/editors/code-editors',
-  //       icon: 'fa fa-code',
-  //       badge: {
-  //         variant: 'danger',
-  //         text: 'PRO'
-  //       }
-  //     }
-  //   ]
-  // },
+  {
+    name: 'Buttons',
+    url: '/buttons',
+    icon: 'icon-cursor',
+    children: [
+      {
+        name: 'Buttons',
+        url: '/buttons/buttons',
+        icon: 'icon-cursor'
+      },
+      {
+        name: 'Dropdowns',
+        url: '/buttons/dropdowns',
+        icon: 'icon-cursor'
+      },
+      {
+        name: 'Loading Buttons',
+        url: '/buttons/loading-buttons',
+        icon: 'icon-cursor',
+        badge: {
+          variant: 'danger',
+          text: 'PRO'
+        }
+      },
+      {
+        name: 'Brand Buttons',
+        url: '/buttons/brand-buttons',
+        icon: 'icon-cursor'
+      }
+    ]
+  }
+  ,
   {
     name: 'Forms',
     url: '/forms',
@@ -345,107 +316,97 @@ export const navItems: NavData[] = [
       },
     ]
   },
-  // {
-  //   name: 'Widgets',
-  //   url: '/widgets',
-  //   icon: 'icon-calculator',
-  //   badge: {
-  //     variant: 'info',
-  //     text: 'NEW'
-  //   }
-  // },
-  // {
-  //   divider: true
-  // },
-  // {
-  //   title: true,
-  //   name: 'Extras',
-  // },
-  // {
-  //   name: 'Pages',
-  //   url: '/pages',
-  //   icon: 'icon-star',
-  //   children: [
+  {
+    name: 'Widgets',
+    url: '/widgets',
+    icon: 'icon-calculator',
+    badge: {
+      variant: 'info',
+      text: 'NEW'
+    }
+  },
+  {
+    divider: true
+  },
+  {
+    title: true,
+    name: 'Extras',
+  },
+  {
+    name: 'Pages',
+    url: '/pages',
+    icon: 'icon-star',
+    children: [
 
 
-  // {
-  //   name: 'Error 404',
-  //   url: '/404',
-  //   icon: 'icon-star'
-  // },
-  // {
-  //   name: 'Error 500',
-  //   url: '/500',
-  //   icon: 'icon-star'
-  // },
-  // ]
-  // ,
-  //   {
-  //     name: 'Disabled',
-  //     url: '/dashboard',
-  //     icon: 'icon-ban',
-  //     badge: {
-  //       variant: 'secondary',
-  //       text: 'NEW'
-  //     },
-  //     attributes: {disabled: true},
-  //   },
-  //   {
-  //     name: 'Apps',
-  //     url: '/apps',
-  //     icon: 'icon-layers',
-  //     children: [
-  //       {
-  //         name: 'Invoicing',
-  //         url: '/apps/invoicing',
-  //         icon: 'icon-speech',
-  //         children: [
-  //           {
-  //             name: 'Invoice',
-  //             url: '/apps/invoicing/invoice',
-  //             icon: 'icon-speech',
-  //             badge: {
-  //               variant: 'danger',
-  //               text: 'PRO'
-  //             }
-  //           }
-  //         ]
-  //       },
-  //       {
-  //         name: 'Email',
-  //         url: '/apps/email',
-  //         icon: 'icon-speech',
-  //         children: [
-  //           {
-  //             name: 'Inbox',
-  //             url: '/apps/email/inbox',
-  //             icon: 'icon-speech',
-  //             badge: {
-  //               variant: 'danger',
-  //               text: 'PRO'
-  //             }
-  //           },
-  //           {
-  //             name: 'Message',
-  //             url: '/apps/email/message',
-  //             icon: 'icon-speech',
-  //             badge: {
-  //               variant: 'danger',
-  //               text: 'PRO'
-  //             }
-  //           },
-  //           {
-  //             name: 'Compose',
-  //             url: '/apps/email/compose',
-  //             icon: 'icon-speech',
-  //             badge: {
-  //               variant: 'danger',
-  //               text: 'PRO'
-  //             }
-  //           }
-  //         ]
-  //       }
-  //     ]
-  //   }
-  
+      {
+        name: 'Error 404',
+        url: '/404',
+        icon: 'icon-star'
+      },
+      {
+        name: 'Error 500',
+        url: '/500',
+        icon: 'icon-star'
+      },
+    ]
+  },
+    {
+    name: 'Apps',
+    url: '/apps',
+    icon: 'icon-layers',
+    children: [
+      {
+        name: 'Invoicing',
+        url: '/apps/invoicing',
+        icon: 'icon-speech',
+        children: [
+          {
+            name: 'Invoice',
+            url: '/apps/invoicing/invoice',
+            icon: 'icon-speech',
+            badge: {
+              variant: 'danger',
+              text: 'PRO'
+            }
+          }
+        ]
+      },
+      {
+        name: 'Email',
+        url: '/apps/email',
+        icon: 'icon-speech',
+        children: [
+          {
+            name: 'Inbox',
+            url: '/apps/email/inbox',
+            icon: 'icon-speech',
+            badge: {
+              variant: 'danger',
+              text: 'PRO'
+            }
+          },
+          {
+            name: 'Message',
+            url: '/apps/email/message',
+            icon: 'icon-speech',
+            badge: {
+              variant: 'danger',
+              text: 'PRO'
+            }
+          },
+          {
+            name: 'Compose',
+            url: '/apps/email/compose',
+            icon: 'icon-speech',
+            badge: {
+              variant: 'danger',
+              text: 'PRO'
+            }
+          }
+        ]
+      }
+    ]
+  }
+
 ];
