@@ -8,12 +8,21 @@
     padding-bottom: 10px ;
     display: flex;
     justify-content: space-around;
-    background-color: #44318D;
+    background-color: #1b1922;
 }
 .logo-img{
     padding: 5px;
+    margin-top:-10px;
+    margin-left:3em;
     width: 100px;
     height: auto;
+}
+@media screen and (max-width: 768px) {
+    .logo-img{
+        padding: 5px;
+        width: 100px;
+        height: auto;
+    }
 }
 .nav-links{
     display: flex;
@@ -22,17 +31,15 @@
     list-style-type: none;
    
 }
-.nav-links:hover{
-    
-    
-}
 .links{
     padding: 7px 10px;
     margin-left: 5px;
     border-bottom: solid 2px;
-    border-bottom-color: #44318D ;
+    border-bottom-color: #1b1922 ;
     transition:  0.5s;
     transition: all 0.3s ease-in-out 0s;
+    display: block;margin: auto;
+
 }
 .links>a{
     text-decoration: none;
@@ -40,5 +47,5 @@
     font-weight: bold;
 }
 .links:hover{
-    border-bottom-color: red ;
+    border-bottom-color: red;
 }

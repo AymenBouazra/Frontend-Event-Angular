@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 
 
@@ -38,7 +38,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptorService } from './providers/token-interceptor.service';
 import { ResetPasswordComponent } from './views/login/reset-password/reset-password.component';
-import { HomeComponent } from './home/home/home.component';
+
+
+
 
 @NgModule({
   imports: [
@@ -57,7 +59,7 @@ import { HomeComponent } from './home/home/home.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
     
   ],
   declarations: [
@@ -68,7 +70,6 @@ import { HomeComponent } from './home/home/home.component';
     LoginComponent,
     RegisterComponent,
     ResetPasswordComponent,
-    HomeComponent,
   ],
   providers: [{
     provide: LocationStrategy,
@@ -82,4 +83,5 @@ import { HomeComponent } from './home/home/home.component';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
