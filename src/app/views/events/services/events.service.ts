@@ -24,4 +24,8 @@ export class EventsService {
   deleteEventById(id:number){
     return this.http.delete(`${this.baseUrl}/events/${id}`)
   }
+  getAllTags()
+  {
+   return this.http.get(`${this.baseUrl}/tags`)
+  }
 }

@@ -20,6 +20,7 @@ export class EventsComponent implements OnInit {
   @ViewChild('dp') public dp: BsDatepickerModule;
   searchText: string;
   listEvents: any;
+  listTags:any;
   eventId: any;
   showUpdateButton = false;
   submitted = false;
@@ -36,6 +37,7 @@ export class EventsComponent implements OnInit {
     endDate: new FormControl(new Date(), [Validators.required]),
     endTime: new FormControl('', [Validators.required]),
     photo: new FormControl('',Validators.required),
+
   });
   file:any;
 
@@ -56,16 +58,9 @@ export class EventsComponent implements OnInit {
   startTime: Date = new Date();
   endTime: Date = new Date();
 
-  public countries: Array<IOption> = [
-    { label: 'Belgium', value: 'BE' },
-    { label: 'Danmark', value: 'DK' },
-    { label: 'France', value: 'FR', disabled: true },
-    { label: 'Luxembourg', value: 'LU' },
-    { label: 'Netherlands', value: 'NL' }
+  public tags: Array<IOption> = [
+
   ];
-
-  public selectedCountries: Array<string> = ['BE', 'NL'];
-
   constructor(
     private eventService: EventsService,
     private toastr: ToastrService,
@@ -90,6 +85,16 @@ export class EventsComponent implements OnInit {
     }, (error) => {
       console.log(error);
 
+    })
+
+    this.eventService.getAllTags().subscribe((response)=>{
+      this.listTags = response;
+   
+      
+    },err=>{}, ()=>{
+      this.listTags.forEach(element => {
+        this.tags.push( { label: element.title, value:element.title })
+      })
     })
 
     this.eventForm.controls.eventType.valueChanges.subscribe(newvalue => {

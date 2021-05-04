@@ -145,14 +145,17 @@
                         <img *ngIf="eventForm.value.photo" [src]="eventForm.value.photo"
                             style="width: 50px; height :50px;">
                     </div>
+                    <fieldset class="form-group" *ngIf="tags.length">
+                        <ng-select class="bootstrap" placeholder="Choose Tag for your Event"   [options]="tags" 
+                            [multiple]="true" >
+                        </ng-select>
+                     </fieldset>
                     <!-- <fieldset class="form-group">
-                        <ng-select
-                        class="bootstrap"
-                        placeholder="Choose Tag for your Event"
-                        [options]="countries"
-                        [multiple]="true"   
-                        [(ngModel)]="selectedCountries"></ng-select>
-                      </fieldset> -->
+                    <ng-select [multiple]="true">
+                        <ng-option *ngFor="let tag of listTags" [value]="tag.title">{{tag.title}}</ng-option>
+                      
+                    </ng-select>
+                    </fieldset> -->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" (click)="hide()">Close</button>
