@@ -32,6 +32,7 @@ export class CompanyComponent implements OnInit {
 
   });
   companyid: number;
+  file: any;
 
   constructor(private router: Router, private companyService: CompanyService, private toastr: ToastrService) { }
 
@@ -43,11 +44,26 @@ export class CompanyComponent implements OnInit {
   }
 
   upload(event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    this.companyForm.patchValue({
-      photo: file
-    });
-    this.companyForm.get('photo').updateValueAndValidity()
+    // const file = (event.target as HTMLInputElement).files[0];
+    // this.companyForm.patchValue({
+    //   photo: file
+    // });
+    // this.companyForm.get('photo').updateValueAndValidity()
+    this.file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
+    let pattern = /image-*/;
+    if (this.file) {
+      if (!this.file.type.match(pattern)) {
+        this.toastr.error('Please select an image file.', 'File not valid!');
+        return;
+      } else {
+        let reader = new FileReader();
+        reader.readAsDataURL(this.file);
+        reader.onloadend = () => {
+          const base64String = (<string>reader.result).replace("data:", "").replace(/^.+,/, "");
+          this.companyForm.controls.photo.setValue("data:image/jpeg;base64," + base64String.toString())
+        };
+      }
+    }
   }
   addCompany() {
     this.submitted = true;
@@ -56,14 +72,11 @@ export class CompanyComponent implements OnInit {
     }
 
     const formData: any = new FormData();
-    formData.append("photo", this.companyForm.get('photo').value);
-    this.companyService.postCompany(formData).subscribe((response: any) => {
+    formData.append("file", this.companyForm.get('photo').value);
+    this.companyService.postCompany(this.companyForm.value).subscribe((response: any) => {
       this.toastr.success(this.companyForm.value.companyName + ' Added successfully', 'Company added');
       this.ngOnInit();
       this.hide();
-
-
-
     },
       (error) => {
         console.log(error);
