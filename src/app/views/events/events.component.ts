@@ -57,16 +57,9 @@ export class EventsComponent implements OnInit {
   startTime: Date = new Date();
   endTime: Date = new Date();
 
-  public countries: Array<IOption> = [
-    { label: 'Belgium', value: 'BE' },
-    { label: 'Danmark', value: 'DK' },
-    { label: 'France', value: 'FR', disabled: true },
-    { label: 'Luxembourg', value: 'LU' },
-    { label: 'Netherlands', value: 'NL' }
+  public tags: Array<IOption> = [
+    { label: 'tag.title', value: 'tag.title' },
   ];
-
-  public selectedCountries: Array<string> = ['BE', 'NL'];
-
   constructor(
     private eventService: EventsService,
     private toastr: ToastrService,
@@ -81,8 +74,6 @@ export class EventsComponent implements OnInit {
     this.minEndTime.setMinutes;
   }
   imageSrc: string = '';
-  public tags: Array<IOption> = [
-  ];
   ngOnInit(): void {
 
 
@@ -96,8 +87,13 @@ export class EventsComponent implements OnInit {
     })
 
     this.eventService.getAllTags().subscribe((response)=>{
+      this.listTags = response;
+      this.listTags.forEach(x => {
+        console.log(x.title);
+        
+        
+      });
       
-
     })
 
     this.eventForm.controls.eventType.valueChanges.subscribe(newvalue => {
