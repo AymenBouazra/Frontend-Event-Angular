@@ -33,6 +33,7 @@ export class CompanyComponent implements OnInit {
   });
   companyid: number;
   file: any;
+  selectedFile: any;
 
   constructor(private router: Router, private companyService: CompanyService, private toastr: ToastrService) { }
 
@@ -43,7 +44,7 @@ export class CompanyComponent implements OnInit {
 
   }
 
-  upload(event) {
+  onSelectFile(event) {
     // const file = (event.target as HTMLInputElement).files[0];
     // this.companyForm.patchValue({
     //   photo: file
@@ -56,6 +57,7 @@ export class CompanyComponent implements OnInit {
         this.toastr.error('Please select an image file.', 'File not valid!');
         return;
       } else {
+        this.selectedFile= this.file;
         let reader = new FileReader();
         reader.readAsDataURL(this.file);
         reader.onloadend = () => {
@@ -71,9 +73,14 @@ export class CompanyComponent implements OnInit {
       return;
     }
 
-    const formData: any = new FormData();
-    formData.append("file", this.companyForm.get('photo').value);
-    this.companyService.postCompany(this.companyForm.value).subscribe((response: any) => {
+    let formData: any = new FormData();
+    Object.keys(this.companyForm.value).forEach(fieldName => {
+      formData.append(fieldName, this.companyForm.value[fieldName]);
+    });
+
+    formData.replace("photo", this.selectedFile, this.selectedFile.name);
+    
+    this.companyService.postCompany(formData).subscribe((response: any) => {
       this.toastr.success(this.companyForm.value.companyName + ' Added successfully', 'Company added');
       this.ngOnInit();
       this.hide();
