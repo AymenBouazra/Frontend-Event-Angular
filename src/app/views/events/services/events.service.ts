@@ -26,6 +26,6 @@ export class EventsService {
   }
   getAllTags()
   {
-   return this.http.get(`${this.baseUrl}/tags`)
+   return this.http.get(`${this.baseUrl}/tags-options`)
   }
 }
