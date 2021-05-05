@@ -20,7 +20,6 @@ export class EventsComponent implements OnInit {
   @ViewChild('dp') public dp: BsDatepickerModule;
   searchText: string;
   listEvents: any;
-  listTags:any;
   eventId: any;
   showUpdateButton = false;
   submitted = false;
@@ -37,7 +36,7 @@ export class EventsComponent implements OnInit {
     endDate: new FormControl(new Date(), [Validators.required]),
     endTime: new FormControl('', [Validators.required]),
     photo: new FormControl('',Validators.required),
-
+    tags: new FormControl('')
   });
   file:any;
 
@@ -87,15 +86,9 @@ export class EventsComponent implements OnInit {
 
     })
 
-    this.eventService.getAllTags().subscribe((response)=>{
-      this.listTags = response;
-   
-      
-    },err=>{}, ()=>{
-      this.listTags.forEach(element => {
-        this.tags.push( { label: element.title, value:element.title })
-      })
-    })
+    this.eventService.getAllTags().subscribe((response: any)=>{
+      this.tags = response;
+    },(error)=>{})
 
     this.eventForm.controls.eventType.valueChanges.subscribe(newvalue => {
       if (newvalue == 'Paid') {
@@ -129,6 +122,10 @@ export class EventsComponent implements OnInit {
     //     this.minEndTime.setMinutes(m)
     //   }
     // })
+  }
+  addSelectedTag(item:any){
+    console.log(item);
+    
   }
   onFileSelect(event) {
     this.file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
@@ -184,6 +181,8 @@ export class EventsComponent implements OnInit {
     this.eventId = id;
     this.modal.show();
     this.eventService.getEventById(id).subscribe((response: any) => {
+      console.log(response);
+      
       const startDateEvent: string = this.datePipe.transform(response.startDate, 'MM/dd/yyyy');
       const endDateEvent: string = this.datePipe.transform(response.endDate, 'MM/dd/yyyy');
       const startTimeEvent: String = this.datePipe.transform(response.startTime, 'HH:mm');
