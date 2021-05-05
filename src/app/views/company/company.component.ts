@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyService } from './services/company.service';
-
+import jwt_decode from "jwt-decode";
 
 
 
@@ -28,20 +28,23 @@ export class CompanyComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     role: new FormControl('', [Validators.required]),
-    photo: new FormControl('', []),
+    // photo: new FormControl('', []),
 
   });
   companyid: number;
   file: any;
   selectedFile: any;
-
+  connectedCompanyId:any;
   constructor(private router: Router, private companyService: CompanyService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.companyService.getAllCompnanies().subscribe(response => {
       this.company = response;
     });
-
+    const token = localStorage.getItem('token');
+    let decoded: any = jwt_decode(token);
+    this.connectedCompanyId = decoded.companyId 
+        
   }
 
   onSelectFile(event) {
@@ -58,12 +61,12 @@ export class CompanyComponent implements OnInit {
         return;
       } else {
         this.selectedFile= this.file;
-        let reader = new FileReader();
-        reader.readAsDataURL(this.file);
-        reader.onloadend = () => {
-          const base64String = (<string>reader.result).replace("data:", "").replace(/^.+,/, "");
-          this.companyForm.controls.photo.setValue("data:image/jpeg;base64," + base64String.toString())
-        };
+        // let reader = new FileReader();
+        // reader.readAsDataURL(this.file);
+        // reader.onloadend = () => {
+        //   const base64String = (<string>reader.result).replace("data:", "").replace(/^.+,/, "");
+        //    this.companyForm.controls.photo.setValue("data:image/jpeg;base64," + base64String.toString())
+        // };
       }
     }
   }
@@ -78,7 +81,8 @@ export class CompanyComponent implements OnInit {
       formData.append(fieldName, this.companyForm.value[fieldName]);
     });
 
-    formData.replace("photo", this.selectedFile, this.selectedFile.name);
+    formData.append("photo", this.selectedFile, this.selectedFile.name); console.log(formData);
+    
     
     this.companyService.postCompany(formData).subscribe((response: any) => {
       this.toastr.success(this.companyForm.value.companyName + ' Added successfully', 'Company added');
@@ -103,17 +107,19 @@ export class CompanyComponent implements OnInit {
   }
   updateCompany() {
 
-    {
+    
       this.submitted = true;
-      this.companyService.updateCompanyDataByid(this.companyForm.value, this.companyid).subscribe((response: any) => {
+      let formData: any = new FormData();
+      Object.keys(this.companyForm.value).forEach(fieldName => {
+        formData.append(fieldName, this.companyForm.value[fieldName]);
+      });
+      formData.append("photo", this.selectedFile, this.selectedFile.name); 
+      this.companyService.updateCompanyDataByid(formData, this.companyid).subscribe((response: any) => {
         this.toastr.success('Company succesfully updated.', 'Company updated !');
         this.hide();
         this.ngOnInit();
       }, (error) => {
-
       })
-    }
-
   }
 
   showAdd() {
