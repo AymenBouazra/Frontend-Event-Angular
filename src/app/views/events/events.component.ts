@@ -164,7 +164,7 @@ export class EventsComponent implements OnInit {
   }
   deleteEvent(id: number) {
     this.eventService.deleteEventById(id).subscribe((response: any) => {
-      this.toastr.error('Event deleted successfully. ', 'Event deleted!');
+      this.toastr.error('Event deleted susccessfully. ', 'Event deleted!');
       this.ngOnInit()
     }, (error) => {
       console.log(error);
@@ -182,15 +182,19 @@ export class EventsComponent implements OnInit {
     this.modal.show();
     this.eventService.getEventById(id).subscribe((response: any) => {
       console.log(response);
+      console.log(response.startTime , response.endTime);
+      const startDateEvent = this.datePipe.transform(response.startDate, 'MM/dd/yyyy');
+      const endDateEvent = this.datePipe.transform(response.endDate, 'MM/dd/yyyy');
+      // const startTimeEvent = this.datePipe.transform(response.startTime, 'HH:mm');
+      // const endTimeEvent = this.datePipe.transform(response.endTime, 'HH:mm');
+      console.log(startDateEvent , endDateEvent);
       
-      const startDateEvent: string = this.datePipe.transform(response.startDate, 'MM/dd/yyyy');
-      const endDateEvent: string = this.datePipe.transform(response.endDate, 'MM/dd/yyyy');
-      const startTimeEvent: String = this.datePipe.transform(response.startTime, 'HH:mm');
-      const endTimeEvent: String = this.datePipe.transform(response.endTime, 'HH:mm');
+      
+      
       response.endDate = endDateEvent
       response.startDate = startDateEvent
-      response.startTime = startTimeEvent
-      response.endTime = endTimeEvent;
+      // response.startTime = startTimeEvent
+      // response.endTime = endTimeEvent;
       this.imageSrc = response.photo
       this.eventForm.patchValue(response);
       this.ngOnInit();
