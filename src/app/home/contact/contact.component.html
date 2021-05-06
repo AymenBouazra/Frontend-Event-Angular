@@ -7,13 +7,39 @@
                 laboriosam sapiente ab!
             </p>
         </div>
-        <form class="contact-form">
-            <input class="contact-input" type="text" placeholder="Name">
-            <input class="contact-input" type="email" placeholder="E-mail">
-            <input class="contact-input" id="contact-subject" type="text" placeholder="Subject">
-            <textarea class="contact-input" placeholder="Message.." rows="5" cols="50"></textarea>
-           <div class="test-btn"><a href="#" class="contact-btn">contact Us ! </a></div>
-    
+        <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="Contact()">
+            <input class="contact-input " type="text" placeholder="Name" formControlName="name"
+                [ngClass]="{'is-invalid': submitted && contactForm.controls.name.errors, 'is-valid': submitted && !contactForm.controls.name.errors}">
+            <div class="invalid-feedback d-block">
+                <div *ngIf="submitted && contactForm.controls.name.hasError('required')">
+                    Name is required.
+                </div>
+            </div>
+            <input class="contact-input" type="email" placeholder="E-mail" formControlName="email"
+                [ngClass]="{'is-invalid': submitted && contactForm.controls.email.errors, 'is-valid': submitted && !contactForm.controls.email.errors}">
+            <div class="invalid-feedback d-block">
+                <div *ngIf="submitted && contactForm.controls.email.hasError('required')">
+                    E-mail is required.
+                </div>
+            </div>
+            <input class="contact-input" id="contact-subject" type="text" placeholder="Subject"
+                formControlName="subject"
+                [ngClass]="{'is-invalid': submitted && contactForm.controls.subject.errors, 'is-valid': submitted && !contactForm.controls.subject.errors}">
+            <div class="invalid-feedback d-block">
+                <div *ngIf="submitted && contactForm.controls.subject.hasError('required')">
+                    Subject is required.
+                </div>
+            </div>
+            <textarea class="contact-input" placeholder="Message.." rows="5" cols="50" formControlName="text"
+                [ngClass]="{'is-invalid': submitted && contactForm.controls.text.errors, 'is-valid': submitted && !contactForm.controls.text.errors}"></textarea>
+            <div class="invalid-feedback d-block">
+                <div *ngIf="submitted && contactForm.controls.text.hasError('required')">
+                    Text is required.
+                </div>
+            </div>
+            <!-- <div class="test-btn"><a class="contact-btn" type="submit">contact Us ! </a></div> -->
+            <button type="submit" class="contact-btn">Contact Us !</button>
+
         </form>
     </div>
 </div>

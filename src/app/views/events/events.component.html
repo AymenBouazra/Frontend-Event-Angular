@@ -146,10 +146,10 @@
                             style="width: 50px; height :50px;">
                     </div>
                     <fieldset class="form-group" *ngIf="tags.length">
-                        <ng-select class="bootstrap" placeholder="Choose Tag for your Event" formControlName="tags"   [options]="tags" 
-                            [multiple]="true" (change)="addSelectedTag($event)">
+                        <ng-select class="bootstrap" placeholder="Choose Tag for your Event" formControlName="tags"
+                            [options]="tags" [multiple]="true" (change)="addSelectedTag($event)">
                         </ng-select>
-                     </fieldset>
+                    </fieldset>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" (click)="hide()">Close</button>
@@ -170,13 +170,23 @@
                     <small>list</small>
                 </div>
                 <div class="card-body">
-                    <div class="offset-1 my-3 row">
+                    <div class="my-3 row">
                         <div class="col-12">
-                            <button class="btn btn-success col-1.5 float-right" data-toggle="modal"
-                                (click)="showAdd()"><i class="fa fa-plus"></i> Add event</button>
+                            <div class="col-5 float-left">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                    </div>
+                                    <input type="search" class="form-control" placeholder="Search by name or event type"
+                                        [(ngModel)]="searchEvent">
+                                </div>
+                            </div>
+                            <div class="col-2 float-right">
+                                <button class="btn btn-success" data-toggle="modal" (click)="showAdd()"><i
+                                        class="fa fa-plus"></i> Add event</button>
+                            </div>
                         </div>
                     </div>
-                    <input type="search" class="form-control" placeholder="Search event" [(ngModel)]="searchEvent">
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -200,18 +210,17 @@
                                 <td>{{event.price | currency : 'TND': true}}</td>
                                 <td><img [src]="event.photo" width="50px" height="50px" alt=""></td>
                                 <td>
-                                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                                    <button type="button" class="btn btn-warning text-white" data-toggle="modal"
                                         (click)="showUpdate(event._id)">
-                                        <i class="fa fa-edit"></i> Update
+                                        <i class="fa fa-edit"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger text-dark"
+                                    <button type="button" class="btn btn-danger text-white"
                                         (click)='deleteEvent(event._id)'><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <!--/.row-->
             </div>
         </div>
     </div>

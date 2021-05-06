@@ -6,6 +6,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { EventsService } from './services/events.service';
 import { IOption } from 'ng-select';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-events',
@@ -163,13 +164,35 @@ export class EventsComponent implements OnInit {
 
   }
   deleteEvent(id: number) {
-    this.eventService.deleteEventById(id).subscribe((response: any) => {
-      this.toastr.error('Event deleted successfully. ', 'Event deleted!');
-      this.ngOnInit()
-    }, (error) => {
-      console.log(error);
-
+    
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this event!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor:'#f00',
+      cancelButtonColor:'#D8D8D8',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.eventService.deleteEventById(id).subscribe((response: any) => {
+          this.toastr.error('Event deleted susccessfully. ', 'Event deleted!');
+          this.ngOnInit()
+        }, (error) => {
+          console.log(error);
+    
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Event is not deleted',
+          'error'
+        )
+      }
     })
+    
+    
   }
   showAdd() {
     this.modal.show();
@@ -182,15 +205,19 @@ export class EventsComponent implements OnInit {
     this.modal.show();
     this.eventService.getEventById(id).subscribe((response: any) => {
       console.log(response);
+      console.log(response.startTime , response.endTime);
+      const startDateEvent = this.datePipe.transform(response.startDate, 'MM/dd/yyyy');
+      const endDateEvent = this.datePipe.transform(response.endDate, 'MM/dd/yyyy');
+      // const startTimeEvent = this.datePipe.transform(response.startTime, 'HH:mm');
+      // const endTimeEvent = this.datePipe.transform(response.endTime, 'HH:mm');
+      console.log(startDateEvent , endDateEvent);
       
-      const startDateEvent: string = this.datePipe.transform(response.startDate, 'MM/dd/yyyy');
-      const endDateEvent: string = this.datePipe.transform(response.endDate, 'MM/dd/yyyy');
-      const startTimeEvent: String = this.datePipe.transform(response.startTime, 'HH:mm');
-      const endTimeEvent: String = this.datePipe.transform(response.endTime, 'HH:mm');
+      
+      
       response.endDate = endDateEvent
       response.startDate = startDateEvent
-      response.startTime = startTimeEvent
-      response.endTime = endTimeEvent;
+      // response.startTime = startTimeEvent
+      // response.endTime = endTimeEvent;
       this.imageSrc = response.photo
       this.eventForm.patchValue(response);
       this.ngOnInit();
