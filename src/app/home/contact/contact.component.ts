@@ -24,12 +24,13 @@ export class ContactComponent implements OnInit {
   Contact(){
     this.submitted = true
     if (this.contactForm.invalid) {
-      this.toastr.warning('Please complete');
+      this.toastr.warning('Please complete your information');
       return;
     }
     this.contactService.contacts(this.contactForm.value).subscribe((response)=>{
-      this.toastr.success('Mail send successfully.');
+      this.toastr.success('Mail sent successfully.');
     },(error)=>{
+      this.toastr.error('Please verify your information');
       console.log(error);
       
     })

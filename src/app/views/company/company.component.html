@@ -1,7 +1,7 @@
 <div bsModal #modal="bs-modal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
   aria-hidden="true">
   <div class="modal-dialog modal-primary" role="document">
-    <div class="modal-content" style="background:rgba(255, 255, 255, 0.5);">
+    <div class="modal-content" style="background:rgba(255, 255, 255, 0.8);">
       <div class="modal-header">
         <h4 class="modal-title">{{modalTitle}}</h4>
         <button type="button" class="close" (click)="hide()" aria-label="Close">
@@ -12,7 +12,7 @@
         <div class="form-group">
 
           <label for="companyName">Company name:</label>
-          <input type="text" class="form-control" id="companyName" placeholder="Enter your company name"
+          <input type="text" class="form-control" id="companyName" placeholder="Enter the company's name"
             formControlName="companyName"
             [ngClass]="{'is-invalid': submitted && companyForm.controls.companyName.errors, 'is-valid': submitted && !companyForm.controls.companyName.errors}">
           <div class="invalid-feedback d-block">
@@ -21,23 +21,20 @@
           </div>
         </div>
         <div class="form-group">
-
           <label for="companyDescription">Company description :</label>
-          <textarea class="form-control" row="40" id="companyDescription"
-            placeholder="Enter your Company description here" formControlName="companyDescription"
+          <textarea class="form-control" row="40" id="companyDescription" placeholder="Enter the company's description"
+            formControlName="companyDescription"
             [ngClass]="{'is-invalid': submitted && companyForm.controls.companyDescription.errors, 'is-valid': submitted && !companyForm.controls.companyDescription.errors}"></textarea>
           <div class="invalid-feedback d-block">
             <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('required')">Company description
               is required.</div>
             <div *ngIf="submitted && companyForm.controls.companyDescription.hasError('minlength')">Company description
               is invalid format > 8.</div>
-
           </div>
         </div>
         <div class="form-group">
-
           <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" class="form-control" placeholder="Enter e-mail.."
+          <input type="email" id="email" name="email" class="form-control" placeholder="Eg: example@mail.com"
             autocomplete="email" formControlName="email"
             [ngClass]="{'is-invalid': submitted && companyForm.controls.email.errors, 'is-valid': submitted && !companyForm.controls.email.errors}">
           <div class="invalid-feedback d-block" *ngIf="submitted && companyForm.controls.email.hasError('required')">
@@ -46,57 +43,46 @@
           <div class="invalid-feedback d-block" *ngIf="submitted && companyForm.controls.email.hasError('email')">
             Invalid e-mail.
           </div>
-
         </div>
         <div class="form-group">
-
-          <label for="password"  *ngIf="hideInputPassword"> Password</label>
-          <input type="password" *ngIf="hideInputPassword" id="password" name="password" class="form-control" placeholder="Enter  password.."
-            formControlName="password"
+          <label for="password" *ngIf="hideInputPassword"> Password</label>
+          <input type="password" *ngIf="hideInputPassword" id="password" name="password" class="form-control"
+            placeholder="Enter  password.." formControlName="password"
             [ngClass]="{'is-invalid': submitted && companyForm.controls.password.errors, 'is-valid': submitted && !companyForm.controls.password.errors}">
           <div class="invalid-feedback d-block" *ngIf="submitted && companyForm.controls.password.hasError('required')">
             Passoword is required.
-         </div>
+          </div>
           <div class="invalid-feedback d-block"
             *ngIf="submitted && companyForm.controls.password.hasError('minlength')">
             Passoword is required minimum 8 char.
           </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group">
           <label for="role">Select Role</label>
-          <div class="col-md-9">
+          <div class="col-md-6">
             <select id="role" name="role" class="form-control" formControlName="role"
               [ngClass]="{'is-invalid': submitted && companyForm.controls.role.errors, 'is-valid': submitted && !companyForm.controls.role.errors}">
               <option value="super-admin">Super Admin</option>
-              <option value="Admin" selected>Admin</option>
+              <option value="Admin">Admin</option>
             </select>
             <div class="invalid-feedback d-block" *ngIf="submitted && companyForm.controls.role.hasError('required')">
               Role is required.
             </div>
           </div>
         </div>
-        <div class="form-group row">
-          <label>Photo :</label>
-          <input type="file" (change)="onSelectFile($event)" placeholder="Upload your compnay logo"
-              accept="image/*">
-          <!-- <div class="invalid-feedback d-block">
-              <div *ngIf="submitted && companyForm.controls.photo.hasError('required') && !file">
-                  Photo is required.
-              </div>
-              <div *ngIf="submitted && companyForm.controls.photo.hasError('required') && file">
-                  Photo format must be type image.
-              </div>
-          </div> -->
-          <!-- <img *ngIf="companyForm.value.photo" [src]="companyForm.value.photo"
-              style="width: 50px; height :50px;"> -->
-      </div>
-        <!-- <div class="form-group row">
-          <label for="uploadPhoto">Upload your compnay logo</label>
-          <div class="col-md-9">
-            <input type="file"(change)="upload($event)">
-
+        <div class="form-group">
+          <label>Photo: </label>
+          <input type="file" (change)="onSelectFile($event)" placeholder="Upload your compnay logo" accept="image/*">
+          <div class="invalid-feedback d-block">
+            <div *ngIf="submitted && companyForm.controls.photo.hasError('required') && !file">
+              Photo is required.
+            </div>
+            <div *ngIf="submitted && companyForm.controls.photo.hasError('required') && file">
+              Photo format must be type image.
+            </div>
           </div>
-        </div> -->
+          <img *ngIf="companyForm.value.photo" [src]="companyForm.value.photo" style="width: 50px; height :50px;">
+        </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="hide()">Close</button>
           <button type="button" class="btn btn-primary" (click)="updateCompany()" *ngIf="showUpdateButton">Save
@@ -111,19 +97,26 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card">
-        <div class="card-header" >
+        <div class="card-header">
           <strong>Company</strong>
           <small>Amalia Entertaiment & Events</small>
         </div>
         <div class="card-body">
-          <div class="offset-1 my-3 row">
+          <div class="my-3 row">
             <div class="col-12">
-              <button class="btn btn-primary col-1.5 float-right" data-toggle="modal" (click)="showAdd()"><i
+              <div class="col-5 float-left">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                  </div>
+                  <input type="search" class="form-control" placeholder="Search by name or e-mail" [(ngModel)]="searchCompany">
+                </div>
+              </div>
+              <button class="btn btn-success col-2 float-right" data-toggle="modal" (click)="showAdd()"><i
                   class="fa fa-plus"></i> Add company</button>
-              <!-- <input type="search" class="form-control col-3" placeholder="Search product by name"  [(ngModel)]="searchText"> -->
             </div>
           </div>
-          <table class="table table-striped table-hover"  >
+          <table class="table table-striped table-hover">
             <thead>
               <tr>
                 <th scope="col">ID</th>
@@ -136,7 +129,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="" *ngFor="let company of company ; let i=index">
+              <tr class="" *ngFor="let company of company | searchpipe:searchCompany ; let i=index">
                 <td>{{i+1}}</td>
                 <td>{{ company.companyName }}</td>
                 <td><img [src]="company.photo" width="50px" height="50px" alt=""></td>
@@ -144,27 +137,17 @@
                 <td>{{ company.email }}</td>
                 <td>{{ company.role }}</td>
                 <td>
-                  <button type="button" class="btn btn-warning" data-toggle="modal" (click)="showUpdate(company._id)" >
-                    <i class="fa fa-edit"></i> Update
+                  <button type="button" class="btn btn-warning text-white" data-toggle="modal" (click)="showUpdate(company._id)">
+                    <i class="fa fa-edit"></i>
                   </button>
-                  <button type="button" class="btn btn-danger text-dark" *ngIf="connectedCompanyId !== company._id" (click)='deletecompany(company._id)'><i
-                      class="fa fa-trash"></i></button>
+                  <button type="button" class="btn btn-danger  text-white" *ngIf="connectedCompanyId !== company._id"
+                    (click)='deletecompany(company._id)'><i class="fa fa-trash"></i></button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <!--/.row-->
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-

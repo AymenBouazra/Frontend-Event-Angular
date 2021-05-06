@@ -3,20 +3,23 @@ import { CommonModule } from '@angular/common';
 import { CompanyRoutingModule } from './company-routing.module';
 import { CompanyComponent } from './company.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
 import { AngularFileUploaderModule } from "angular-file-uploader";
+import { SearchPipe } from './pipes/search.pipe';
 
 
 
 @NgModule({
   declarations: [
-    CompanyComponent, 
+    CompanyComponent,
+    SearchPipe,
   ],
   imports: [
     CommonModule,
     CompanyRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     AngularFileUploaderModule,
     ModalModule.forRoot(),

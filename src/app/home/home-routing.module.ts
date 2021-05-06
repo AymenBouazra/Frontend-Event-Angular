@@ -12,13 +12,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'home/home',
     pathMatch : 'full'
   },
   {
     path:'',component:HomeComponent, children:[
       {
-        path:'index' , component:IndexComponent
+        path:'home' , component:IndexComponent
       },
       {
         path: 'about', component:AboutComponent

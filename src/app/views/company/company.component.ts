@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,8 +5,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyService } from './services/company.service';
 import jwt_decode from "jwt-decode";
-
-
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-company',
@@ -28,8 +26,7 @@ export class CompanyComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     role: new FormControl('', [Validators.required]),
-    // photo: new FormControl('', []),
-
+    photo: new FormControl('', [Validators.required]),
   });
   companyid: number;
   file: any;
@@ -44,15 +41,14 @@ export class CompanyComponent implements OnInit {
     const token = localStorage.getItem('token');
     let decoded: any = jwt_decode(token);
     this.connectedCompanyId = decoded.companyId 
-        
   }
 
   onSelectFile(event) {
-    // const file = (event.target as HTMLInputElement).files[0];
-    // this.companyForm.patchValue({
-    //   photo: file
-    // });
-    // this.companyForm.get('photo').updateValueAndValidity()
+    const file = (event.target as HTMLInputElement).files[0];
+    this.companyForm.patchValue({
+      photo: file
+    });
+    this.companyForm.get('photo').updateValueAndValidity()
     this.file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
     let pattern = /image-*/;
     if (this.file) {
@@ -61,12 +57,12 @@ export class CompanyComponent implements OnInit {
         return;
       } else {
         this.selectedFile= this.file;
-        // let reader = new FileReader();
-        // reader.readAsDataURL(this.file);
-        // reader.onloadend = () => {
-        //   const base64String = (<string>reader.result).replace("data:", "").replace(/^.+,/, "");
-        //    this.companyForm.controls.photo.setValue("data:image/jpeg;base64," + base64String.toString())
-        // };
+        let reader = new FileReader();
+        reader.readAsDataURL(this.file);
+        reader.onloadend = () => {
+          const base64String = (<string>reader.result).replace("data:", "").replace(/^.+,/, "");
+           this.companyForm.controls.photo.setValue("data:image/jpeg;base64," + base64String.toString())
+        };
       }
     }
   }
@@ -76,13 +72,14 @@ export class CompanyComponent implements OnInit {
       return;
     }
 
+    const companyModalForm = this.companyForm.value;
+    delete companyModalForm.photo
     let formData: any = new FormData();
-    Object.keys(this.companyForm.value).forEach(fieldName => {
-      formData.append(fieldName, this.companyForm.value[fieldName]);
+    Object.keys(companyModalForm).forEach(fieldName => {
+      formData.append(fieldName, companyModalForm[fieldName]);
     });
 
-    formData.append("photo", this.selectedFile, this.selectedFile.name); console.log(formData);
-    
+    formData.append("photo", this.selectedFile, this.selectedFile.name);
     
     this.companyService.postCompany(formData).subscribe((response: any) => {
       this.toastr.success(this.companyForm.value.companyName + ' Added successfully', 'Company added');
@@ -96,25 +93,47 @@ export class CompanyComponent implements OnInit {
 
   }
   deletecompany(i: number) {
-
-    this.companyService.deleteCompanyById(i).subscribe((response: any) => {
-      this.toastr.warning('Company succesfully deleted.', 'Company deleted !');;
-      this.ngOnInit()
-    }, (error) => { })
-    console.log(i);
-
-
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this company!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor:'#f00',
+      cancelButtonColor:'#D8D8D8',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.companyService.deleteCompanyById(i).subscribe((response: any) => {
+          this.toastr.success('Company succesfully deleted.', 'Company deleted !');;
+          this.ngOnInit()
+        }, (error) => {
+          
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Company is not deleted',
+          'error'
+        )
+      }
+    })
+    
+    
   }
   updateCompany() {
 
     
       this.submitted = true;
+      
+    const companyModalForm = this.companyForm.value;
+    delete companyModalForm.photo
       let formData: any = new FormData();
-      Object.keys(this.companyForm.value).forEach(fieldName => {
-        formData.append(fieldName, this.companyForm.value[fieldName]);
+      Object.keys(companyModalForm).forEach(fieldName => {
+        formData.append(fieldName, companyModalForm[fieldName]);
       });
       formData.append("photo", this.selectedFile, this.selectedFile.name); 
-      this.companyService.updateCompanyDataByid(formData, this.companyid).subscribe((response: any) => {
+      this.companyService.updateCompanyDataById(formData, this.companyid).subscribe((response: any) => {
         this.toastr.success('Company succesfully updated.', 'Company updated !');
         this.hide();
         this.ngOnInit();
