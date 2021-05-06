@@ -6,6 +6,7 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { EventsService } from './services/events.service';
 import { IOption } from 'ng-select';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-events',
@@ -163,13 +164,35 @@ export class EventsComponent implements OnInit {
 
   }
   deleteEvent(id: number) {
-    this.eventService.deleteEventById(id).subscribe((response: any) => {
-      this.toastr.error('Event deleted susccessfully. ', 'Event deleted!');
-      this.ngOnInit()
-    }, (error) => {
-      console.log(error);
-
+    
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this event!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor:'#f00',
+      cancelButtonColor:'#D8D8D8',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.eventService.deleteEventById(id).subscribe((response: any) => {
+          this.toastr.error('Event deleted susccessfully. ', 'Event deleted!');
+          this.ngOnInit()
+        }, (error) => {
+          console.log(error);
+    
+        })
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Event is not deleted',
+          'error'
+        )
+      }
     })
+    
+    
   }
   showAdd() {
     this.modal.show();

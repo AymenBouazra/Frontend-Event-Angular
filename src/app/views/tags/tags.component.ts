@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 import { TagService } from './services/tag.service';
 
 @Component({
@@ -53,10 +54,29 @@ export class TagsComponent implements OnInit {
   }
 
   delete(id:number){    
-    this.tag.deleteTagById(id).subscribe((response:any)=>{
-      this.toastr.error( 'Tag succesfully deleted.','Tag deleted !');;
-      this.ngOnInit()},(error)=>{})
-    console.log(id);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this tag!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor:'#f00',
+      cancelButtonColor:'#D8D8D8',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it'
+    }).then((result) => {
+      if (result.value) {
+        this.tag.deleteTagById(id).subscribe((response:any)=>{
+          this.toastr.error( 'Tag succesfully deleted.','Tag deleted !');;
+          this.ngOnInit()},(error)=>{})
+        console.log(id);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Tag is not deleted',
+          'error'
+        )
+      }
+    })
   }
   showAdd(){
     this.modal.show()

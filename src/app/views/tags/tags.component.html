@@ -51,23 +51,21 @@
                     <small>list</small>
                 </div>
                 <div class="card-body">
-                    <div class="offset-1 my-3 row">
+                    <div class="my-3 row">
                         <div class="col-12">
-                            <button class="btn btn-success col-1.5 float-right" data-toggle="modal"
-                                (click)="showAdd()"><i class="fa fa-plus"></i> Add tag</button>
-                            
+                            <div class="col-5 float-left">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                    </div>
+                                    <input type="search" class="form-control"
+                                        placeholder="Search by name or description" [(ngModel)]="searchTag">
+                                </div>
+                            </div>
+                            <button class="btn btn-success col-2 float-right" data-toggle="modal" (click)="showAdd()"><i
+                                    class="fa fa-plus"></i> Add tag</button>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-4 offset-md-8">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="fa fa-search"></i></span>
-                            </div>
-                            <input type="search" class="form-control" placeholder="Search tag"  [(ngModel)]="searchText">
-                          </div>
-                        </div>
-                      </div>
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
@@ -78,16 +76,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="" *ngFor="let tag of listTagsTodo | searchpipe: searchText ;let i=index">
+                            <tr class="" *ngFor="let tag of listTagsTodo | searchpipe: searchTag ;let i=index">
                                 <td>{{i+1}}</td>
                                 <td>{{tag.title}}</td>
                                 <td>{{tag.description}}</td>
                                 <td>
-                                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                                    <button type="button" class="btn btn-warning text-white" data-toggle="modal"
                                         (click)="showUpdate(tag._id)">
-                                        <i class="fa fa-edit"></i> Update
+                                        <i class="fa fa-edit"></i>
                                     </button>
-                                    <button type="button" class="btn btn-danger text-dark" (click)='delete(tag._id)'><i
+                                    <button type="button" class="btn btn-danger text-white" (click)='delete(tag._id)'><i
                                             class="fa fa-trash"></i></button>
                                 </td>
                             </tr>
