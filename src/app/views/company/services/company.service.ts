@@ -12,15 +12,15 @@ export class CompanyService {
     return this.http.post(`${this.baseUrl}/company`, companyData)
   }
   getcompanyByid(id: number) {
-    return this.http.get(`${this.baseUrl}/company` + id)
+    return this.http.get(`${this.baseUrl}/company/` + id)
   };
   getAllCompnanies() {
     return this.http.get(`${this.baseUrl}/company`)
   };
   updateCompanyDataById(updatecompanyData: any, id: any) {
-    return this.http.put(`${this.baseUrl}/company` + id, updatecompanyData)
+    return this.http.put(`${this.baseUrl}/company/` + id, updatecompanyData)
   }
   deleteCompanyById(id: number) {
-    return this.http.delete(`${this.baseUrl}/company` + id)
+    return this.http.delete(`${this.baseUrl}/company/` + id)
   };
 }

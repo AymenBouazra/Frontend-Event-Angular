@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { EventsService } from './services/events.service';
 import { IOption } from 'ng-select';
 import Swal from 'sweetalert2';
+import { SweetAlertService } from '../../providers/sweet-alert.service';
 
 @Component({
   selector: 'app-events',
@@ -17,6 +18,7 @@ import Swal from 'sweetalert2';
   encapsulation: ViewEncapsulation.None
 })
 export class EventsComponent implements OnInit {
+
   @ViewChild('modal') public modal: ModalDirective;
   @ViewChild('dp') public dp: BsDatepickerModule;
   searchText: string;
@@ -54,17 +56,17 @@ export class EventsComponent implements OnInit {
   public mstep: number = 1;
   public ismeridian: boolean = false;
   public isEnabled: boolean = true;
-
   startTime: Date = new Date();
   endTime: Date = new Date();
 
   public tags: Array<IOption> = [
-
   ];
+
   constructor(
     private eventService: EventsService,
     private toastr: ToastrService,
-    private datePipe: DatePipe) {
+    private datePipe: DatePipe,
+    private sweetAlert:SweetAlertService) {
     this.startTime.setHours;
     this.startTime.setMinutes;
     this.endTime.setHours;
@@ -75,22 +77,16 @@ export class EventsComponent implements OnInit {
     this.minEndTime.setMinutes;
   }
   imageSrc: string = '';
+
   ngOnInit(): void {
-
-
     this.eventService.getAllEvents().subscribe((response) => {
       this.listEvents = response
-      console.log(this.listEvents);
-
     }, (error) => {
       console.log(error);
-
     })
-
     this.eventService.getAllTags().subscribe((response: any)=>{
       this.tags = response;
     },(error)=>{})
-
     this.eventForm.controls.eventType.valueChanges.subscribe(newvalue => {
       if (newvalue == 'Paid') {
         this.eventForm.controls.price.setValidators([Validators.required, Validators.min(1)])
@@ -124,10 +120,7 @@ export class EventsComponent implements OnInit {
     //   }
     // })
   }
-  addSelectedTag(item:any){
-    console.log(item);
-    
-  }
+
   onFileSelect(event) {
     this.file = event.dataTransfer ? event.dataTransfer.files[0] : event.target.files[0];
     let pattern = /image-*/;
@@ -161,27 +154,15 @@ export class EventsComponent implements OnInit {
     }, (error) => {
       console.log(error);
     })
-
   }
   deleteEvent(id: number) {
-    
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You will not be able to recover this event!',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor:'#f00',
-      cancelButtonColor:'#D8D8D8',
-      confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, keep it'
-    }).then((result) => {
+    this.sweetAlert.deleteConfirmation('event').then((result) => {
       if (result.value) {
         this.eventService.deleteEventById(id).subscribe((response: any) => {
           this.toastr.error('Event deleted susccessfully. ', 'Event deleted!');
           this.ngOnInit()
         }, (error) => {
           console.log(error);
-    
         })
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire(
@@ -190,10 +171,9 @@ export class EventsComponent implements OnInit {
           'error'
         )
       }
-    })
-    
-    
+    }) 
   }
+
   showAdd() {
     this.modal.show();
     this.showUpdateButton = false;

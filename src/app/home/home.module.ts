@@ -12,6 +12,7 @@ import { HomeComponent } from './home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardEventComponent } from './events/card-event/card-event.component';
 import { EventInfoComponent } from './events/event-info/event-info.component';
+import { ReservationComponent } from './events/reservation/reservation.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { EventInfoComponent } from './events/event-info/event-info.component';
     IndexComponent,
     HomeComponent,
     CardEventComponent,
-    EventInfoComponent
+    EventInfoComponent,
+    ReservationComponent
   ],
   imports: [
     CommonModule,
