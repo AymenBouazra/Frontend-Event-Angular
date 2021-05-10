@@ -1,21 +1,24 @@
-<div class="card-container">
-    <div class="card-image-container">
-        <p class="card-text-name">
-            first event
-        </p>
-    </div>
-    <div class="card-text-container">
-        <div class="card-Event-info-container">
-            <p class="card-text-description">
-                this event will be idc
+<div class="cardd">
+  <div class="card-container">
+    <div class="row">
+      <div class="col-sm-6 col-md-4 col-lg-3 mt-3" *ngFor="let event of listEvents">
+        <div class="card h-100" [routerLink]="['event-details/', event._id]">
+          <img [src]="event.photo" class="card-img-top h-50" alt="">
+          <div class="card-body">
+            <h5 class="card-title">{{event.eventName}}</h5>
+            <p class="card-text">
+              {{event.eventDescription | slice:0:100}}
+              <span *ngIf="event.eventDescription.length > 100">...</span>
             </p>
-            <p class="card-text-date">
-                    20/03/2021
+          </div>
+          <div class="card-footer d-flex justify-content-between">
+            <p class="badge badge-pill" [ngClass]="{'badge-success':event.eventType == 'Free','badge-primary':event.eventType == 'Paid'}">
+              {{event.eventType}}
             </p>
-            <p class="card-text-price">
-                500Dt
-            </p>
+            <p class="card-text float-right event-date">{{event.startDate | date : 'EEEE, MMMM d, y'}}</p>
+          </div>
         </div>
-        <a href="#" class="card-event-button" > see event</a>
+      </div>
     </div>
+  </div>
 </div>
