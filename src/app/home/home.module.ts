@@ -11,6 +11,7 @@ import { IndexComponent } from './index/index.component';
 import { HomeComponent } from './home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardEventComponent } from './events/card-event/card-event.component';
+import { EventInfoComponent } from './events/event-info/event-info.component';
 import { ReservationComponent } from './events/reservation/reservation.component';
 
 
@@ -24,6 +25,7 @@ import { ReservationComponent } from './events/reservation/reservation.component
     IndexComponent,
     HomeComponent,
     CardEventComponent,
+    EventInfoComponent,
     ReservationComponent
   ],
   imports: [
