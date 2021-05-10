@@ -1,0 +1,136 @@
+<!-- <div bsModal #modal="bs-modal" class="modal right fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content" style="background:rgba(255, 255, 255, 0.8);">
+            <div class="modal-header">
+                <h4 class="modal-title">checkout</h4>
+                <button type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            
+            </div>
+            <form class="modal-body">
+                <div class="form-group">
+
+                    <label for="firstName"> First name:</label>
+                    <input type="text" class="form-control" id="Name" placeholder="Enter your name">
+                        
+                    <div class="invalid-feedback d-block">
+                        <div *ngIf="submitted && reservationForm.controls.firstName.hasError('required')"> First name is
+                            required.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <label for="lastName"> last name:</label>
+                    <input type="text" class="form-control" id="Name" placeholder="Enter your name"
+                        formControlName="lastName">
+                    <div class="invalid-feedback d-block">
+                        <div *ngIf="submitted && reservationForm.controls.lastName.hasError('required')"> last name is
+                            required.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Eg: example@mail.com"
+                        autocomplete="email" formControlName="email"
+                       >
+                    <div class="invalid-feedback d-block"
+                        *ngIf="submitted && reservationForm.controls.email.hasError('required')">
+                        E-mail is required.
+                    </div>
+                    <div class="invalid-feedback d-block"
+                        *ngIf="submitted && reservationForm.controls.email.hasError('email')">
+                        Invalid e-mail.
+                    </div>
+                </div>
+            </form>
+                <div class="modal-footer">
+                   <button type="submit" class="btn btn-primary">place order </button>
+                </div>
+           
+        </div>
+    </div>
+</div> -->
+<div class="Reservation">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header">
+                        <strong>Reservation form</strong>
+                        <!-- <small>Form</small> -->
+                    </div>
+                    <div class="card-body" style="height: 500px;">
+                        <div class="row">
+                            <div class="form-group col-sm-3">
+                                <label for="ticket">Select nember of ticket</label>
+                                <select class="form-control" id="ticket">
+                                    <option value="">1</option>
+                                    <option value="">2</option>
+                                    <option value="">3</option>
+                                    <option value="">4</option>
+                                    <option value="">5</option>
+                                    <option value="">6</option>
+                                    <option value="">7</option>
+                                    <option value="">8</option>
+                                    <option value="">9</option>
+                                    <option value="">10</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row float-right">
+                            <div class="pane-order-summary eds-g-cell eds-g-cell-12-12 eds-g-cell-sw-10-12 eds-g-offset-sw-1-12 eds-l-mar-bot-10 eds-l-pad-bot-10 eds-l-sn-mar-top-12 eds-l-sm-mar-top-12 eds-l-sw-mar-top-12 eds-l-sn-pad-hor-4 eds-l-sm-pad-hor-6 eds-l-sw-pad-hor-6 eds-l-mar-top-6"
+                                data-spec="pane-order-summary">
+                                <div class="eds-order-summary eds-text-bs--fixed" role="grid">
+                                    <div>
+                                        <div class="eds-l-mar-bot-6">
+                                            <div class="eds-order-summary-title eds-g-cell eds-g-cell-12-12 eds-text-bm--fixed eds-text-color--grey-900"
+                                                role="gridcell">Order summary</div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="eds-g-group eds-l-mar-vert-4 eds-text-color--grey-700" role="row">
+                                            <div class="eds-g-cell eds-g-cell-6-12" role="gridcell"><span
+                                                    class="eds-text-bm--fixed eds-text-color--grey-800">1 x General
+                                                    Admission</span></div>
+                                            <div class="eds-g-cell eds-g-cell-6-12 eds-text--right" role="gridcell">
+                                                <span class="eds-text-bm--fixed eds-text-color--grey-800">$20.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="eds-divider__hr eds-bg-color--ui-200 eds-divider--horizontal"
+                                        data-spec="divider-hr" aria-hidden="true">
+                                    <div></div>
+                                    <div class="eds-g-group eds-l-mar-vert-4" role="row">
+                                        <div class="eds-g-cell eds-g-cell-6-12" role="gridcell"><span
+                                                class="eds-text-weight--heavy eds-text-bl--fixed eds-text-color--ui-800">Total</span>
+                                        </div>
+                                        <div class="eds-g-cell eds-g-cell-6-12 eds-text--right" role="gridcell"><span
+                                                class="eds-text-bm--fixed"><span
+                                                    class="eds-text--uppercase eds-text-color--ui-600"></span>&nbsp;<span
+                                                    class="eds-text-weight--heavy eds-text-bl--fixed eds-text-color--ui-800">$20.00</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-md btn-primary float-right"><i
+                                class="fa fa-dot-circle-o"></i>
+                            checkout</button>
+
+                    </div>
+
+                </div>
+                <!--/.col-->
+            </div>
+            <!--/.row-->
+        </div>
+    </div>
+</div>
