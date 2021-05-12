@@ -79,7 +79,9 @@
                             <tr class="" *ngFor="let tag of listTagsTodo | searchpipe: searchTag ;let i=index">
                                 <td>{{i+1}}</td>
                                 <td>{{tag.title}}</td>
-                                <td>{{tag.description}}</td>
+                                <td>{{tag.description | slice:0:25}}
+                                    <span *ngIf="tag.description.length > 100">...</span>
+                                </td>
                                 <td>
                                     <button type="button" class="btn btn-warning text-white" data-toggle="modal"
                                         (click)="showUpdate(tag._id)">

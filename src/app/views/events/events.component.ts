@@ -185,19 +185,22 @@ export class EventsComponent implements OnInit {
     this.modal.show();
     this.eventService.getEventById(id).subscribe((response: any) => {
       console.log(response);
-      console.log(response.startTime , response.endTime);
+      // console.log(response.startTime , response.endTime);
       const startDateEvent = this.datePipe.transform(response.startDate, 'MM/dd/yyyy');
       const endDateEvent = this.datePipe.transform(response.endDate, 'MM/dd/yyyy');
-      // const startTimeEvent = this.datePipe.transform(response.startTime, 'HH:mm');
-      // const endTimeEvent = this.datePipe.transform(response.endTime, 'HH:mm');
-      console.log(startDateEvent , endDateEvent);
+      const startTimeEvent = this.datePipe.transform(response.startTime, 'HH:mm');
+      const endTimeEvent = this.datePipe.transform(response.endTime, 'HH:mm');
+      // console.log(startDateEvent , endDateEvent);
+      // console.log(startTimeEvent);
+      // console.log(endTimeEvent);
+      
       
       
       
       response.endDate = endDateEvent
       response.startDate = startDateEvent
-      // response.startTime = startTimeEvent
-      // response.endTime = endTimeEvent;
+      response.startTime = startTimeEvent
+      response.endTime = endTimeEvent;
       this.imageSrc = response.photo
       this.eventForm.patchValue(response);
       this.ngOnInit();
