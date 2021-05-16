@@ -14,7 +14,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home/home',
+    redirectTo: 'home',
     pathMatch : 'full'
   },
   {
@@ -35,7 +35,7 @@ const routes: Routes = [
         path: 'contact',component:ContactComponent
       },
       {
-        path:'events/reservation', component:ReservationComponent
+        path:'events/reservation/:id', component:ReservationComponent
       },
     ]
   },

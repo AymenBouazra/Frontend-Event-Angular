@@ -1,4 +1,5 @@
 .reservation {
+    width: 100%;
     background: url("/assets/img/Background-image/home-bg.jpg") top center;
     background-size: cover;
     overflow: hidden;
@@ -16,6 +17,9 @@
     margin: 80px 90px;
     border-radius: 5px 5px;
 }
+.firstRow{
+    height: 450px;
+}
 .event-type-container {
     position: absolute;
     bottom: 15px;
@@ -23,7 +27,11 @@
 }  
 .event-details {
     position: relative;
-}   
+    height: 450px;
+}
+.image-container{
+    height: 450px;
+}
 .event-name-container {
     padding: 30px 30px;
 }
