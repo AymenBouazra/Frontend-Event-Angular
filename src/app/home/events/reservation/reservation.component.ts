@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ModalDirective } from 'ngx-bootstrap/modal';
 import { HomeService } from '../../services/home.service';
 
 @Component({
@@ -48,5 +47,9 @@ export class ReservationComponent implements OnInit {
     if (this.reservationForm.invalid) {
       return;
     }
+    this.reservService.reservationById(this.reservId,this.reservationForm.value).subscribe((response)=>{
+      console.log(response);
+      
+    })
   }
 }

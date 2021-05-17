@@ -14,4 +14,7 @@ export class HomeService {
   getEventById(id:number){
     return this.http.get(`${this.baseUrl}/event-detail/${id}`)
   }
+  reservationById(id:number,dataReservation:any){
+    return this.http.post(`${this.baseUrl}/reservation/${id}`,dataReservation)
+  }
 }
