@@ -14,10 +14,9 @@ export class EventInfoComponent implements OnInit {
   constructor(private route: ActivatedRoute, private eventService:  HomeService) { }
 
   ngOnInit(): void {
-    this.detailId = this.route.snapshot.params['id'],
+    this.detailId = this.route.snapshot.params['id'];
     this.eventService.getEventById(this.detailId).subscribe((response)=>{
       this.details = response
-      console.log(response);
       
     },(error) => {
       console.log(error);
