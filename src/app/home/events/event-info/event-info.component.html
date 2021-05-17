@@ -16,9 +16,12 @@
 
                 </div>
                 <div class="event-type-container">
-                    <h5>
-                        {{details?.eventType}}
-                        <span *ngIf="details?.eventType == 'Paid'">: {{details?.price | currency: 'TND'}}</span>
+                    <h5 *ngIf="details?.eventType == 'Paid'">
+                        Price:  
+                        <span > {{details?.price | currency: 'TND '}}</span>
+                    </h5>
+                    <h5 *ngIf="details?.eventType == 'Free'">
+                        Free
                     </h5>
                 </div>
             </div>

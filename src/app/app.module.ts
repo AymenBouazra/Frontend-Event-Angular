@@ -3,10 +3,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-
-
-
-
 import { AppComponent } from './app.component';
 
 // Import containers
@@ -15,9 +11,6 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-
-
-
 import {
   AppAsideModule,
   AppBreadcrumbModule,
@@ -38,9 +31,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { TokenInterceptorService } from './providers/token-interceptor.service';
 import { ResetPasswordComponent } from './views/login/reset-password/reset-password.component';
-
-
-
 
 @NgModule({
   imports: [
