@@ -34,7 +34,9 @@ export class CompanyComponent implements OnInit {
   file: any;
   selectedFile: any;
   connectedCompanyId: any;
+  connectedCompanyRole: any;
   
+
   constructor(
     private router: Router,
     private companyService: CompanyService,
@@ -48,7 +50,10 @@ export class CompanyComponent implements OnInit {
     });
     const token = localStorage.getItem('token');
     let decoded: any = jwt_decode(token);
-    this.connectedCompanyId = decoded.companyId
+    this.connectedCompanyId = decoded.companyId;
+    this.connectedCompanyRole = decoded.companyRole;
+    console.log(this.connectedCompanyRole);
+    
   }
 
   onSelectFile(event) {
@@ -75,7 +80,7 @@ export class CompanyComponent implements OnInit {
     }
   }
 
-  addCompany() {
+  addCompany=()=> {
     this.submitted = true;
     if (this.companyForm.invalid) {
       return;
