@@ -20,8 +20,8 @@
     padding: 5px;
     margin-top:-10px;
     margin-left:3em;
-    width: 200px;
-    height: 85px;
+    width: 160px;
+    height: 60px;
 }
 @media screen and (max-width: 768px) {
     .logo-img{
@@ -40,7 +40,7 @@
     padding: 7px 10px;
     margin-left: 5px;
     transition:  0.5s;
-    border-bottom: solid 2px;
+    border-bottom: 2px;
     transition: all 0.3s ease-in-out 0s;
     display: block;margin: auto;
 
@@ -52,5 +52,5 @@
 }
 .links:hover{
     border-bottom: solid 2px;
-    border-bottom-color: red;
+    border-bottom-color: #ff9900;
 }

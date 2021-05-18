@@ -12,8 +12,11 @@
             </p>
           </div>
           <div class="card-footer d-flex justify-content-between">
-            <p class="badge badge-pill" [ngClass]="{'badge-success':event.eventType == 'Free','badge-primary':event.eventType == 'Paid'}">
+            <p class="badge badge-pill" *ngIf="event.availableTicketNumber!==0" [ngClass]="{'badge-success':event.eventType == 'Free','badge-primary':event.eventType == 'Paid'}">
               {{event.eventType}}
+            </p>
+            <p class="badge badge-pill" *ngIf="event.availableTicketNumber==0" [ngClass]="{'badge-danger':event.availableTicketNumber == 0}">
+              SOLD
             </p>
             <p class="card-text float-right event-date">{{event.startDate | date : 'EEEE, MMMM d, y'}}</p>
           </div>

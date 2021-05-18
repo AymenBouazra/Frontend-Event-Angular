@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HomeService } from '../../services/home.service';
 
@@ -9,7 +10,8 @@ import { HomeService } from '../../services/home.service';
 })
 export class CardEventComponent implements OnInit {
   listEvents: any;
-  constructor(private toastr: ToastrService, private eventService:  HomeService) { }
+
+  constructor(private toastr: ToastrService, private eventService:  HomeService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.eventService.getEvents().subscribe((response) => {
@@ -20,6 +22,7 @@ export class CardEventComponent implements OnInit {
       console.log(error);
 
     })
+  
   }
 
 }

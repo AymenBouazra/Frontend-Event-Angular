@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { HomeService } from '../../services/home.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class ReservationComponent implements OnInit {
   });
   reservId:any;
   reserv:any;
-  constructor(private route: ActivatedRoute, private reservService:  HomeService) { }
+  constructor(private route: ActivatedRoute, private reservService:  HomeService, private toastr:ToastrService) { }
 
   ngOnInit(): void {
     this.reservId = this.route.snapshot.params['id'],
@@ -47,9 +48,18 @@ export class ReservationComponent implements OnInit {
     if (this.reservationForm.invalid) {
       return;
     }
-    this.reservService.reservationById(this.reservId,this.reservationForm.value).subscribe((response)=>{
-      console.log(response);
+    this.reservService.getEventById(this.reservId).subscribe((response)=>{
+      this.reserv = response
+    },(error)=>{
+      console.log(error);
       
     })
+    if(this.reserv.availableTicketNumber!==0){
+      this.reservService.reservationById(this.reservId,this.reservationForm.value).subscribe((response)=>{   
+        this.toastr.success('Reservation ticket has been sent in E-mail.', 'Reservation done successfully!');   
+      })
+    }else{
+      this.toastr.error('All tickets has been sold! For more information please feel free to contact as.', 'Reservation failed!');
+    }
   }
 }
