@@ -43,44 +43,8 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'base',
-        loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
-      },
-      {
-        path: 'buttons',
-        loadChildren: () => import('./views/buttons/buttons.module').then(m => m.ButtonsModule)
-      },
-      {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'forms',
-        loadChildren: () => import('./views/forms/forms.module').then(m => m.FormsModule)
-      },
-      {
-        path: 'icons',
-        loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
-      },
-      {
-        path: 'plugins',
-        loadChildren: () => import('./views/plugins/plugins.module').then(m => m.PluginsModule)
-      },
-      {
-        path: 'tables',
-        loadChildren: () => import('./views/tables/tables.module').then(m => m.TablesModule)
-      },
-      {
-        path: 'theme',
-        loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
-      },
-      {
-        path: 'apps',
-        loadChildren: () => import('./views/apps/apps.module').then(m => m.AppsModule)
-      },
-      {
-        path: 'widgets',
-        loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
       },
       { 
         path: 'companies', 
