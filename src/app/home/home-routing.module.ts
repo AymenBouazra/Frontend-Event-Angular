@@ -32,7 +32,7 @@ const routes: Routes = [
         path: 'events/event-details/:id', component: EventInfoComponent
       },
       {
-        path: 'contact',component:ContactComponent
+        path: 'contact', component: ContactComponent
       },
       {
         path:'events/reservation/:id', component:ReservationComponent
