@@ -2,7 +2,7 @@
     <div class="reservation-container">
         <div class="row firstRow">
             <div class="image-container col-8">
-                <img [src]="details?.photo" alt="photo" width="100%" height="100%">
+                <img [src]="details?.photo" *ngIf="details?.photo" alt="photo" width="100%" height="100%">
             </div>
             <div class="event-details col-4">
                 <div class="event-name-container">
@@ -13,7 +13,6 @@
                             {{details?.eventName}}
                         </h1>
                     </div>
-
                 </div>
                 <div class="event-type-container">
                     <h5 *ngIf="details?.eventType == 'Paid'">
@@ -28,13 +27,11 @@
         </div>
         <div class="row">
             <div class="col-4">
-                
             </div>
             <div class="col-4"></div>
             <div class="col-4 float-right">
                 <button class="btn btn-success col-11" [routerLink]="['/home/events/reservation/', details?._id]">Reservation</button>
             </div>
-            
         </div>
         <div class="row">
             <div class="about-event-container col-8">
@@ -51,7 +48,8 @@
                 <hr>
                 <div class="ticket-event-container">
                     <h4>Ticket Number :</h4>
-                    <p>{{details?.availableTicketNumber}}</p>
+                    <p *ngIf="details?.availableTicketNumber==0" style="color:red;font-size:25px">All tickets are SOLD!</p>
+                    <p *ngIf="details?.availableTicketNumber!==0">{{details?.availableTicketNumber}}</p>
                 </div>
                 <hr>
                 <div class="location-event-container">
@@ -59,8 +57,6 @@
                     <p>{{details?.location}}</p>
                 </div>
             </div>
-            
         </div>
-        
     </div>
 </div>

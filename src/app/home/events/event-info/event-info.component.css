@@ -13,6 +13,7 @@
     z-index: 1;
 }
 .reservation-container {
+    height: max-content;
     background-color: white;
     margin: 80px 90px;
     border-radius: 5px 5px;

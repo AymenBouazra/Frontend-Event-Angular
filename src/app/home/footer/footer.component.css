@@ -1,6 +1,7 @@
 .footer{
-    margin: auto;
-color: blanchedalmond;
+    /* margin: auto; */
+    color: blanchedalmond;
     position: absolute ; 
     bottom: 0;
+    z-index:100;
 }

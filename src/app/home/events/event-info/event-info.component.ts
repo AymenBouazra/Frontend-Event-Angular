@@ -22,6 +22,7 @@ export class EventInfoComponent implements OnInit {
       console.log(error);
 
     })
+    
   }
 
 }
