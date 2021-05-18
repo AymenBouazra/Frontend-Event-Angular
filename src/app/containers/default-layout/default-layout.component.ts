@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { navItems } from '../../_nav';
 import { LoginregisterService } from '../../views/login/services/loginregister.service';
 import { ToastrService } from 'ngx-toastr';
-import { EventsService } from '../../views/events/services/events.service';
+import { CompanyService } from '../../views/company/services/company.service';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class DefaultLayoutComponent implements OnDestroy {
   constructor(
     private user: LoginregisterService,
     private toastr: ToastrService,
-    private eventService: EventsService,
+    private companyService: CompanyService,
     @Inject(DOCUMENT) _document?: any) {
 
     this.changes = new MutationObserver((mutations) => {
@@ -33,10 +33,8 @@ export class DefaultLayoutComponent implements OnDestroy {
   }
 
   ngOnInit(): void {
-    this.eventService.getAllEvents().subscribe((response) => {
-      this.connected = response
-    }, (error) => {
-      console.log(error);
+    this.companyService.getCompanyConnected().subscribe(response =>{
+      this.connected = response;
     })
   }
 

@@ -11,6 +11,9 @@ export class CompanyService {
   postCompany(companyData: any) {
     return this.http.post(`${this.baseUrl}/company`, companyData)
   }
+  getCompanyConnected() {
+    return this.http.get(`${this.baseUrl}/connectedCompany`)
+  }
   getcompanyByid(id: number) {
     return this.http.get(`${this.baseUrl}/company/` + id)
   };
