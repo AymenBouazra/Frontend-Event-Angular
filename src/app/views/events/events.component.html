@@ -199,7 +199,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="" *ngFor="let event of listEvents.events | searchpipe:searchEvent ;let i=index">
+                            <tr class="" *ngFor="let event of listEvents | searchpipe:searchEvent ;let i=index">
                                 <td>{{i+1}}</td>
                                 <td>{{event?.eventName}}</td>
                                 <td>{{event?.eventDescription | slice:0:25}}

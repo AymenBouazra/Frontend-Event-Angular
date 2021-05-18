@@ -139,10 +139,10 @@
                 <td>{{ company.email }}</td>
                 <td>{{ company.role }}</td>
                 <td>
-                  <button type="button" class="btn btn-warning text-white" data-toggle="modal" (click)="showUpdate(company._id)" *ngIf="(connectedCompanyRole !== 'Admin') || (connectedCompanyRole == 'Admin' && connectedCompanyId == company._id)">
+                  <button type="button" class="btn btn-warning text-white" data-toggle="modal" (click)="showUpdate(company._id)" >
                     <i class="fa fa-edit"></i>
                   </button>
-                  <button type="button" class="btn btn-danger  text-white" *ngIf="connectedCompanyRole !== 'Admin'"
+                  <button type="button" class="btn btn-danger  text-white" *ngIf="connectedCompanyId !== company._id"
                     (click)='deletecompany(company._id)'><i class="fa fa-trash"></i></button>
                 </td>
               </tr>
@@ -153,3 +153,5 @@
     </div>
   </div>
 </div>
+<!-- *ngIf="(connectedCompanyRole !== 'Admin') || (connectedCompanyRole == 'Admin' && connectedCompanyId == company._id)" -->
+<!-- (connectedCompanyRole !== 'Admin' &&  -->
