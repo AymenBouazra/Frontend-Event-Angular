@@ -206,7 +206,14 @@
                                     <span *ngIf="event.eventDescription.length > 100">...</span>
                                 </td>
                                 <td>{{event?.startDate | date: 'MM/dd/y'}} ==> {{event?.endDate | date: 'MM/dd/y'}}</td>
-                                <td>{{event?.eventType}}</td>
+                                <td>
+                                    <p class="badge badge-pill" *ngIf="event?.availableTicketNumber!==0" [ngClass]="{'badge-success':event?.eventType == 'Free','badge-primary':event?.eventType == 'Paid'}">
+                                        {{event?.eventType}}
+                                      </p>
+                                      <p class="badge badge-pill" *ngIf="event?.availableTicketNumber==0" [ngClass]="{'badge-danger':event?.availableTicketNumber == 0}">
+                                        SOLD
+                                      </p>
+                                </td>
                                 <td>{{event?.price | currency : 'TND': true}}</td>
                                 <td><img [src]="event.photo" width="50px" height="50px" alt=""></td>
                                 <td>

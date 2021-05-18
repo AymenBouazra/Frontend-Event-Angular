@@ -16,8 +16,7 @@ export class CardEventComponent implements OnInit {
   ngOnInit(): void {
     this.eventService.getEvents().subscribe((response) => {
       this.listEvents = response
-      // console.log(this.listEvents);
-
+      
     }, (error) => {
       console.log(error);
 
