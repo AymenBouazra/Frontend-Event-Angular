@@ -10,7 +10,7 @@
     justify-content: space-around;
     position: relative;
     transition: 1s;
-    z-index: 2;
+    z-index: 1;
 }
 .nav-container:hover{ 
     background: #1b1922;

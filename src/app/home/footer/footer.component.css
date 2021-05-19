@@ -2,11 +2,10 @@
   color: blanchedalmond;
   position: absolute;
   bottom: 0;
-  border-left: 10px solid #fff;
-  border-right: 10px solid #fff;
-  -webkit-animation: animborder 2s linear infinite;
-  animation: animborder 2s linear infinite; }
-
+  /* -webkit-animation: animborder 2s linear infinite;
+  animation: animborder 2s linear infinite; 
+  */
+}
 @-webkit-keyframes animborder {
   0% {
     -webkit-transform: translateX(0px);
@@ -61,7 +60,7 @@
 .dk-footer {
   padding: 10px 0 0;
   background-color: #151414;
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: 0;
   width: 100%;
@@ -69,7 +68,7 @@
  
   text-align: center;
   /* position: relative; */
-  z-index: 2; 
+  z-index: 3; 
 }
   .dk-footer .contact-us {
     margin-top: 0;
