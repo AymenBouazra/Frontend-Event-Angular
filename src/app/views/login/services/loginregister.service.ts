@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class LoginregisterService {
+  avatar$ : BehaviorSubject<string>;
   baseUrl:string=environment.baseUrl
-  constructor(private http:HttpClient) { }
+
+  constructor(private http:HttpClient) { 
+    this.avatar$ = new BehaviorSubject(this.getAvatar());
+  }
+
   registerCompany(companyData:any)
   {
    return this.http.post(`${this.baseUrl}/register`,companyData)
@@ -27,4 +33,16 @@ export class LoginregisterService {
    logout(){
     return this.http.get(`${this.baseUrl}/logout`)
    }
+
+  setAvatar(newavatar: string){
+    this.avatar$.next(newavatar)
+  }
+  getAvatar() {
+    const avatar = localStorage.getItem('avatar');
+    if (avatar !== null && avatar !== undefined) {
+      return avatar;
+    } else {
+      return '';
+    }
+  }
 }

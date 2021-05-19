@@ -68,6 +68,9 @@ export class LoginComponent {
     }
     this.company.loginCompany(this.loginForm.value).subscribe((response: any) => {
       localStorage.setItem('token', response.token);
+      // update photo 
+      let decoded: any = jwt_decode(response.token);
+      localStorage.setItem('avatar',decoded.companyAvatar)
       this.router.navigate(['/dashboard'])
       this.toastr.success('You are succesfully logged in !.', 'Logged in');
     },

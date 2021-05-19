@@ -81,7 +81,6 @@ export class EventsComponent implements OnInit {
   ngOnInit(): void {
     this.eventService.getAllEvents().subscribe((response) => {
       this.listEvents = response
-      console.log(this.listEvents);
       
     }, (error) => {
       console.log(error);
@@ -195,9 +194,6 @@ export class EventsComponent implements OnInit {
       // console.log(startDateEvent , endDateEvent);
       // console.log(startTimeEvent);
       // console.log(endTimeEvent);
-      
-      
-      
       
       response.endDate = endDateEvent
       response.startDate = startDateEvent
