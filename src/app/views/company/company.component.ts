@@ -7,6 +7,7 @@ import { CompanyService } from './services/company.service';
 import jwt_decode from "jwt-decode";
 import Swal from 'sweetalert2'
 import { SweetAlertService } from '../../providers/sweet-alert.service';
+import { LoginregisterService } from '../login/services/loginregister.service';
 
 @Component({
   selector: 'app-company',
@@ -41,7 +42,8 @@ export class CompanyComponent implements OnInit {
     private router: Router,
     private companyService: CompanyService,
     private toastr: ToastrService,
-    private sweetAlert: SweetAlertService
+    private sweetAlert: SweetAlertService,
+    private loginService: LoginregisterService,
   ) { }
 
   ngOnInit(): void {
@@ -131,6 +133,8 @@ export class CompanyComponent implements OnInit {
     });
     formData.append("photo", this.selectedFile, this.selectedFile.name);
     this.companyService.updateCompanyDataById(formData, this.companyid).subscribe((response: any) => {
+      this.loginService.setAvatar(response.photo);
+      localStorage.setItem('avatar',response.photo)
       this.toastr.success('Company succesfully updated.', 'Company updated !');
       this.hide();
       this.ngOnInit();

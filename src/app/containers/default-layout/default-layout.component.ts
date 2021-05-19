@@ -4,6 +4,7 @@ import { navItems } from '../../_nav';
 import { LoginregisterService } from '../../views/login/services/loginregister.service';
 import { ToastrService } from 'ngx-toastr';
 import { CompanyService } from '../../views/company/services/company.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Component({
@@ -16,6 +17,8 @@ export class DefaultLayoutComponent implements OnDestroy {
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement;
+  public avatarImage$ : Observable<string>;
+
   constructor(
     private user: LoginregisterService,
     private toastr: ToastrService,
@@ -30,6 +33,7 @@ export class DefaultLayoutComponent implements OnDestroy {
       attributes: true,
       attributeFilter: ['class']
     });
+    this.avatarImage$ = this.user.avatar$
   }
 
   ngOnInit(): void {
@@ -46,6 +50,7 @@ export class DefaultLayoutComponent implements OnDestroy {
     this.user.logout().subscribe((response: any) => {
       this.toastr.success('Logged out successfully', 'Logged out!')
       localStorage.removeItem('token');
+      localStorage.removeItem('avatar');
       window.location.reload()
     })
   }

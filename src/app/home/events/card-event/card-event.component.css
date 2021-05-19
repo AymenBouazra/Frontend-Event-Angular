@@ -1,4 +1,5 @@
 .card-content {
+    width: 100%;
     min-height: 750px;
     background: url("/assets/img/Background-image/home-bg.jpg") top center;
     background-size: cover;
