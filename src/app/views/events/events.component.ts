@@ -201,7 +201,6 @@ export class EventsComponent implements OnInit {
       response.endTime = endTimeEvent;
       this.imageSrc = response.photo
       this.eventForm.patchValue(response);
-      this.ngOnInit();
     }, (error) => { })
   }
   hide() {
