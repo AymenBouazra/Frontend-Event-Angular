@@ -27,20 +27,7 @@ export class EventsComponent implements OnInit {
   showUpdateButton = false;
   submitted = false;
   modalTitle: string = 'Add event'
-  eventForm: FormGroup = new FormGroup({
-    eventName: new FormControl('', [Validators.required]),
-    eventDescription: new FormControl('', [Validators.required]),
-    eventType: new FormControl('', [Validators.required]),
-    location: new FormControl('', [Validators.required]),
-    availableTicketNumber: new FormControl('', [Validators.required, Validators.min(1)]),
-    price: new FormControl('', []),
-    startDate: new FormControl(new Date(), [Validators.required]),
-    startTime: new FormControl('', [Validators.required]),
-    endDate: new FormControl(new Date(), [Validators.required]),
-    endTime: new FormControl('', [Validators.required]),
-    photo: new FormControl('',Validators.required),
-    tags: new FormControl('')
-  });
+  eventForm: FormGroup
   file:any;
 
   // DatePicker
@@ -67,21 +54,34 @@ export class EventsComponent implements OnInit {
     private toastr: ToastrService,
     private datePipe: DatePipe,
     private sweetAlert:SweetAlertService) {
-    this.startTime.setHours;
-    this.startTime.setMinutes;
-    this.endTime.setHours;
-    this.endTime.setMinutes
-    this.minStartTime.setHours;
-    this.minStartTime.setMinutes;
-    this.minEndTime.setHours;
-    this.minEndTime.setMinutes;
+    // this.startTime.setHours;
+    // this.startTime.setMinutes;
+    // this.endTime.setHours;
+    // this.endTime.setMinutes
+    // this.minStartTime.setHours;
+    // this.minStartTime.setMinutes;
+    // this.minEndTime.setHours;
+    // this.minEndTime.setMinutes;
   }
   imageSrc: string = '';
 
   ngOnInit(): void {
+    this.eventForm= new FormGroup({
+      eventName: new FormControl('', [Validators.required]),
+      eventDescription: new FormControl('', [Validators.required]),
+      eventType: new FormControl('', [Validators.required]),
+      location: new FormControl('', [Validators.required]),
+      availableTicketNumber: new FormControl('', [Validators.required, Validators.min(1)]),
+      price: new FormControl('', []),
+      startDate: new FormControl(new Date(), [Validators.required]),
+      startTime: new FormControl('', [Validators.required]),
+      endDate: new FormControl(new Date(), [Validators.required]),
+      endTime: new FormControl('', [Validators.required]),
+      photo: new FormControl('',Validators.required),
+      tags: new FormControl('')
+    });
     this.eventService.getAllEvents().subscribe((response) => {
-      this.listEvents = response
-      
+      this.listEvents = response 
     }, (error) => {
       console.log(error);
     })
@@ -97,29 +97,43 @@ export class EventsComponent implements OnInit {
       }
     });
     this.eventForm.controls.startDate.valueChanges.subscribe(newvalue => {
+      const startDateEvent: string = this.datePipe.transform(newvalue, 'MM/dd/yyyy');
+      const currentDate : string = this.datePipe.transform(new Date, 'MM/dd/yyyy');
+      const currentTime : string = this.datePipe.transform(new Date, 'HH:mm')
       this.endValue = newvalue;
       this.minEndDate = newvalue;
+      if (startDateEvent == currentDate) {
+        const h = Number(currentTime[0]+currentTime[1])
+        const m = Number(currentTime[3]+currentTime[4])
+        this.minStartTime.setHours(h)
+        this.minStartTime.setMinutes(m)
+        this.startTime.setHours(h)
+        this.startTime.setMinutes(m)
+      }else{        
+        this.minStartTime.setHours(0)
+        this.minStartTime.setMinutes(0)
+        this.startTime.setHours(0)
+        this.startTime.setMinutes(0)
+      }
     })
-    // this.eventForm.controls.endDate.valueChanges.subscribe(newvalue =>{
-
-    //   const startDateEvent: string = this.datePipe.transform(this.eventForm.value.startDate, 'MM/dd/yyyy');
-    //   const endDateEvent: string = this.datePipe.transform(newvalue, 'MM/dd/yyyy');
-    //   const startTimeEvent: String = this.datePipe.transform(this.eventForm.value.startTime, 'HH:mm');
-    //   if (endDateEvent == startDateEvent) {
-    //     console.log(startTimeEvent[0]+startTimeEvent[1]);
-    //     const h = Number(startTimeEvent[0]+startTimeEvent[1])
-    //     const m = Number(startTimeEvent[3]+startTimeEvent[4])
-    //     console.log(h);
-
-    //     console.log(this.endTime.setMinutes(h));
-
-
-    //     this.endTime.setMinutes(m)
-    //     this.endTime.setHours(h) 
-    //     this.minEndTime.setHours(h)
-    //     this.minEndTime.setMinutes(m)
-    //   }
-    // })
+    this.eventForm.controls.endDate.valueChanges.subscribe(newvalue =>{
+      const startDateEvent: string = this.datePipe.transform(this.eventForm.value.startDate, 'MM/dd/yyyy');
+      const endDateEvent: string = this.datePipe.transform(newvalue, 'MM/dd/yyyy');
+      const startTimeEvent: String = this.datePipe.transform(this.eventForm.value.startTime, 'HH:mm');
+      if (endDateEvent == startDateEvent) {
+        const h = Number(startTimeEvent[0]+startTimeEvent[1])
+        const m = Number(startTimeEvent[3]+startTimeEvent[4])
+        this.endTime.setMinutes(m)
+        this.endTime.setHours(h) 
+        this.minEndTime.setHours(h)
+        this.minEndTime.setMinutes(m)
+      }else{
+        this.endTime.setMinutes(0)
+        this.endTime.setHours(0)
+        this.minEndTime.setHours(0)
+        this.minEndTime.setMinutes(0)
+      }
+    })
   }
 
   onFileSelect(event) {
@@ -176,40 +190,38 @@ export class EventsComponent implements OnInit {
   }
 
   showAdd() {
+    this.modalTitle="Add event"
+    this.ngOnInit()
     this.modal.show();
     this.showUpdateButton = false;
   }
+
   showUpdate(id: number) {
     this.showUpdateButton = true;
     this.modalTitle = 'Update event';
     this.eventId = id;
     this.modal.show();
     this.eventService.getEventById(id).subscribe((response: any) => {
-      console.log(response);
-      // console.log(response.startTime , response.endTime);
       const startDateEvent = this.datePipe.transform(response.startDate, 'MM/dd/yyyy');
       const endDateEvent = this.datePipe.transform(response.endDate, 'MM/dd/yyyy');
       const startTimeEvent = this.datePipe.transform(response.startTime, 'HH:mm');
       const endTimeEvent = this.datePipe.transform(response.endTime, 'HH:mm');
-      // console.log(startDateEvent , endDateEvent);
-      // console.log(startTimeEvent);
-      // console.log(endTimeEvent);
-      
       response.endDate = endDateEvent
       response.startDate = startDateEvent
       response.startTime = startTimeEvent
       response.endTime = endTimeEvent;
       this.imageSrc = response.photo
       this.eventForm.patchValue(response);
-      this.ngOnInit();
     }, (error) => { })
   }
+
   hide() {
     this.modal.hide();
     this.modalTitle = 'Add event';
     this.eventForm.reset();
     this.submitted = false;
   }
+  
   updateEvent() {
     this.submitted = true;
     if (this.eventForm.invalid) {
