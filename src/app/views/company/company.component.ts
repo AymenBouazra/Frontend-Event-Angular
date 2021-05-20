@@ -54,7 +54,7 @@ export class CompanyComponent implements OnInit {
     let decoded: any = jwt_decode(token);
     this.connectedCompanyId = decoded.companyId;
     this.connectedCompanyRole = decoded.companyRole;
-    console.log(this.connectedCompanyRole);
+    // console.log(this.connectedCompanyRole);
     
   }
 
