@@ -35,7 +35,7 @@ export class EventsComponent implements OnInit {
   minEndDate = new Date();
   startValue: Date = new Date();
   endValue: Date = new Date();
-  minStartTime = new Date();
+  minStartTime : Date = new Date();
   minEndTime = new Date();
 
   // TimePicker
@@ -46,22 +46,13 @@ export class EventsComponent implements OnInit {
   startTime: Date = new Date();
   endTime: Date = new Date();
 
-  public tags: Array<IOption> = [
-  ];
+  public tags: Array<IOption> = [];
 
   constructor(
     private eventService: EventsService,
     private toastr: ToastrService,
     private datePipe: DatePipe,
     private sweetAlert:SweetAlertService) {
-    // this.startTime.setHours;
-    // this.startTime.setMinutes;
-    // this.endTime.setHours;
-    // this.endTime.setMinutes
-    // this.minStartTime.setHours;
-    // this.minStartTime.setMinutes;
-    // this.minEndTime.setHours;
-    // this.minEndTime.setMinutes;
   }
   imageSrc: string = '';
 
@@ -97,41 +88,41 @@ export class EventsComponent implements OnInit {
       }
     });
     this.eventForm.controls.startDate.valueChanges.subscribe(newvalue => {
-      const startDateEvent: string = this.datePipe.transform(newvalue, 'MM/dd/yyyy');
-      const currentDate : string = this.datePipe.transform(new Date, 'MM/dd/yyyy');
-      const currentTime : string = this.datePipe.transform(new Date, 'HH:mm')
-      this.endValue = newvalue;
-      this.minEndDate = newvalue;
-      if (startDateEvent == currentDate) {
-        const h = Number(currentTime[0]+currentTime[1])
-        const m = Number(currentTime[3]+currentTime[4])
-        this.minStartTime.setHours(h)
-        this.minStartTime.setMinutes(m)
-        this.startTime.setHours(h)
-        this.startTime.setMinutes(m)
-      }else{        
-        this.minStartTime.setHours(0)
-        this.minStartTime.setMinutes(0)
-        this.startTime.setHours(0)
-        this.startTime.setMinutes(0)
+      if (newvalue != null) {
+        const newStartTime = new Date(this.eventForm.value.startTime);
+        newStartTime.setDate(newvalue.getDate());
+        newStartTime.setMonth(newvalue.getMonth());
+        newStartTime.setFullYear(newvalue.getFullYear());
+        this.minStartTime.setDate(newvalue.getDate());
+        this.minStartTime.setMonth(newvalue.getMonth());
+        this.minStartTime.setFullYear(newvalue.getFullYear());
+        this.eventForm.controls.startTime.setValue(newStartTime)
+        
+        this.endValue = newvalue;
+        this.minEndDate = newvalue;
+        
+        // compare with  current Date
+        const startDateEvent: string = this.datePipe.transform(newvalue, 'MM/dd/yyyy');
+        const currentDate : string = this.datePipe.transform(new Date, 'MM/dd/yyyy');
+        // const currentTime : string = this.datePipe.transform(new Date, 'HH:mm')
+        if (startDateEvent == currentDate) {
+          this.minStartTime.setHours(new Date().getHours())
+          this.minStartTime.setMinutes(new Date().getMinutes())
+        }else{
+          this.minStartTime.setHours(0o0)
+          this.minStartTime.setMinutes(0o0)
+        }
+        // console.log(this.minStartTime);SS
+        
       }
     })
     this.eventForm.controls.endDate.valueChanges.subscribe(newvalue =>{
-      const startDateEvent: string = this.datePipe.transform(this.eventForm.value.startDate, 'MM/dd/yyyy');
-      const endDateEvent: string = this.datePipe.transform(newvalue, 'MM/dd/yyyy');
-      const startTimeEvent: String = this.datePipe.transform(this.eventForm.value.startTime, 'HH:mm');
-      if (endDateEvent == startDateEvent) {
-        const h = Number(startTimeEvent[0]+startTimeEvent[1])
-        const m = Number(startTimeEvent[3]+startTimeEvent[4])
-        this.endTime.setMinutes(m)
-        this.endTime.setHours(h) 
-        this.minEndTime.setHours(h)
-        this.minEndTime.setMinutes(m)
-      }else{
-        this.endTime.setMinutes(0)
-        this.endTime.setHours(0)
-        this.minEndTime.setHours(0)
-        this.minEndTime.setMinutes(0)
+      if (newvalue != null) {
+        const newEndTime = new Date(this.eventForm.value.endTime);
+        newEndTime.setDate(newvalue.getDate());
+        newEndTime.setMonth(newvalue.getMonth());
+        newEndTime.setFullYear(newvalue.getFullYear());
+        this.eventForm.controls.endTime.setValue(newEndTime)
       }
     })
   }
